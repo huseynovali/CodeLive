@@ -6,6 +6,7 @@ const cors = require("cors");
 const userRouter = require("./router/userRouter");
 const videoRouter = require("./router/videoRouter");
 const accountImgRouter = require("./router/accountImgRouter");
+const categoryRouter = require("./router/categoryRouter");
 
 const app = express();
 
@@ -23,5 +24,5 @@ db_connect()
 app.use("/user",userRouter)
 app.use("/accountimg",accountImgRouter)
 app.use("/video",videoRouter)
-
+app.use("/category",categoryRouter)
 app.listen(PORT, () => console.log(`${PORT} listen !!`))

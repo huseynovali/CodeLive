@@ -8,6 +8,26 @@ const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
 ]);
 
 const VideoController = {
+  getAllVideoContent:async(req,res)=>{
+   try {
+    const videos = await Video.find()
+    res.status(200).json(videos)
+   } catch (error) {
+    
+   }
+
+  },
+  getVideoContentById:async(req,res)=>{
+    const id= req.params.id
+    try {
+     const videos = await Video.findById(id)
+     res.status(200).json(videos)
+    } catch (error) {
+     
+    }
+ 
+   },
+
   addVideo: async (req, res) => {
     try {
       videoAndCoverImageUpload(req, res, async (err) => {
@@ -79,7 +99,7 @@ const VideoController = {
       res.status(500).json({ message: "An error occurred while deleting the video.", error: error.message });
     }
   },
-  
+
   videoEdit: async (req, res) => {
     const videoId = req.params.videoId;
     const { title, description } = req.body;
