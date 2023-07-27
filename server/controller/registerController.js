@@ -13,7 +13,7 @@ const register = async (req, res) => {
                 return res.status(400).json({ message: "Image upload failed." });
             }
 
-            const { name, surname, about, email, password } = req.body;
+            const { fullname, about, email, password } = req.body;
             const checkUseremail = await User.findOne({ email });
 
             if (checkUseremail) {
@@ -28,8 +28,7 @@ const register = async (req, res) => {
             const uploadedFile = await uploadFile(file);
             const lastPart = uploadedFile.Location.split("/").pop();
             const newUser = new User({
-                name,
-                surname,
+              fullname,
                 about,
                 email,
                 password: hashedPassword,

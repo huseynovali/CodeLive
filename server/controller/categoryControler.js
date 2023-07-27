@@ -13,10 +13,25 @@ const categoryController = {
         } catch (error) {
             res.status(500).json(error)
         }
-
-
-
+    },
+    getCategories:async(req,res)=>{
+        try {
+            const categories = Category.find()
+            res.status(200).json(categories);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    getCategoriesById:async(req,res)=>{
+        const id = req.params.id;
+        try {
+            const categories = Category.findById(id)
+            res.status(200).json(categories);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
+
 
 
 

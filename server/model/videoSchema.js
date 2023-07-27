@@ -43,6 +43,10 @@ const videoSchema = mongoose.Schema({
         ref: 'Category',
         
     },
+    languageId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Language',
+    },
     price: {
         type: String
     },

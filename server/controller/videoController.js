@@ -8,25 +8,29 @@ const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
 ]);
 
 const VideoController = {
-  getAllVideoContent:async(req,res)=>{
-   try {
-    const videos = await Video.find()
-    res.status(200).json(videos)
-   } catch (error) {
-    
-   }
+  getAllVideoContent: async (req, res) => {
+    try {
+      const videos = await Video.find()
+        .populate("categoryId")
+        .populate("languageId")
+        .populate("userid", "fullname")
+
+      res.status(200).json(videos)
+    } catch (error) {
+
+    }
 
   },
-  getVideoContentById:async(req,res)=>{
-    const id= req.params.id
+  getVideoContentById: async (req, res) => {
+    const id = req.params.id
     try {
-     const videos = await Video.findById(id)
-     res.status(200).json(videos)
+      const videos = await Video.findById(id)
+      res.status(200).json(videos)
     } catch (error) {
-     
+
     }
- 
-   },
+
+  },
 
   addVideo: async (req, res) => {
     try {
@@ -34,7 +38,7 @@ const VideoController = {
         if (err) {
           return res.status(400).json({ message: "Video and cover image upload failed." });
         }
-        const { title, description, userid } = req.body;
+        const { title, description, userid, categoryId, languageId } = req.body;
         const user = await User.findById(userid);
         if (!user) {
           return res.status(404).json({ message: "User not found!" });
@@ -49,6 +53,8 @@ const VideoController = {
           title,
           description,
           userid,
+          categoryId,
+          languageId,
           videoawsid: videoPath,
         });
 
@@ -75,16 +81,16 @@ const VideoController = {
     const result = getFile(Key)
     result.pipe(res)
   },
-  deleteVideo : async (req, res) => {
+  deleteVideo: async (req, res) => {
     const videoId = req.params.videoId;
-  
+
     try {
 
       const video = await Video.findByIdAndDelete(videoId);
       if (!video) {
         return res.status(404).json({ message: "Video not found!" });
       }
-  
+
       const videoFileKey = video.videoawsid;
       const coverimgFileKey = video.coverImageid;
       if (videoFileKey) {
@@ -110,9 +116,9 @@ const VideoController = {
         return res.status(404).json({ message: "Video not found!" });
       }
 
-      video.title = title || video.title; 
-      video.description = description || video.description; 
-    
+      video.title = title || video.title;
+      video.description = description || video.description;
+
       await video.save();
 
       res.status(200).json({ message: "Video updated successfully!", video });
