@@ -9,7 +9,6 @@ const userRouter = express.Router();
 userRouter.post("/register", register);
 userRouter.post("/login", login);
 userRouter.get("/", userController.getAllUser)
-
 userRouter.get("/:id", userController.getUserById)
-
+userRouter.put("/:id", userController.editUserInfo)
 module.exports = userRouter

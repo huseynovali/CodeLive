@@ -28,6 +28,29 @@ const userController = {
             res.status(500).json(error);
         }
     },
+    editUserInfo: async (req, res) => {
+        const id = req.params.id;
+        const { name, surname, email, about } = req.body
+        try {
+            const user = await User.findById(id);
+            if (user) {
+                user.name = name
+                user.surname = surname
+                user.email = email
+                user.about = about
+                user.save()
+                res.status(200).json({ message: "User information updated successfully!" });
+
+
+            } else {
+                res.status(404).json({ message: "User not found!" });
+            }
+        } catch (error) {
+            res.status(500).json(error);
+        }
+
+
+    }
 
 }
 
