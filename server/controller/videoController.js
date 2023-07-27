@@ -25,6 +25,9 @@ const VideoController = {
     const id = req.params.id
     try {
       const videos = await Video.findById(id)
+      .populate("categoryId")
+      .populate("languageId")
+      .populate("userid", "fullname")
       res.status(200).json(videos)
     } catch (error) {
 
