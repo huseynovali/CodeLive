@@ -31,6 +31,9 @@ const videoSchema = mongoose.Schema({
     videoawsid:{
         type:String
     },
+    coverImageid:{
+        type:String
+    },
     uploadDate: {
         type: Date,
         default: Date.now
