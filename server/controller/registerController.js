@@ -13,7 +13,7 @@ const register = async (req, res) => {
                 return res.status(400).json({ message: "Image upload failed." });
             }
 
-            const { fullname, about, email, password } = req.body;
+            const { username, about, email, password } = req.body;
             const checkUseremail = await User.findOne({ email });
 
             if (checkUseremail) {
@@ -24,11 +24,11 @@ const register = async (req, res) => {
 
             // S3'ye yüklenen resmi burada işleyin ve URL'sini alın
             const file = req.file;
-            console.log(file);
+            
             const uploadedFile = await uploadFile(file);
             const lastPart = uploadedFile.Location.split("/").pop();
             const newUser = new User({
-              fullname,
+                username,
                 about,
                 email,
                 password: hashedPassword,

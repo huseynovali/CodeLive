@@ -30,12 +30,11 @@ const userController = {
     },
     editUserInfo: async (req, res) => {
         const id = req.params.id;
-        const { name, surname, email, about } = req.body
+        const { username, email, about } = req.body
         try {
             const user = await User.findById(id);
             if (user) {
-                user.name = name
-                user.surname = surname
+                user.username=username
                 user.email = email
                 user.about = about
                 user.save()

@@ -2,6 +2,7 @@ const Video = require("../model/videoSchema");
 const multer = require("multer");
 const { uploadFile, getFile, deleteFile } = require("../config/s3.js");
 const User = require("../model/userSchema");
+const Comment = require("../model/comentSchema")
 const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
   { name: "video", maxCount: 1 },
   { name: "coverImage", maxCount: 1 },
@@ -12,8 +13,15 @@ const VideoController = {
     try {
       const videos = await Video.find()
         .populate("categoryId")
+        .populate({
+          path: "comments",
+          populate: {
+            path: "author",
+            select: "username",
+          },
+        })
         .populate("languageId")
-        .populate("userid", "fullname")
+        .populate("userid", "username")
 
       res.status(200).json(videos)
     } catch (error) {
@@ -25,9 +33,16 @@ const VideoController = {
     const id = req.params.id
     try {
       const videos = await Video.findById(id)
-      .populate("categoryId")
-      .populate("languageId")
-      .populate("userid", "fullname")
+        .populate("categoryId")
+        .populate("languageId")
+        .populate({
+          path: "comments",
+          populate: {
+            path: "author",
+            select: "username",
+          },
+        })
+        .populate("userid", "username")
       res.status(200).json(videos)
     } catch (error) {
 
@@ -101,7 +116,9 @@ const VideoController = {
       }
       if (coverimgFileKey) {
         await deleteFile(coverimgFileKey);
-      }
+      }   
+      await Comment.deleteMany({ videoId });
+
       await User.findByIdAndUpdate(video.userid, { $pull: { videos: video._id } });
       res.status(200).json({ message: "Video deleted successfully!" });
     } catch (error) {
@@ -130,6 +147,64 @@ const VideoController = {
     }
   },
 
+  likeVideo: async (req, res) => {
+    const videoId = req.params.videoId;
+    const userId = req.params.userId;
+
+    try {
+      const video = await Video.findById(videoId);
+      if (!video) {
+        return res.status(404).json({ message: "Video not found!" });
+      }
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+      if (user.favoritevideo.includes(videoId)) {
+        user.favoritevideo = user.favoritevideo.filter((id) => id.toString() !== videoId);
+        video.likeBy = video.likeBy.filter((id) => id.toString() !== userId);
+      } else {
+        // If the user doesn't like the video yet, add the like
+        user.favoritevideo.push(videoId);
+        video.likeBy.push(userId);
+      }
+
+      await user.save();
+      await video.save();
+
+      res.status(200).json({ message: "Video liked/unliked successfully!", user });
+    } catch (error) {
+      res.status(500).json({ message: "An error occurred while liking/unliking the video.", error: error.message });
+    }
+  },
+  buyVideo: async (req, res) => {
+    const videoId = req.params.videoId;
+    const userId = req.params.userId;
+
+    try {
+      const video = await Video.findById(videoId);
+      if (!video) {
+        return res.status(404).json({ message: "Video not found!" });
+      }
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+
+      user.purchasedVideos.push(video._id)
+      video.buyingBy.push(user._id)
+
+
+      await user.save();
+      await video.save();
+
+      res.status(200).json({ message: "Video buy successfully!", user });
+    } catch (error) {
+      res.status(500).json({ message: "An error occurred while buying the video.", error: error.message });
+    }
+  },
 
 
 };

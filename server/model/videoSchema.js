@@ -28,11 +28,11 @@ const videoSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    videoawsid:{
-        type:String
+    videoawsid: {
+        type: String
     },
-    coverImageid:{
-        type:String
+    coverImageid: {
+        type: String
     },
     uploadDate: {
         type: Date,
@@ -41,9 +41,9 @@ const videoSchema = mongoose.Schema({
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        
+
     },
-    languageId:{
+    languageId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Language',
     },
@@ -60,6 +60,6 @@ const videoSchema = mongoose.Schema({
 
 })
 
-const Video = mongoose.model("Video",videoSchema)
+const Video = mongoose.model("Video", videoSchema)
 
 module.exports = Video

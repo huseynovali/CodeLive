@@ -9,6 +9,9 @@ videoRouter.get("/getvideo/:key",VideoController.getVideo)
 videoRouter.post("/",VideoController.addVideo)
 videoRouter.delete("/:videoId",VideoController.deleteVideo)
 videoRouter.put("/:videoId",VideoController.videoEdit) 
+videoRouter.post("/:videoId/user/:userId",VideoController.likeVideo) 
+videoRouter.post("/buy/:videoId/user/:userId",VideoController.buyVideo) 
+
 
 
 
