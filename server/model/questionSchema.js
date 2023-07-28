@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const questionSchema =  mongoose.Schema({
-  test: String,
+  text: String,
   author: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
@@ -11,7 +11,7 @@ const questionSchema =  mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  answers: [{ type: Schema.Types.ObjectId, ref: 'Answer' }] // Yorumların olduğu "answers" alanı
+  answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }] // Yorumların olduğu "answers" alanı
 });
 
 const Question = mongoose.model('Question', questionSchema);

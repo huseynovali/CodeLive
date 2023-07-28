@@ -9,6 +9,7 @@ const accountImgRouter = require("./router/accountImgRouter");
 const categoryRouter = require("./router/categoryRouter");
 const languageRouter = require("./router/languageRouter");
 const commentRouter = require("./router/commentRouter");
+const questionRouter = require("./router/questionRouter");
 
 const app = express();
 
@@ -29,4 +30,5 @@ app.use("/video",videoRouter)
 app.use("/category",categoryRouter)
 app.use("/language",languageRouter)
 app.use("/comment",commentRouter)
+app.use("/question",questionRouter)
 app.listen(PORT, () => console.log(`${PORT} listen !!`))
