@@ -28,6 +28,20 @@ const userController = {
             res.status(500).json(error);
         }
     },
+    getUserByIdGlobal: async (req, res) => {
+        const id = req.params.id;
+        try {
+            const user = await User.findById(id)
+            .select('username videos followers follow about image')
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                res.status(404).json({ message: "User not found!" });
+            }
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
     editUserInfo: async (req, res) => {
         const id = req.params.id;
         const { username, email, about } = req.body

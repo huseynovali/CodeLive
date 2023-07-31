@@ -11,7 +11,7 @@ const questionSchema =  mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }] // Yorumların olduğu "answers" alanı
+  answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }] 
 });
 
 const Question = mongoose.model('Question', questionSchema);

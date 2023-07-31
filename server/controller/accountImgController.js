@@ -1,6 +1,7 @@
-const { getFile, deleteFile, uploadFile } = require("../config/s3")
+
 const User = require("../model/userSchema")
 const multer = require("multer");
+const { uploadFile, deleteFile, getFile } = require("../services/s3");
 const upload = multer({ dest: "upload/" }).single("image");
 const accountImgController = {
 

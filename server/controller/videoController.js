@@ -1,8 +1,8 @@
 const Video = require("../model/videoSchema");
 const multer = require("multer");
-const { uploadFile, getFile, deleteFile } = require("../config/s3.js");
 const User = require("../model/userSchema");
-const Comment = require("../model/comentSchema")
+const Comment = require("../model/comentSchema");
+const { uploadFile, deleteFile, getFile } = require("../services/s3");
 const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
   { name: "video", maxCount: 1 },
   { name: "coverImage", maxCount: 1 },

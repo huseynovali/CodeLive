@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../model/userSchema.js");
 const multer = require("multer");
-const { uploadFile } = require("../config/s3.js");
+const { uploadFile } = require("../services/s3.js");
+
 
 
 
@@ -22,17 +23,20 @@ const register = async (req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            // S3'ye yüklenen resmi burada işleyin ve URL'sini alın
+
             const file = req.file;
-            
-            const uploadedFile = await uploadFile(file);
-            const lastPart = uploadedFile.Location.split("/").pop();
+            const uploadedFile =""
+            if(file){
+              uploadedFile = await uploadFile(file);
+               
+            }
+            const lastPart = uploadedFile?.Location?.split("/").pop();
             const newUser = new User({
                 username,
                 about,
                 email,
                 password: hashedPassword,
-                image: lastPart,
+                image: lastPart || "",
             });
 
             await newUser.save();
