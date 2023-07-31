@@ -11,7 +11,7 @@ const userRouter = express.Router();
 
 userRouter.post("/register", register);
 userRouter.post("/login", login);
-userRouter.get("/", userController.getAllUser)
+userRouter.get("/getalluser/:userid", userController.getAllUser)
 userRouter.get("/:id", userController.getUserById)
 userRouter.get("/getuserglobal/:id", userController.getUserByIdGlobal)
 userRouter.put("/:id", userController.editUserInfo)

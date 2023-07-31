@@ -1,11 +1,15 @@
 
 const User = require("../model/userSchema")
 const userController = {
+
     getAllUser: async (req, res) => {
+        const id = req.params.userid
         try {
             const data = await User.find()
+                .select('username videos followers follow about image')
             if (data.length > 0) {
-                res.status(200).json(data)
+                const userdata = data.filter(user => user.id !== id)
+                res.status(200).json(userdata)
             } else {
                 res.status(404).json({ message: "users not found !" })
             }
@@ -32,7 +36,7 @@ const userController = {
         const id = req.params.id;
         try {
             const user = await User.findById(id)
-            .select('username videos followers follow about image')
+                .select('username videos followers follow about image')
             if (user) {
                 res.status(200).json(user);
             } else {
