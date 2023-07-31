@@ -23,6 +23,7 @@ const userController = {
         const id = req.params.id;
         const token = req.params.token;
         try {
+            
             const user = await User.findById(id);
             if (user) {
                 res.status(200).json(user);
