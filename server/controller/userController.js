@@ -21,6 +21,7 @@ const userController = {
     },
     getUserById: async (req, res) => {
         const id = req.params.id;
+        const token = req.params.token;
         try {
             const user = await User.findById(id);
             if (user) {
