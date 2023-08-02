@@ -23,7 +23,7 @@ const register = async (req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 10);
 
-
+ 
             const file = req.file;
             const uploadedFile =""
             if(file){

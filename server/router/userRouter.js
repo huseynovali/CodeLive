@@ -4,6 +4,7 @@ const login = require("../controller/loginController");
 const userController = require("../controller/userController");
 const registerValidation = require("../validation/registerValidation");
 const userMid = require("../middleware/authValidateMiddliware");
+const forgotPassword = require("../controller/forgotPassword");
 
 const userRouter = express.Router();
 
@@ -16,5 +17,9 @@ userRouter.get("/:id/:token", userController.getUserById)
 userRouter.get("/getuserglobal/:id", userController.getUserByIdGlobal)
 userRouter.put("/:id", userController.editUserInfo)
 userRouter.post("/follow/:userId/followUserId/:followUserId", userController.toggleFollowUser)
+
+userRouter.post("/api/forgot-password", forgotPassword.sendConfirmMessage)
+userRouter.post("/api/reset-password", forgotPassword.resetPassword)
+
 
 module.exports = userRouter

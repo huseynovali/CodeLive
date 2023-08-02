@@ -1,8 +1,7 @@
-
-    const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
-//Öncelikle mail konfigürasyonumu yazıyorum
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -14,12 +13,12 @@ const transporter = nodemailer.createTransport({
         pass: "bcozssymjajpqicg",
     },
 });
-const sendEmail = (userEMail,token)=>{
+const sendEmail = (userEMail,userId)=>{
     transporter.sendMail({
         from: 'c8657545@gmail.com',
         to: userEMail,
         subject: "Confirm Code",
-        html: `<p>Parolanızı sıfırlamak için <a href=${"http://localhost:3000/resetpassword/"+token}>buraya tıklayın</a>.</p>`
+        html: `<p>Parolanızı sıfırlamak için <a href=${"http://localhost:3000/resetpassword/"+userId}>buraya tıklayın</a>.</p>`
     });
 }
 
