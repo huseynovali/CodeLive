@@ -3,7 +3,7 @@ import MainRoutes from './Routes/MainRoutes'
 
 function App() {
   return (
-    <div>
+    <div >
       <MainRoutes/>
     </div>
   )

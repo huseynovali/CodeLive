@@ -5,7 +5,7 @@ import { AiOutlineHome, AiOutlineMenu, AiOutlineYoutube, AiOutlineUser } from 'r
 import { LiaUsersSolid } from 'react-icons/lia';
 import { BiCodeAlt } from 'react-icons/bi';
 import { CiStreamOn } from 'react-icons/ci';
-import { motion, useMotionValue, useVelocity } from 'framer-motion';
+import { motion} from 'framer-motion';
 
 function MenuBar() {
   const [open, setOpen] = useState(false)
