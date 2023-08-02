@@ -4,7 +4,7 @@ import MenuBar from '../components/MenuBar'
 
 function MainLayout() {
     return (
-        <div>MainLayout
+        <div>
             <MenuBar />
             <Outlet />
         </div>

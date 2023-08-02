@@ -1,0 +1,27 @@
+.header {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #2a218a 5%, #4034ab 22%, #2333B4 74%);
+}
+
+
+
+.header__section__img {
+    width: 60%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: url("../../img/ultimate-membership-pro-members-management.png");
+    background-size: contain;
+    background-position: 80% 50%;
+}
+
+
+
+.header__section__text p {
+    padding: 20px 0;
+    font-size: 21px;
+}
+
+.header__section__text button{
+    background: #6663FD;
+}
