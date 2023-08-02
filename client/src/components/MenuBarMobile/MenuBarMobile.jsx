@@ -11,13 +11,13 @@ function MenuBarMobile() {
 
   return (
 
-    <motion.div className={`bottom__menu__section fixed flex  p-1 text-2xl left-0 bottom-0 z-50 select-none w-full `}>
+    <motion.div className={`bottom__menu__section fixed flex  p-1 text-2xl left-0 bottom-0 z-50 select-none w-full   md:hidden`}>
       <motion.ul className={`flex  justify-around text-white w-full  `}
         initial={false}
         transition={{ type: "spring", stiffness: 300, damping: 14 }}
       >
-        <Link>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+        <Link to={"/"}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' relative bg-blue-700' : ""} `} transition={{ duration: 1 }} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/" ? ' block' : "hidden"}`}></div>
             <AiOutlineHome />
           </motion.li>
@@ -46,7 +46,7 @@ function MenuBarMobile() {
             <CiStreamOn />
           </motion.li>
         </Link>
-        <Link>
+        <Link to={"/profile"}>
           <motion.li className={` p-3 rounded-full ${location.pathname == "/profile" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/profile" ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
         </Link>
