@@ -55,7 +55,7 @@ function Home() {
             </div>
           </motion.div>
           <motion.div
-            className="header__section__img   md:block absolute lg:relative right-0 opacity-30 h-full md:h-[60%]  w-full lg:w-[60%] lg:opacity-100"
+            className="header__section__img   md:block absolute lg:relative right-0 opacity-30 h-full md:h-[60%]  w-full lg:w-[60%] lg:h-[100%] lg:opacity-100"
             initial={{ x: 1000 }}
             animate={{ x: 0 }}
             transition={{ duration: 1 }}

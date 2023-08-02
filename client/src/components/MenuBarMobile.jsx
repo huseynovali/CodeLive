@@ -2,7 +2,9 @@ import React from 'react'
 
 function MenuBarMobile() {
   return (
-    <div>MenuBarMobile</div>
+    <div>
+        
+    </div>
   )
 }
 

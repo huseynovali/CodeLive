@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router'
-import MenuBar from '../components/MenuBar'
+import MenuBar from '../components/MenuBar/MenuBar'
 
 function MainLayout() {
     return (
