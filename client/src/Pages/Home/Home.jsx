@@ -11,6 +11,7 @@ function Home() {
 
       </div>
       <div className="header">
+
         <div className="nav__brand">
           <h1 className='text-2xl p-5  text-white md:text-4xl md:px-[50px] md:py-[30px]'>
             <Link to="/">

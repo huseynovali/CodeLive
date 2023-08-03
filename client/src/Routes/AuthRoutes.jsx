@@ -13,10 +13,7 @@ function AuthRoutes() {
         setLoading(false);
     }, 2000);
 
-    // Simulate an error condition for demonstration purposes (you can remove this part)
-    setTimeout(() => {
-        setError(true);
-    }, 4000);
+ 
 
     if (loading) {
         // If loading is true, you can show a loading spinner or message here.

@@ -5,7 +5,7 @@ import AuthRoutes from "./AuthRoutes";
 import { useRoutes } from 'react-router';
 import Home from '../Pages/Home/Home';
 import Profile from '../Pages/Profile';
-import Login from '../Pages/Login';
+import Login from '../Pages/login/Login';
 import MainLayout from '../Layout/MainLayout';
 export default function MainRoutes() {
   const Routes =useRoutes( [
