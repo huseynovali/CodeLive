@@ -1,9 +1,66 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./login.css"
-import { Link } from 'react-router-dom'
+import * as Yup from "yup";
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineLeft } from 'react-icons/ai'
-
+import axios from "axios"
+import { useMutation, useQueryClient } from 'react-query';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Field, Form, Formik } from 'formik';
+import { axiosInstance } from '../../services/axiosServices';
 function ResetPassword() {
+const navigate = useNavigate()
+const location = useParams()
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("instantToken"))
+    axiosInstance.post("/user/api/token", { token })
+      .then(res => {
+        if (res.data !== true) {
+          localStorage.removeItem("instantToken");
+          navigate("/login")
+        }
+      })
+      .catch(err=>{
+        localStorage.removeItem("instantToken")
+        return navigate("/login")
+      })
+  }, [])
+
+
+  const SignupSchema = Yup.object().shape({
+    password: Yup.string()
+      .min(8, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required')
+      .matches(/[a-zA-Z]/g, "Password must contain at least one letter")
+      .matches(/\d/g, "Password must contain at least one number"),
+  
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Required')
+  });
+
+  const queryClient = useQueryClient();
+
+  const resetPassword = (values) => {
+    console.log(values);
+    return axios.post('http://localhost:8080/user/api/reset-password', values);
+  };
+
+  const createUserMutation = useMutation(resetPassword, {
+    onSuccess: (res) => {
+      localStorage.removeItem("instantToken")
+      queryClient.invalidateQueries('users');
+      toast.success('Change Password !');
+      navigate('/login');
+    },
+    onError: (error) => {
+      const errorMessage = error.response.data.message
+      toast.error('Error :' + errorMessage);
+    },
+  });
   return (
     <div className='login__page  w-full h-screen overflow-hidden'>
       <div className="div relative z-10">
@@ -22,11 +79,50 @@ function ResetPassword() {
         <Link className='text-2xl p-2 bg-blue-500 w-[41px] h-[41px] text-white rounded-full absolute inset-5 border hover:border-blue-700' to={"/"}>
           <AiOutlineLeft />
         </Link>
-         <div className="form__content py-16 w-full md:w-[50%]">
-       
+        <div className="form__content py-16 w-full md:w-[50%]">
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <Formik
+            initialValues={{
+              password:"",
+              confirmPassword:"",
+              userId:location.id
+            }}
+            validationSchema={SignupSchema}
+            onSubmit={(values, { resetForm }) => {
+
+              createUserMutation.mutate(values);
+            }}
+          >
+            {({ errors, touched }) => (
+              <Form className='flex flex-col w-full p-5 lg:p-16 '>
+                <Field  type="password" name="password" className="auth__input border border-t-0 border-l-0 border-r-0  py-2 outline-none" placeholder="Password" />
+                {errors.password && touched.password ? (
+                  <div className='text-red-500'>{errors.password}</div>
+                ) : null}
+
+                <Field name="confirmPassword" type="password" className="auth__input border border-t-0 border-l-0 border-r-0  py-2  outline-none mt-7" placeholder="confirmPassword" />
+                {errors.confirmPassword && touched.confirmPassword ? (
+                  <div className='text-red-500'>{errors.confirmPassword}</div>
+                ) : null}
+
+                <button type="submit" className="border px-3  py-2 rounded-3xl bg-blue-500 text-white mt-12">Submit</button>
+              </Form>
+            )}
+          </Formik>
         </div>
         <div className="forget__content__img w-[50%] h-full hidden md:block"></div>
-       
+
 
       </div>
     </div>

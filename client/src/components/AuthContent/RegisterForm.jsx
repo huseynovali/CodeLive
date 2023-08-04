@@ -3,12 +3,14 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
 import "./FormContent.css"
-import axios from "axios"
+
 import { useMutation, useQueryClient } from 'react-query';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { axiosInstance } from '../../services/axiosServices';
 
 function RegisterFormContent() {
+
     const navigate = useNavigate()
     const SignupSchema = Yup.object().shape({
         email: Yup.string()
@@ -20,12 +22,13 @@ function RegisterFormContent() {
             .required('Required')
             .matches(/[aA-zZ]/g, "Password must contain at least one letter")
             .matches(/\d/g, "Password must contain at least one number")
+
     });
 
     const queryClient = useQueryClient();
 
     const login = (values) => {
-        return axios.post('http://localhost:8080/user/register', values);
+        return axiosInstance.post('http://localhost:8080/user/register', values);
     };
 
     const createUserMutation = useMutation(login, {

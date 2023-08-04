@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
 const { sendEmail } = require("../services/sendingEmail");
-
+const bcrypt = require("bcrypt");
 const forgotPassword = {
     sendConfirmMessage: async (req, res) => {
         const { email } = req.body;
@@ -33,14 +33,16 @@ const forgotPassword = {
             return;
         }
         try {
-            userModel.findById(userId)
-                .then((user) => {
+            User.findById(userId)
+                .then(async(user) => {
                     if (!user) {
                         res.status(404).json({ message: 'User not found!' });
                         return;
                     }
+                console.log(user);
+                const hashedPassword = await bcrypt.hash(password, 10);
 
-                    user.password = password;
+                    user.password = hashedPassword;
 
                     user.save()
                         .then(() => {
