@@ -8,15 +8,17 @@ import Profile from '../Pages/Profile';
 import Login from '../Pages/auth/Login';
 import MainLayout from '../Layout/MainLayout';
 import Register from '../Pages/auth/Register';
+import ForgotPassword from '../Pages/auth/ForgotPassword';
+import ResetPassword from '../Pages/auth/ResetPassword';
 export default function MainRoutes() {
-  const Routes =useRoutes( [
+  const Routes = useRoutes([
     {
-      element: <MainLayout/> ,
+      element: <MainLayout />,
       path: '/',
       children: [
         {
           path: "/",
-          element:<Home />
+          element: <Home />
 
         },
         {
@@ -26,7 +28,7 @@ export default function MainRoutes() {
               path: "/profile",
               element: <Profile />,
             },
-         
+
           ]
         },
 
@@ -37,11 +39,20 @@ export default function MainRoutes() {
         {
           path: "/login",
           element: <Login />,
+
         },
-          {
-              path:"/register",
-              element:<Register/>
-            }
+        {
+          path: "/register",
+          element: <Register />
+        },
+        {
+          path: "/forgot-password",
+          element: <ForgotPassword />
+        },
+        {
+          path: "/reset-password/:id",
+          element: <ResetPassword />
+        }
       ]
     },
   ]);

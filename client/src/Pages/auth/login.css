@@ -16,3 +16,11 @@
     object-fit: cover;
     background-position: 10% 50%;
 }
+
+.forget__content__img{
+  background-image: url("../../img/login.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: 10% 50%;
+}
