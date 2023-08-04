@@ -18,7 +18,7 @@ function Login() {
           </svg>
         </div>
       </div>
-      <div className="login__container w-[80vw] h-[80vh]   m-auto mt-[10vh] relative z-30 rounded-lg flex">
+      <div className="login__container w-[80vw] h-[60vh] md:h-[40vh] lg:h-[80vh]   m-auto mt-[20vh] md:mt-[30vh] lg:mt-[10vh] relative z-30 rounded-lg flex ">
         <Link className='text-2xl p-2 bg-blue-500 w-[41px] h-[41px] text-white rounded-full absolute inset-5 border hover:border-blue-700' to={"/"}>
           <AiOutlineLeft />
         </Link>

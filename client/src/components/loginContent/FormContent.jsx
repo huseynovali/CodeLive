@@ -4,8 +4,12 @@ import * as Yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
 import "./FormContent.css"
 import axios from "axios"
+import { useMutation, useQueryClient } from 'react-query';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function FormContent() {
-   const navigate = useNavigate()
+  const navigate = useNavigate()
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email')
@@ -18,8 +22,44 @@ function FormContent() {
       .matches(/\d/g, "Password must contain at least one number")
   });
 
+  const queryClient = useQueryClient();
+
+  const login = (values) => {
+    return axios.post('http://localhost:8080/user/login', values);
+  };
+
+  const createUserMutation = useMutation(login, {
+    onSuccess: (res) => {
+      const data = res.data;
+      queryClient.invalidateQueries('users');
+      toast.success('Login !');
+      localStorage.setItem('token', JSON.stringify(data.token));
+      localStorage.setItem('username', JSON.stringify(data.user.username));
+      navigate('/profile');
+    },
+    onError: (error) => {
+      const errorMessage = error.response.data.message
+      toast.error('Error :' + errorMessage);
+    },
+  });
+
+
+
+
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Formik
 
         initialValues={{
@@ -27,14 +67,8 @@ function FormContent() {
           password: ""
         }}
         validationSchema={SignupSchema}
-        onSubmit={values => {
-           axios.post('http://localhost:8080/user/login',values)
-           .then(res=>{
-            localStorage.setItem("token",JSON.stringify(res.data.token));
-            localStorage.setItem("username",JSON.stringify(res.data.user.username)) 
-            navigate("/profile")
-           })
-           .catch(err=>console.log(err))
+        onSubmit={(values, { resetForm }) => {
+          createUserMutation.mutate(values);
         }}
       >
         {({ errors, touched }) => (
@@ -43,7 +77,7 @@ function FormContent() {
             {errors.email && touched.email ? (
               <div className='text-red-500'>{errors.email}</div>
             ) : null}
-            <Field name="password" className="auth__input border border-t-0 border-l-0 border-r-0    py-2  outline-none   mt-7" placeholder="Password" />
+            <Field type="password" name="password" className="auth__input border border-t-0 border-l-0 border-r-0    py-2  outline-none   mt-7" placeholder="Password" />
             {errors.password && touched.password ? (
               <div className='text-red-500'>{errors.password}</div>
             ) : null}

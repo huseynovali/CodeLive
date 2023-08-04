@@ -5,6 +5,7 @@ const userController = require("../controller/userController");
 const registerValidation = require("../validation/registerValidation");
 const userMid = require("../middleware/authValidateMiddliware");
 const forgotPassword = require("../controller/forgotPassword");
+const tokenController = require("../controller/tokenController");
 
 const userRouter = express.Router();
 
@@ -21,5 +22,6 @@ userRouter.post("/follow/:userId/followUserId/:followUserId", userController.tog
 userRouter.post("/api/forgot-password", forgotPassword.sendConfirmMessage)
 userRouter.post("/api/reset-password", forgotPassword.resetPassword)
 
+userRouter.post("/api/token", tokenController)
 
 module.exports = userRouter

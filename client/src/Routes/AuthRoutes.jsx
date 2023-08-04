@@ -1,29 +1,35 @@
-import { useState } from "react";
-import { Navigate, Outlet } from "react-router";
+import { useEffect, useState } from "react";
+import { Navigate, Outlet, json } from "react-router";
+import { axiosInstance } from "../services/axiosServices";
 
 function AuthRoutes() {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const isTrue = false;
 
-
-
-    // Simulate a loading delay for demonstration purposes (you can remove this part)
-    setTimeout(() => {
-        setLoading(false);
-    }, 2000);
-
- 
+    const [isTrue,setIsTrue] =useState(false) ;
+    const token = JSON.parse(localStorage.getItem("token"))
+    useEffect(() => {
+        console.log(token);
+        axiosInstance.post("/user/api/token", {token})
+            .then(res => {
+                if(res.data == true){
+                    setIsTrue(true);
+                    setLoading(false)
+              
+                }
+            })
+            .catch(err=>{
+                setIsTrue(false);
+                setLoading(false)
+         
+            })
+    }, [])
 
     if (loading) {
-        // If loading is true, you can show a loading spinner or message here.
+
         return <div>Loading...</div>;
     }
 
-    if (error) {
-        // If error is true, you can show an error message or a fallback UI here.
-        return <div>Error occurred. Please try again later.</div>;
-    }
+
     if (isTrue) {
         return <Navigate to="/" />;
     }
