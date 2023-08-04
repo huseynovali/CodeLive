@@ -14,7 +14,7 @@ function ForgotPassword() {
       .email('Invalid email')
       .required('Required'),
   })
-const navigate = useNavigate()
+  const navigate = useNavigate()
   const queryClient = useQueryClient();
 
   const frogetPassword = (values) => {
@@ -23,6 +23,8 @@ const navigate = useNavigate()
 
   const createUserMutation = useMutation(frogetPassword, {
     onSuccess: (res) => {
+      localStorage.setItem("instantToken",JSON.stringify(res.data.token))
+      console.log(res.data);
       queryClient.invalidateQueries('users');
       toast.success('Login !');
       navigate('/login');
@@ -69,7 +71,7 @@ const navigate = useNavigate()
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, { resetForm }) => {
-              console.log(values);
+             
               createUserMutation.mutate(values);
             }}
           >

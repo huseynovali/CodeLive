@@ -86,7 +86,10 @@ function FormContent() {
 
             <div className="form__bottom flex justify-between p-1 mt-3">
               <Link to={"/register"} className='auth__link register__link'>Register</Link>
-              <Link className='auth__link froget__password__link' to={"/forgot-password"}>Forgot your password?</Link>
+              {
+                localStorage.getItem("instantToken") ? null : <Link className='auth__link froget__password__link' to={"/forgot-password"}>Forgot your password?</Link>
+              }
+
             </div>
           </Form>
         )}

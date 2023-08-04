@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
 const { sendEmail } = require("../services/sendingEmail");
 
@@ -12,11 +13,11 @@ const forgotPassword = {
                         res.status(404).json({ message: 'User not found!' });
                         return 0;
                     }
-
+                     
                     sendEmail(email, user._id)
+                    let token = jwt.sign(req.body.email, process.env.ACCESS_KEY)
 
-
-                    res.json({message:"Send email succesfull !"})
+                    res.json({token})
                 })
         }
 
