@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet, json } from "react-router";
 import { axiosInstance } from "../services/axiosServices";
+import { getCryptLocalSrtorage } from "../services/localStorageCrypt";
 
 function AuthRoutes() {
     const [loading, setLoading] = useState(true);
 
     const [isTrue,setIsTrue] =useState(false) ;
-    const token = JSON.parse(localStorage.getItem("token"))
+    const token = getCryptLocalSrtorage("token") 
+
     useEffect(() => {
         console.log(token);
         axiosInstance.post("/user/api/token", {token})
             .then(res => {
+                console.log(res.data);
                 if(res.data == true){
                     setIsTrue(true);
                     setLoading(false)

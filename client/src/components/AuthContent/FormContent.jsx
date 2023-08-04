@@ -7,6 +7,7 @@ import axios from "axios"
 import { useMutation, useQueryClient } from 'react-query';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { setCryptLocalSrtorage } from '../../services/localStorageCrypt';
 
 function FormContent() {
   const navigate = useNavigate()
@@ -33,8 +34,10 @@ function FormContent() {
       const data = res.data;
       queryClient.invalidateQueries('users');
       toast.success('Login !');
-      localStorage.setItem('token', JSON.stringify(data.token));
-      localStorage.setItem('username', JSON.stringify(data.user.username));
+
+      setCryptLocalSrtorage('token',data.token)
+      setCryptLocalSrtorage('username',data.user.username)
+      setCryptLocalSrtorage('userid',data.user._id)
       navigate('/profile');
     },
     onError: (error) => {

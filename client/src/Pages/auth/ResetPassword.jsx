@@ -10,8 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Field, Form, Formik } from 'formik';
 import { axiosInstance } from '../../services/axiosServices';
 function ResetPassword() {
-const navigate = useNavigate()
-const location = useParams()
+  const navigate = useNavigate()
+  const location = useParams()
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("instantToken"))
@@ -22,7 +22,7 @@ const location = useParams()
           navigate("/login")
         }
       })
-      .catch(err=>{
+      .catch(err => {
         localStorage.removeItem("instantToken")
         return navigate("/login")
       })
@@ -36,7 +36,7 @@ const location = useParams()
       .required('Required')
       .matches(/[a-zA-Z]/g, "Password must contain at least one letter")
       .matches(/\d/g, "Password must contain at least one number"),
-  
+
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
       .required('Required')
@@ -76,9 +76,7 @@ const location = useParams()
         </div>
       </div>
       <div className="login__container w-[80vw] h-[60vh] md:h-[40vh] lg:h-[80vh]   m-auto mt-[20vh] md:mt-[30vh] lg:mt-[10vh] relative z-30 rounded-lg flex ">
-        <Link className='text-2xl p-2 bg-blue-500 w-[41px] h-[41px] text-white rounded-full absolute inset-5 border hover:border-blue-700' to={"/"}>
-          <AiOutlineLeft />
-        </Link>
+   
         <div className="form__content py-16 w-full md:w-[50%]">
           <ToastContainer
             position="top-right"
@@ -94,9 +92,9 @@ const location = useParams()
           />
           <Formik
             initialValues={{
-              password:"",
-              confirmPassword:"",
-              userId:location.id
+              password: "",
+              confirmPassword: "",
+              userId: location.id
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, { resetForm }) => {
@@ -106,7 +104,7 @@ const location = useParams()
           >
             {({ errors, touched }) => (
               <Form className='flex flex-col w-full p-5 lg:p-16 '>
-                <Field  type="password" name="password" className="auth__input border border-t-0 border-l-0 border-r-0  py-2 outline-none" placeholder="Password" />
+                <Field type="password" name="password" className="auth__input border border-t-0 border-l-0 border-r-0  py-2 outline-none" placeholder="Password" />
                 {errors.password && touched.password ? (
                   <div className='text-red-500'>{errors.password}</div>
                 ) : null}
