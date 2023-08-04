@@ -23,12 +23,13 @@ const register = async (req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 10);
 
- 
+
             const file = req.file;
-            const uploadedFile =""
-            if(file){
-              uploadedFile = await uploadFile(file);
-               
+            console.log(file);
+            let uploadedFile = ""
+            if (file) {
+                uploadedFile = await uploadFile(file);
+
             }
             const lastPart = uploadedFile?.Location?.split("/").pop();
             const newUser = new User({

@@ -5,8 +5,9 @@ import AuthRoutes from "./AuthRoutes";
 import { useRoutes } from 'react-router';
 import Home from '../Pages/Home/Home';
 import Profile from '../Pages/Profile';
-import Login from '../Pages/login/Login';
+import Login from '../Pages/auth/Login';
 import MainLayout from '../Layout/MainLayout';
+import Register from '../Pages/auth/Register';
 export default function MainRoutes() {
   const Routes =useRoutes( [
     {
@@ -25,6 +26,7 @@ export default function MainRoutes() {
               path: "/profile",
               element: <Profile />,
             },
+         
           ]
         },
 
@@ -36,7 +38,10 @@ export default function MainRoutes() {
           path: "/login",
           element: <Login />,
         },
-       
+          {
+              path:"/register",
+              element:<Register/>
+            }
       ]
     },
   ]);
