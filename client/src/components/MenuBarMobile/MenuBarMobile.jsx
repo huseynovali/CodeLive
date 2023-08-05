@@ -47,8 +47,8 @@ function MenuBarMobile() {
           </motion.li>
         </Link>
         <Link to={"/profile"}>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/profile" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
-            <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/profile" ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
+          <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+            <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname.split("/")[1] == "profile"  ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
         </Link>
 
       </motion.ul>

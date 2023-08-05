@@ -41,7 +41,7 @@ function Sidebar() {
                             <ul className='overflow-hidden w-[250px] py-3'>
 
                                 <Link to={"myvideo"}>
-                                <li className={` sidebar__list__item  ${sellectLink == "myvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "myvideo" ? "text-blue-300" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <BiSolidVideos className='text-2xl' />
                                         </div>
@@ -49,7 +49,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                <li className={` sidebar__list__item  ${sellectLink == "followers" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "followers" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <SlUserFollow className='text-2xl' />
                                         </div>
@@ -57,7 +57,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                <li className={` sidebar__list__item  ${sellectLink == "following" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "following" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <SlUserFollowing className='text-2xl' />
                                         </div>
@@ -65,7 +65,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                <li className={` sidebar__list__item  ${sellectLink == "favorite" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "favorite" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <MdFavoriteBorder className='text-2xl' />
                                         </div>
@@ -73,7 +73,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                <li className={` sidebar__list__item  ${sellectLink == "addvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "addvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <RiVideoAddLine className='text-2xl' />
                                         </div>
@@ -81,7 +81,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                <li className={` sidebar__list__item  ${sellectLink == "addquestion" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "addquestion" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <RiQuestionnaireLine className='text-2xl' />
                                         </div>
@@ -89,7 +89,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                <li className={` sidebar__list__item  ${sellectLink == "purchesvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <li className={` sidebar__list__item  ${sellectLink == "purchesvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <BiPurchaseTagAlt className='text-2xl' />
                                         </div>

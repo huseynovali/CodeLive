@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./MenuBar.css"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlineHome, AiOutlineMenu, AiOutlineYoutube, AiOutlineUser, AiOutlineClose } from 'react-icons/ai';
 import { LiaUsersSolid } from 'react-icons/lia';
 import { BiCodeAlt } from 'react-icons/bi';
@@ -9,11 +9,11 @@ import { motion } from 'framer-motion';
 
 function MenuBar() {
   const [open, setOpen] = useState(false)
-
+  const location = useLocation()
   const toggleMenu = (event) => {
     setOpen(!open);
   };
-
+console.log(location.pathname.split("/")[1] == "profile");
   useEffect(() => {
     const closeMenuOnOutsideClick = (event) => {
       if (event.target.classList.contains("close__button__cover")) {
@@ -82,7 +82,7 @@ function MenuBar() {
             </motion.li>
           </Link>
           <Link to={"/profile"}>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/profile" ? ' bg-blue-700' : ""} `}>
+            <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' bg-blue-700' : ""} `}>
               <AiOutlineUser />
             </motion.li>
           </Link>

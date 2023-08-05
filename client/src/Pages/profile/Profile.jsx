@@ -8,14 +8,14 @@ import ProfileMainContent from '../../components/profileComponents/ProfileMainCo
 function Profile() {
 
   return (
-    <motion.div 
-    className='profile__page flex relative h-screen'
-    initial={{ scale:0.9 }}
-    animate={{ scale:1 }}
-    transition={{ duration: 0.9 }}
-  >
+    <motion.div
+      className='profile__page flex relative h-screen'
+      initial={{ scale: 0.9 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.9 }}
+    >
 
-      <div className="div relative z-10">
+      <div className=" absolute z-10 w-full h-full">
         <div className="decoration__image absolute  w-full h-screen overflow-hidden -z-10">
           <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" >
             <path fill="#4144EB" d="M49.9,-67.1C64.8,-57.8,77.2,-43.4,82.8,-26.8C88.3,-10.1,87.1,8.9,79.1,23.2C71,37.5,56.1,47.1,41.8,58.9C27.5,70.6,13.7,84.5,-1.4,86.4C-16.5,88.3,-33,78.3,-42,64.8C-50.9,51.3,-52.3,34.4,-55.1,19.4C-57.9,4.4,-62.2,-8.6,-58.3,-18.4C-54.4,-28.2,-42.3,-34.9,-31.2,-45.4C-20.1,-56,-10,-70.4,3.7,-75.5C17.5,-80.7,34.9,-76.4,49.9,-67.1Z" transform="translate(50 100)" />
@@ -33,7 +33,7 @@ function Profile() {
         </div>
       </div>
       <Sidebar />
-       <ProfileMainContent/>
+      <ProfileMainContent />
 
     </motion.div>
   )
