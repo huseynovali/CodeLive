@@ -5,7 +5,7 @@ import { BiSolidUserDetail, BiSolidVideos, BiPurchaseTagAlt } from 'react-icons/
 import { SlUserFollow, SlUserFollowing } from 'react-icons/sl'
 import { MdFavoriteBorder } from 'react-icons/md'
 import { RiVideoAddLine, RiQuestionnaireLine } from 'react-icons/RI'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import "./ProfileComponets.css"
 import profileImage from "../../img/Unsplash-Avatars_0005s_0017_harps-joseph-tAvpDE7fXgY-unsplash.png"
 const variants = {
@@ -14,7 +14,9 @@ const variants = {
 }
 function Sidebar() {
     const [isOpen, setIsOpen] = useState(false)
-
+    const location = useLocation()
+    const sellectLink = location.pathname.split("/").pop()
+    console.log(sellectLink);
     return (
         <div className='z-30 absolute'>
             <motion.nav
@@ -39,7 +41,7 @@ function Sidebar() {
                             <ul className='overflow-hidden w-[250px] py-3'>
 
                                 <Link to={"myvideo"}>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
+                                <li className={` sidebar__list__item  ${sellectLink == "myvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <BiSolidVideos className='text-2xl' />
                                         </div>
@@ -47,7 +49,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
+                                <li className={` sidebar__list__item  ${sellectLink == "followers" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <SlUserFollow className='text-2xl' />
                                         </div>
@@ -55,7 +57,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
+                                <li className={` sidebar__list__item  ${sellectLink == "following" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <SlUserFollowing className='text-2xl' />
                                         </div>
@@ -63,7 +65,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg py-2 '>
+                                <li className={` sidebar__list__item  ${sellectLink == "favorite" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <MdFavoriteBorder className='text-2xl' />
                                         </div>
@@ -71,7 +73,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
+                                <li className={` sidebar__list__item  ${sellectLink == "addvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <RiVideoAddLine className='text-2xl' />
                                         </div>
@@ -79,7 +81,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
+                                <li className={` sidebar__list__item  ${sellectLink == "addquestion" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <RiQuestionnaireLine className='text-2xl' />
                                         </div>
@@ -87,7 +89,7 @@ function Sidebar() {
                                     </li>
                                 </Link>
                                 <Link>
-                                    <li className='sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
+                                <li className={` sidebar__list__item  ${sellectLink == "purchesvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                         <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                             <BiPurchaseTagAlt className='text-2xl' />
                                         </div>
@@ -97,8 +99,8 @@ function Sidebar() {
                             </ul>
                         </div>
                         <Link className=' overflow-hidden w-[250px] px-3' to={"accound"}>
-                            <div className=' sidebar__list__item hover:text-blue-500 flex items-center text-lg  py-2'>
-                                <div className="list__icon  flex justify-center items-center border border-transparent hover:border-white rounded-full">
+                            <div className={` sidebar__list__item  ${sellectLink == "accound" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                <div className={`list__icon  flex justify-center items-center border  ${sellectLink == "accound" ? "border-white" : "border-transparent"} hover:border-white rounded-full`}>
                                     <img src={profileImage} className='rounded-full h-[40px] w-[40px] ' />
                                 </div>
                                 <span className='mx-2'>Ali_612</span>
