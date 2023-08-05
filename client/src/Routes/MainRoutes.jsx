@@ -4,12 +4,14 @@ import PrivateRoutes from "./PrivateRoutes";
 import AuthRoutes from "./AuthRoutes";
 import { useRoutes } from 'react-router';
 import Home from '../Pages/Home/Home';
-import Profile from '../Pages/Profile';
+import Profile from '../Pages/profile/Profile';
 import Login from '../Pages/auth/Login';
 import MainLayout from '../Layout/MainLayout';
 import Register from '../Pages/auth/Register';
 import ForgotPassword from '../Pages/auth/ForgotPassword';
 import ResetPassword from '../Pages/auth/ResetPassword';
+import Accound from '../Pages/Accound';
+import MyVideo from '../components/MyVideo';
 export default function MainRoutes() {
   const Routes = useRoutes([
     {
@@ -27,6 +29,16 @@ export default function MainRoutes() {
             {
               path: "/profile",
               element: <Profile />,
+              children:[
+                {
+                  path:"accound",
+                  element:<Accound/>
+                },
+                {
+                  path:"myvideo",
+                  element:<MyVideo/>
+                }
+              ]
             },
 
           ]

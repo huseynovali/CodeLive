@@ -2,7 +2,7 @@ import React from 'react'
 import "./login.css"
 import { Link } from 'react-router-dom'
 import { AiOutlineLeft } from 'react-icons/ai'
-import FormContent from '../../components/AuthContent/formContent'
+import FormContent from '../../components/AuthContent/FormContent'
 function Login() {
   return (
     <div className='login__page  w-full h-screen overflow-hidden'>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "./MenuBar.css"
 import { Link } from "react-router-dom";
-import { AiOutlineHome, AiOutlineMenu, AiOutlineYoutube, AiOutlineUser,AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineMenu, AiOutlineYoutube, AiOutlineUser, AiOutlineClose } from 'react-icons/ai';
 import { LiaUsersSolid } from 'react-icons/lia';
 import { BiCodeAlt } from 'react-icons/bi';
 import { CiStreamOn } from 'react-icons/ci';
@@ -10,11 +10,25 @@ import { motion } from 'framer-motion';
 function MenuBar() {
   const [open, setOpen] = useState(false)
 
-  const toggleMenu = () => {
+  const toggleMenu = (event) => {
     setOpen(!open);
   };
 
-
+  useEffect(() => {
+    const closeMenuOnOutsideClick = (event) => {
+      if (event.target.classList.contains("close__button__cover")) {
+        setOpen(true);
+      } else if (event.target.classList.contains("open__button__cover")) {
+        setOpen(false);
+      } else {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("click", closeMenuOnOutsideClick);
+    return () => {
+      document.removeEventListener("click", closeMenuOnOutsideClick);
+    };
+  }, []);
 
   return (
     <>
@@ -29,15 +43,19 @@ function MenuBar() {
           }}
           transition={{ type: "spring", stiffness: 300, damping: 14 }}
         >
+          {
+            open ?
+              <motion.li className='close hover:bg-blue-700 p-3 rounded-full relative' onClick={toggleMenu} >
+                <div className="close__button__cover absolute w-full h-full inset-0"></div>
+                <AiOutlineClose />
+              </motion.li>
+              :
+              <motion.li className='open hover:bg-blue-700 p-3 rounded-full relative' onClick={toggleMenu} >
+                <div className="open__button__cover absolute w-full h-full inset-0"></div>
+                <AiOutlineMenu />
+              </motion.li>
+          }
 
-          <motion.li className='hover:bg-blue-700 p-3 rounded-full' onClick={toggleMenu} >
-            {
-              open ?
-              <AiOutlineClose/>:
-              <AiOutlineMenu />
-            }
-            
-          </motion.li>
           <Link to={"/"}>
             <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' bg-blue-700' : ""} `}>
               <AiOutlineHome />
