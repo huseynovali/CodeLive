@@ -15,7 +15,7 @@ userRouter.post("/register", register);
 userRouter.post("/login", login);
 userRouter.get("/getalluser/:userid", userController.getAllUser)
 userRouter.get("/:id/:token", userController.getUserById)
-userRouter.get("/getuserglobal/:id", userController.getUserByIdGlobal)
+userRouter.get("/:id", userController.getUserByIdGlobal)
 userRouter.put("/:id", userController.editUserInfo)
 userRouter.post("/follow/:userId/followUserId/:followUserId", userController.toggleFollowUser)
 

@@ -9,7 +9,7 @@ function Profile() {
 
   return (
     <motion.div
-      className='profile__page flex relative h-screen'
+      className='profile__page flex relative h-screen overflow-hidden'
       initial={{ scale: 0.9 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.9 }}

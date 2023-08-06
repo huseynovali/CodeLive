@@ -30,7 +30,7 @@ function Sidebar() {
                             isOpen ? <div className='flex justify-between w-full items-center'>
                                 <h1 className='text-xl ml-3'>CodeLive</h1>
                                 <BsArrowBarLeft className=' text-2xl' />
-                            </div> : <BsArrowBarRight className=' text-2xl' />
+                            </div> : <BsArrowBarRight className=' text-2xl h-[28px]' />
                         }
 
 

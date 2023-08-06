@@ -23,10 +23,16 @@ const userController = {
         const id = req.params.id;
         const token = req.params.token;
         try {
-            
+
             const user = await User.findById(id);
             if (user) {
-                res.status(200).json(user);
+                if (token == user.token) {
+                    res.status(200).json(user);
+                }else{
+                    res.status(400).json({message:"you don't have permission !!!"})
+                }
+
+
             } else {
                 res.status(404).json({ message: "User not found!" });
             }
@@ -35,17 +41,20 @@ const userController = {
         }
     },
     getUserByIdGlobal: async (req, res) => {
+
         const id = req.params.id;
+        console.log(id);
         try {
             const user = await User.findById(id)
                 .select('username videos followers follow about image')
             if (user) {
+                console.log(user);
                 res.status(200).json(user);
             } else {
                 res.status(404).json({ message: "User not found!" });
             }
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json("asd");
         }
     },
     editUserInfo: async (req, res) => {
