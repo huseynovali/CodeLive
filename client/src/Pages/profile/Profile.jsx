@@ -1,15 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { motion } from "framer-motion"
 import "./Profile.css"
 import Sidebar from '../../components/profileComponents/Sidebar'
 import ProfileMainContent from '../../components/profileComponents/ProfileMainContent'
-
+import { axiosInstance } from '../../services/axiosServices'
+import { useQuery } from 'react-query'
+import { getCryptLocalSrtorage } from '../../services/localStorageCrypt'
+import { useSelector, useDispatch } from 'react-redux'
+import { addUserData } from '../../Store/reducers/userSlice'
+import { useFetcher } from 'react-router-dom'
 function Profile() {
+  const userid = getCryptLocalSrtorage("userid")
+  const token = getCryptLocalSrtorage("token")
+  const dispatch = useDispatch()
+
+
+  const { isLoading, error, data } = useQuery('userData', () =>
+    axiosInstance.get(`/user/${userid}/${token}`), { refetchOnWindowFocus: false, }
+  )
+  console.log(data);
+  useEffect(() => {
+    dispatch(addUserData(data?.data))
+
+  }, [data])
+
+
 
   return (
     <motion.div
-      className='profile__page flex relative h-screen overflow-hidden'
+      className='profile__page flex relative h-screen overflow-y-scroll'
       initial={{ scale: 0.9 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.9 }}
@@ -34,7 +54,6 @@ function Profile() {
       </div>
       <Sidebar />
       <ProfileMainContent />
-
     </motion.div>
   )
 }

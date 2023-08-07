@@ -78,7 +78,8 @@ const UserSchema = mongoose.Schema({
     //status
     image: {
         type: String
-    }
+    },
+    social:[]
 })
 
 

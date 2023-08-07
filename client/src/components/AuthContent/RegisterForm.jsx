@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { axiosInstance } from '../../services/axiosServices';
+import axios from 'axios';
 
 function RegisterFormContent() {
 
@@ -28,7 +29,7 @@ function RegisterFormContent() {
     const queryClient = useQueryClient();
 
     const login = (values) => {
-        return axiosInstance.post('http://localhost:8080/user/register', values);
+        return axios.post('http://localhost:8080/user/register', values);
     };
 
     const createUserMutation = useMutation(login, {

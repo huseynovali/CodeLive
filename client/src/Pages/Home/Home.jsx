@@ -3,6 +3,11 @@ import "./Home.css"
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter'
 import { Link } from "react-router-dom";
+import Spline from '@splinetool/react-spline';
+
+
+
+
 function Home() {
 
   return (
@@ -55,6 +60,10 @@ function Home() {
               </Link>
             </div>
           </motion.div>
+          {/* <div className="splien__div hidden lg:block">
+            <Spline scene="https://prod.spline.design/QKvuY4UlDFS1OT5D/scene.splinecode" className='w-[80%] h-screen absolute inset-0 opacity-30 lg:opacity-100 hidden lg:block' />
+          </div> */}
+
           <motion.div
             className="header__section__img   md:block absolute lg:relative right-0 opacity-30 h-full md:h-[60%]  w-full lg:w-[60%] lg:h-[100%] lg:opacity-100"
             initial={{ x: 1000 }}

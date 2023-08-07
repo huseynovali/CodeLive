@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@splinetool/react-spline": "^2.2.6",
     "axios": "^1.4.0",
     "crypto-js": "^4.1.1",
     "formik": "^2.4.3",

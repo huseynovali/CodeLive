@@ -10,8 +10,9 @@ import MainLayout from '../Layout/MainLayout';
 import Register from '../Pages/auth/Register';
 import ForgotPassword from '../Pages/auth/ForgotPassword';
 import ResetPassword from '../Pages/auth/ResetPassword';
-import Accound from '../Pages/Accound';
-import MyVideo from '../components/MyVideo';
+import Accound from '../components/profileComponents/ProfileComponents/Accound';
+import MyVideo from '../components/profileComponents/ProfileComponents/MyVideo';
+
 export default function MainRoutes() {
   const Routes = useRoutes([
     {

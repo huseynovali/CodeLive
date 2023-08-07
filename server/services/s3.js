@@ -29,6 +29,7 @@ function uploadFile(file) {
 
 
 function getFile(filekey) {
+
     const downloadParams = {
         Bucket: bucketName,
         Key: filekey

@@ -23,9 +23,9 @@ const accountImgController = {
 
                 if (oldFileKey) {
                     await deleteFile(oldFileKey);
-                    res.status(200).json({ message: "Photo Edit" });
+                    res.status(200).json({ message: "Photo Edit",lastPart });
                 } else {
-                    res.status(201).json({ message: "Photo Added" });
+                    res.status(201).json({ message: "Photo Added",lastPart });
                 }
 
                 user.image = lastPart;
@@ -38,9 +38,14 @@ const accountImgController = {
 
 
     getAccoundImg: async (req, res) => {
-        const Key = req.params.key;
-        const result = getFile(Key)
-        result.pipe(res)
+        let Key = req.params.key;
+        console.log("key:", req.params.key);
+        if (Key !== undefined) {
+            console.log("burder");
+            const result = getFile(Key)
+            result.pipe(res)
+        }
+
 
     },
     deleteAccoundImg: async (req, res) => {

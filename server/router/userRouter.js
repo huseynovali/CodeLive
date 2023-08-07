@@ -6,6 +6,7 @@ const registerValidation = require("../validation/registerValidation");
 const userMid = require("../middleware/authValidateMiddliware");
 const forgotPassword = require("../controller/forgotPassword");
 const tokenController = require("../controller/tokenController");
+const userSocial = require("../controller/usersocialMedia");
 
 const userRouter = express.Router();
 
@@ -23,5 +24,11 @@ userRouter.post("/api/forgot-password", forgotPassword.sendConfirmMessage)
 userRouter.post("/api/reset-password", forgotPassword.resetPassword)
 
 userRouter.post("/api/token", tokenController)
+
+
+userRouter.post("/social/:userid", userSocial.addSocial)
+userRouter.delete("/social/:userid/:name", userSocial.deleteSocial)
+// userRouter.put("/social/:userid",userSocial.editSocial)
+
 
 module.exports = userRouter

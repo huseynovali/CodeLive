@@ -24,7 +24,27 @@ const userController = {
         const token = req.params.token;
         try {
 
-            const user = await User.findById(id);
+            const user = await User.findById(id)
+          
+            .populate(
+                {
+                    path:"videos",
+                    select:"coverImageid uploadDate videoawsid title" 
+                },
+                )
+            .populate(
+                {
+                    path:"follow",
+                    select:"username image"
+                }
+            )
+            .populate(
+                {
+                    path:"followers",
+                    select:"username image"
+                }
+            )
+            
             if (user) {
                 if (token == user.token) {
                     res.status(200).json(user);
@@ -63,10 +83,17 @@ const userController = {
         try {
             const user = await User.findById(id);
             if (user) {
+            
                 user.username = username
                 user.email = email
-                user.about = about
-                user.save()
+                user.about = about 
+                   const emailCheck = await User.findOne({email})
+                if(!emailCheck){
+                    user.save()
+                }else{
+                    res.status(400).json({message:"This email already exists !"})
+                }
+                
                 res.status(200).json({ message: "User information updated successfully!" });
 
 
