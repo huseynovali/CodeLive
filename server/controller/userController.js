@@ -79,33 +79,32 @@ const userController = {
     },
     editUserInfo: async (req, res) => {
         const id = req.params.id;
-        const { username, email, about } = req.body
+        const { username, email, about } = req.body;
         try {
             const user = await User.findById(id);
             if (user) {
-
-                user.username = username
-                user.email = email
-                user.about = about
-                const emailCheck = await User.findOne({ email })
-                if (!emailCheck) {
-                    user.save()
-                } else {
-                    res.status(400).json({ message: "This email already exists !" })
+                user.username = username;
+                user.about = about;
+    
+                // E-posta adresinin değişip değişmediğini kontrol ediyoruz
+                if (user.email !== email) {
+                    const emailCheck = await User.findOne({ email });
+                    if (emailCheck) {
+                        return res.status(400).json({ message: "This email already exists!" });
+                    }
+                    user.email = email;
                 }
-
-                res.status(200).json({ message: "User information updated successfully!" });
-
-
+    
+                user.save();
+                return res.status(200).json({ message: "User information updated successfully!" });
             } else {
-                res.status(404).json({ message: "User not found!" });
+                return res.status(404).json({ message: "User not found!" });
             }
         } catch (error) {
-            res.status(500).json(error);
+            return res.status(500).json(error);
         }
-
-
     },
+    
     toggleFollowUser: async (req, res) => {
         const userId = req.params.userId;
         const followUserId = req.params.followUserId;

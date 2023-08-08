@@ -7,9 +7,10 @@ import { getCryptLocalSrtorage } from '../../../services/localStorageCrypt'
 import { addUserData } from '../../../Store/reducers/userSlice'
 import "./profileComponentsStyle.css"
 import SocailIconService from '../../SocailIconService'
+import UserInfoEditPopup from '../userInfoEditPopup'
 function Accound() {
   const data = useSelector(state => state.userSlice.user)
-  console.log(data);
+
   const userId = getCryptLocalSrtorage("userid")
   const [sellectImg, setSellectImg] = useState("")
   const [add, setAdd] = useState("")
@@ -47,7 +48,9 @@ function Accound() {
 
 
   return (
-    <div className='h-full'>
+    <div className='h-full'>{
+            openPopup && <UserInfoEditPopup setOpenPopup={setOpenPopup}/>
+          }
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -122,10 +125,10 @@ function Accound() {
             </div>
           </div>
 
-         
+          
   
 
-          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={()=>setOpenPopup(true)}>Edit User Info</button>
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={()=>setOpenPopup(!openPopup)}>{openPopup ? "Close Popup": "Edit User Info"}</button>
 
         </div>
       </div>
