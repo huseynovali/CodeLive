@@ -5,7 +5,7 @@ import { axiosInstance } from '../../../services/axiosServices'
 import { ToastContainer, toast } from 'react-toastify'
 import { getCryptLocalSrtorage } from '../../../services/localStorageCrypt'
 import { addUserData } from '../../../Store/reducers/userSlice'
-
+import "./profileComponentsStyle.css"
 import SocailIconService from '../../SocailIconService'
 function Accound() {
   const data = useSelector(state => state.userSlice.user)
@@ -13,6 +13,7 @@ function Accound() {
   const userId = getCryptLocalSrtorage("userid")
   const [sellectImg, setSellectImg] = useState("")
   const [add, setAdd] = useState("")
+  const [openPopup,setOpenPopup] = useState(false)
   const dispatch = useDispatch()
 
 
@@ -46,7 +47,7 @@ function Accound() {
 
 
   return (
-    <div>
+    <div className='h-full'>
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -59,8 +60,8 @@ function Accound() {
         pauseOnHover
         theme="light"
       />
-      <div className="user__profile__info md:flex md:gap-5">
-        <div className="user__profiler__image">
+      <div className="user__profile__info md:flex md:gap-5 h-full">
+        <div className="user__profiler__image h-full ">
           {
             data?.image ?
               <img src={`http://localhost:8080/accountimg/images/${data?.image}`} className={` h-[230px] w-full md:w-[230px] object-fill rounded-lg  bg-slate-500 ${data?.image ? "p-0" : "p-1"} `} />
@@ -99,20 +100,33 @@ function Accound() {
             }
           </div>
           <div className="user__social__links mt-5">
-            <SocailIconService  />
+            <SocailIconService />
           </div>
         </div>
 
-        <div className="user__profile__userabout mt-5 md:mt-0">
-          <div className="row">
-            <span className='text-white'>Username:</span>
-            <h1 className='text-white text-2xl my-3'>{data?.username}</h1>
+        <div className="user__profile__user__about mt-10 md:mt-0  w-[100%] h-full p-3  rounded-lg overflow-hidden relative">
+          <div className="user__profile__user__about__container overflow-y-auto h-[90%] pb-5 overflow-x-hidden ">
+            <div className="row">
+              <span className='text-white'>Username:</span>
+              <h1 className='text-white text-2xl my-3'>{data?.username}</h1>
+            </div>
+            <hr className='py-3'/>
+            <div className="row">
+              <span className='text-white'>Email:</span>
+              <h1 className='text-white text-2xl my-3'>{data?.email}</h1>
+            </div>
+            <hr className='py-3'/>
+            <div className="row">
+              <span className='text-white'>About:</span>
+              <p className='text-white text-2xl'>{data?.about}</p>
+            </div>
           </div>
-          <hr />
-          <div className="row">
-            <span className='text-white'>About:</span>
-            <p className='text-white text-2xl'>{data?.about}</p>
-          </div>
+
+         
+  
+
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={()=>setOpenPopup(true)}>Edit User Info</button>
+
         </div>
       </div>
 
