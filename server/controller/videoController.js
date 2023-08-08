@@ -45,6 +45,7 @@ const VideoController = {
           },
         })
         .populate("userid", "username")
+
       res.status(200).json(videos)
     } catch (error) {
 
@@ -64,7 +65,7 @@ const VideoController = {
           return res.status(404).json({ message: "User not found!" });
         }
 
-       
+
         const videoFile = req.files["video"][0];
         const uploadedVideo = await uploadFile(videoFile);
         const videoPath = uploadedVideo.Location.split("/").pop();
@@ -76,7 +77,7 @@ const VideoController = {
           categoryId,
           languageId,
           videoawsid: videoPath,
-          uploadDate:moment().tz("Asia/Baku").format()  
+          uploadDate: moment().tz("Asia/Baku").format()
         });
 
         const coverImageFile = req.files["coverImage"][0];
@@ -119,7 +120,7 @@ const VideoController = {
       }
       if (coverimgFileKey) {
         await deleteFile(coverimgFileKey);
-      }   
+      }
       await Comment.deleteMany({ videoId });
 
       await User.findByIdAndUpdate(video.userid, { $pull: { videos: video._id } });
@@ -153,7 +154,7 @@ const VideoController = {
   likeVideo: async (req, res) => {
     const videoId = req.params.videoId;
     const userId = req.params.userId;
-
+console.log(userId);
     try {
       const video = await Video.findById(videoId);
       if (!video) {
