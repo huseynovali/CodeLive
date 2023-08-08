@@ -14,7 +14,7 @@ const variants = {
     closed: { width: "60px" },
 }
 function Sidebar() {
-    const data = useSelector(state => state.userSlice.user)
+    const data = useSelector(state => state.dataSlice.user)
 
     const [isOpen, setIsOpen] = useState(false)
     const location = useLocation()

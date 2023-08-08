@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const videoSchema = mongoose.Schema({
     title: {
         type: String,
@@ -36,7 +35,7 @@ const videoSchema = mongoose.Schema({
     },
     uploadDate: {
         type: Date,
-        default: Date.now
+   
     },
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,

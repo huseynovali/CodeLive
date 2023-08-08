@@ -4,12 +4,12 @@ import profileImage from "../../../img/User-Profile-PNG-Free-Download.png"
 import { axiosInstance } from '../../../services/axiosServices'
 import { ToastContainer, toast } from 'react-toastify'
 import { getCryptLocalSrtorage } from '../../../services/localStorageCrypt'
-import { addUserData } from '../../../Store/reducers/userSlice'
+import { addUserData } from '../../../Store/reducers/dataSlice'
 import "./profileComponentsStyle.css"
-import SocailIconService from '../../SocailIconService'
+import SocailIconService from '../SocailIconService'
 import UserInfoEditPopup from '../userInfoEditPopup'
 function Accound() {
-  const data = useSelector(state => state.userSlice.user)
+  const data = useSelector(state => state.dataSlice.user)
 
   const userId = getCryptLocalSrtorage("userid")
   const [sellectImg, setSellectImg] = useState("")

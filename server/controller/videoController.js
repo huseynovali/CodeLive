@@ -2,6 +2,8 @@ const Video = require("../model/videoSchema");
 const multer = require("multer");
 const User = require("../model/userSchema");
 const Comment = require("../model/comentSchema");
+const moment = require('moment-timezone');
+
 const { uploadFile, deleteFile, getFile } = require("../services/s3");
 const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
   { name: "video", maxCount: 1 },
@@ -62,7 +64,7 @@ const VideoController = {
           return res.status(404).json({ message: "User not found!" });
         }
 
-       console.log(req.files);
+       
         const videoFile = req.files["video"][0];
         const uploadedVideo = await uploadFile(videoFile);
         const videoPath = uploadedVideo.Location.split("/").pop();
@@ -74,8 +76,9 @@ const VideoController = {
           categoryId,
           languageId,
           videoawsid: videoPath,
+          uploadDate:moment().tz("Asia/Baku").format()  
         });
-        console.log(req.files);
+
         const coverImageFile = req.files["coverImage"][0];
         const uploadedImage = await uploadFile(coverImageFile);
         const imagePath = uploadedImage.Location.split("/").pop();

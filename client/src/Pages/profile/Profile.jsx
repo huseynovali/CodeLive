@@ -8,7 +8,7 @@ import { axiosInstance } from '../../services/axiosServices'
 import { useQuery } from 'react-query'
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt'
 import { useSelector, useDispatch } from 'react-redux'
-import { addUserData } from '../../Store/reducers/userSlice'
+import { addUserData } from '../../Store/reducers/dataSlice'
 import { useFetcher } from 'react-router-dom'
 function Profile() {
   const userid = getCryptLocalSrtorage("userid")
@@ -16,7 +16,7 @@ function Profile() {
   const dispatch = useDispatch()
 
 
-  const { isLoading, error, data } = useQuery('userData', () =>
+  const { data } = useQuery('userData', () =>
     axiosInstance.get(`/user/${userid}/${token}`), { refetchOnWindowFocus: false, }
   )
   console.log(data);

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { toast } from 'react-toastify';
-import { addUserData } from '../../Store/reducers/userSlice';
+import { addUserData } from '../../Store/reducers/dataSlice';
 
 function UserInfoEditPopup({setOpenPopup}) {
     const data = useSelector(state => state.userSlice.user)
