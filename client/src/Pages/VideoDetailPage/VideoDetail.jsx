@@ -5,10 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { addVideoData } from '../../Store/reducers/dataSlice';
-import VideoDetailComp from '../../components/VideoDetailComponents/VideoDetailComp';
+
 import { BiArrowBack } from "react-icons/bi"
 import "./VideoDetail.css"
 import { ToastContainer } from 'react-toastify';
+import VideoDetailComp from '../../components/VideoDetailComponents/VideoDetailComp';
 function VideoDetail(props) {
     const location = useLocation();
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ function VideoDetail(props) {
             />
             <button className='p-2 bg-blue-400 rounded-full text-white text-xl' onClick={() => goBack()}><BiArrowBack /></button>
             <div className="video__section w-[90%] m-auto py-5 ">
-                <VideoDetailComp />
+             <VideoDetailComp/>
             </div>
         </div>
     )

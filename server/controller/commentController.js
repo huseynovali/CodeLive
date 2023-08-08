@@ -41,18 +41,14 @@ const commentController = {
     },
 
     deleteComment: async (req, res) => {
-        const commentId = req.params.commentId;
+        const commentId = req.params.id;
 
         try {
-            const comment = await Comment.findById(commentId);
+            const comment = await Comment.findByIdAndDelete(commentId);
             if (!comment) {
                 return res.status(404).json({ message: "Comment not found!" });
             }
 
-            // Comment'i veritabanından sil
-            await comment.remove();
-
-            // Comment'in bağlı olduğu video verilerinden comment ID'yi çıkar
             const video = await Video.findById(comment.videoId);
             if (video) {
                 video.comments.pull(commentId);

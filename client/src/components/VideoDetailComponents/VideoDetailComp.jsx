@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player'
 import moment from 'moment';
 import numeral from 'numeral';
-import { BiLike, BiSolidLike, BiUserCircle ,BiSolidTrashAlt} from 'react-icons/bi';
+import { BiLike, BiSolidLike, BiUserCircle, BiSolidTrashAlt } from 'react-icons/bi';
 import axios from 'axios';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ function VideoDetailComp() {
     const data = useSelector(state => state.dataSlice.video)
     const [playedSeconds, setPlayedSeconds] = useState(0);
     const userid = getCryptLocalSrtorage("userid")
+    console.log(data);
     const dispatch = useDispatch()
     // const handleSeek = newSeekTime => {
     //     setPlayedSeconds(newSeekTime);
@@ -23,20 +24,15 @@ function VideoDetailComp() {
         setPlayedSeconds(clickedTime);
         console.log(clickedTime);
     };
+
     const likeToogle = async () => {
         try {
             console.log(data?._id);
-            // İstenilen videoya beğeni yapmak için sunucuya POST isteği gönderin.
             await axios.post(`http://localhost:8080/video/${data?._id}/user/${userid}`);
-
-            // Redux store güncellemesi yapın (örneğin, beğeni sayısını artırın).
             const updatedVideo = { ...data, likeBy: [...data?.likeBy, userid] };
             dispatch(addVideoData(updatedVideo));
-
-            // Bildirim gösterin.
             toast.success('Video Liked !');
         } catch (error) {
-            // Hata durumunu yönetin.
             console.error(error);
             toast.error('An error occurred.');
         }
@@ -45,22 +41,27 @@ function VideoDetailComp() {
     const unlikeToogle = async () => {
         try {
             console.log(data?._id);
-            // İstenilen videoyu beğeniden çıkarmak için sunucuya DELETE isteği gönderin.
             await axios.post(`http://localhost:8080/video/${data?._id}/user/${userid}`);
-
-            // Redux store güncellemesi yapın (örneğin, beğeni sayısını azaltın).
             const updatedVideo = { ...data, likeBy: data?.likeBy?.filter(id => id !== userid) };
             dispatch(addVideoData(updatedVideo));
-
-            // Bildirim gösterin.
             toast.success('Video Unliked !');
         } catch (error) {
-            // Hata durumunu yönetin.
             console.error(error);
             toast.error('An error occurred.');
         }
     };
-
+const deleteComment = async(id)=>{
+    try {
+        console.log(data?._id);
+        await axios.delete(`http://localhost:8080/comment/${id}`);
+        const updatedVideo = { ...data, comments: data?.comments?.filter(x => x !== id) };
+        dispatch(addVideoData(updatedVideo));
+        toast.success('Comment Delete !');
+    } catch (error) {
+        console.error(error);
+        toast.error('An error occurred.');
+    }
+}
 
 
     return (
@@ -103,26 +104,26 @@ function VideoDetailComp() {
             <div className="video__info py-5">
                 <p className='text-lg text-white'>{data?.description}</p>
             </div>
-           <div className="video__comment">
-         
+            <div className="video__comment">
 
 
 
-            <ul className='py-3'>
-                {
-                    data?.comments.map(item=>{
-                        return  <li className='text-xl text-white bg-blue-300 my-2 px-3 py-2 rounded-md flex items-center justify-between'>
-                            {item.text}
-                            {item?.author?._id == userid ?
-                             <button><BiSolidTrashAlt/></button>
-                             :
-                             ""
-                             }</li>
-                    })
-                }
-               
-            </ul>
-           </div>
+
+                <ul className='py-3'>
+                    {
+                        data?.comments?.map(item => {
+                            return <li className='text-xl text-white bg-blue-300 my-2 px-3 py-2 rounded-md flex items-center justify-between'>
+                                {item.text}
+                                {item?.author?._id == userid ?
+                                    <button><BiSolidTrashAlt onClick={() => deleteComment(item._id)} /></button>
+                                    :
+                                    ""
+                                }</li>
+                        })
+                    }
+
+                </ul>
+            </div>
 
 
         </div>
