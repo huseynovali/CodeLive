@@ -10,9 +10,9 @@ function SocailIconService() {
     const data = useSelector(state => state.userSlice.user)
     const userId = getCryptLocalSrtorage("userid")
     const [addLink, setAddLink] = useState(false)
-    const [linkData,setLinkInput] = useState({
-        name:"",
-        link:""
+    const [linkData, setLinkInput] = useState({
+        name: "",
+        link: ""
     })
     const dispatch = useDispatch()
 
@@ -30,26 +30,26 @@ function SocailIconService() {
         console.log(name);
         try {
             await axios.delete(`http://localhost:8080/user/social/${userId}/${name}`);
-            toast.success('Accound Image Delete !');
+            toast.success('Link Delete !');
             const social = data?.social.filter(item => item.name !== name)
             console.log({ ...data, social });
             dispatch(addUserData({ ...data, social }))
         } catch (error) {
-            console.log(error);
+            toast.error(error.response.data.message);
         }
     }
 
-const saveLink = async()=>{
-   try {
-     await axios.post(`http://localhost:8080/user/social/${userId}`,linkData)
-     console.log(linkData);
-     toast.success('Accound Image Delete !');
-     const social = [...data?.social, linkData]; 
-     dispatch(addUserData({ ...data, social }))
-   } catch (error) {
-    console.log(error);
-   }
-}
+    const saveLink = async () => {
+        try {
+            await axios.post(`http://localhost:8080/user/social/${userId}`, linkData)
+            console.log(linkData);
+            toast.success('Link Add !');
+            const social = [...data?.social, linkData];
+            dispatch(addUserData({ ...data, social }))
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
 
 
 
@@ -78,7 +78,7 @@ const saveLink = async()=>{
                 addLink ?
                     <div className="add__links__inputs  ">
                         <div className="inputs__group border h-[30px] rounded-md w-[250px] flex">
-                            <select name="" id="" className=' outline-none h-full rounded-l-md' onChange={(e)=>setLinkInput({...linkData,name:e.target.value})} >
+                            <select name="" id="" className=' outline-none h-full rounded-l-md' onChange={(e) => setLinkInput({ ...linkData, name: e.target.value })} >
                                 <option value="">sellect</option>
                                 <option value="Github">
                                     Github
@@ -96,14 +96,14 @@ const saveLink = async()=>{
                                     Other
                                 </option>
                             </select>
-                            <input type="link" className='outline-none  h-full rounded-r-md border-l-2 w-full' onChange={(e)=>setLinkInput({...linkData,link:e.target.value.trim()}) }/>
+                            <input type="link" className='outline-none  h-full rounded-r-md border-l-2 w-full' onChange={(e) => setLinkInput({ ...linkData, link: e.target.value.trim() })} />
                         </div>
                         <div className="buttons mt-3 flex gap-5">
                             {
-                                linkData.name && linkData.link && <button className='px-3 py-2 bg-blue-500 rounded-lg text-white' onClick={()=>saveLink()}>Save</button>
+                                linkData.name && linkData.link && <button className='px-3 py-2 bg-blue-500 rounded-lg text-white' onClick={() => saveLink()}>Save</button>
                             }
-                            
-                            <button className='px-3 py-2 bg-blue-500 rounded-lg text-white' onClick={()=>{setLinkInput("");setAddLink(false)}}>Reject</button>
+
+                            <button className='px-3 py-2 bg-blue-500 rounded-lg text-white' onClick={() => { setLinkInput(""); setAddLink(false) }}>Reject</button>
                         </div>
 
                     </div>

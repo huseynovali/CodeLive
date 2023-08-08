@@ -20,7 +20,7 @@ function UserInfoEditPopup({setOpenPopup}) {
   const handleSubmit = async(values) => {
       try {
         await axios.put(`http://localhost:8080/user/${userId}`,values)
-        toast.success('Accound Image Delete !');
+        toast.success('User Info Edit !');
         dispatch(addUserData({ ...data, username:values.username,email:values.email,about:values.about }))
         setOpenPopup(false)
       } catch (error) {
