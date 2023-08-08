@@ -50,18 +50,18 @@ function VideoDetailComp() {
             toast.error('An error occurred.');
         }
     };
-const deleteComment = async(id)=>{
-    try {
-        console.log(data?._id);
-        await axios.delete(`http://localhost:8080/comment/${id}`);
-        const updatedVideo = { ...data, comments: data?.comments?.filter(x => x !== id) };
-        dispatch(addVideoData(updatedVideo));
-        toast.success('Comment Delete !');
-    } catch (error) {
-        console.error(error);
-        toast.error('An error occurred.');
+    const deleteComment = async (id) => {
+        try {
+            console.log(data?._id);
+            await axios.delete(`http://localhost:8080/comment/${id}`);
+            const updatedVideo = { ...data, comments: data?.comments?.filter(x => x._id !== id) };
+            dispatch(addVideoData(updatedVideo));
+            toast.success('Comment Delete !');
+        } catch (error) {
+            console.error(error);
+            toast.error('An error occurred.');
+        }
     }
-}
 
 
     return (
