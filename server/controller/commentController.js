@@ -15,7 +15,7 @@ const commentController = {
         try {
             const { videoId, userId } = req.params;
             const text = req.body.text
-
+           console.log(text);
             const video = await Video.findById(videoId);
             if (!video) {
                 return res.status(404).json({ message: "Video not found!" });

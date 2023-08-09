@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player'
 import moment from 'moment';
 import numeral from 'numeral';
-import { BiLike, BiSolidLike, BiUserCircle, BiSolidTrashAlt } from 'react-icons/bi';
+import { BiLike, BiSolidLike, BiUserCircle, BiSolidTrashAlt, BiSend } from 'react-icons/bi';
 import axios from 'axios';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { toast } from 'react-toastify';
@@ -11,7 +11,9 @@ import { addVideoData } from '../../Store/reducers/dataSlice';
 function VideoDetailComp() {
     const data = useSelector(state => state.dataSlice.video)
     const [playedSeconds, setPlayedSeconds] = useState(0);
+    const [commentInput, setCommentInput] = useState("")
     const userid = getCryptLocalSrtorage("userid")
+
     console.log(data);
     const dispatch = useDispatch()
     // const handleSeek = newSeekTime => {
@@ -62,6 +64,24 @@ function VideoDetailComp() {
             toast.error('An error occurred.');
         }
     }
+    const sendComment = async () => {
+        try {
+            console.log(data?._id);
+            console.log(commentInput);
+            await axios.post(`http://localhost:8080/comment/${data?._id}/user/${userid}`, { text: commentInput });
+            const commentData = {
+                text: commentInput,
+                author: data?.userid,
+                createdAt: new Date()
+            }
+            const updatedVideo = { ...data, comments: [...data.comments, commentData] };
+            dispatch(addVideoData(updatedVideo));
+            toast.success('Comment add !');
+        } catch (error) {
+            console.error(error);
+            toast.error('An error occurred.');
+        }
+    }
 
 
     return (
@@ -105,20 +125,38 @@ function VideoDetailComp() {
                 <p className='text-lg text-white'>{data?.description}</p>
             </div>
             <div className="video__comment">
+                <h1 className='text-xl text-white py-3'>Comments</h1>
+                <div className="add__comment bg-white w-[100%] md:w-[60%] flex rounded-lg">
+                    <input type="text" className='bg-transparent w-full p-2 rounded-l-lg outline-none' onChange={(e) => setCommentInput(e.target.value.trim())} />
+                    <button className='py-2 px-5 bg-blue-400 text-xl text-white rounded-r-lg' disabled={!commentInput} onClick={() => sendComment()}>
+                        <BiSend />
+                    </button>
 
+                </div>
 
 
 
                 <ul className='py-3'>
                     {
                         data?.comments?.map(item => {
-                            return <li className='text-xl text-white bg-blue-300 my-2 px-3 py-2 rounded-md flex items-center justify-between'>
-                                {item.text}
-                                {item?.author?._id == userid ?
-                                    <button><BiSolidTrashAlt onClick={() => deleteComment(item._id)} /></button>
-                                    :
-                                    ""
-                                }</li>
+                            return <li className=' text-white bg-blue-300 my-2 px-3 py-2 rounded-md flex items-center justify-between'>
+                                <div>
+                                    <span className='text-sm'>{item?.author?.username}</span>
+                                    <p className='text-lg'>{item.text}</p>
+                                </div>
+                                <div>
+                                    {item?.author?._id == userid ?
+                                    <div>
+                                        <button onClick={() => deleteComment(item._id)}>
+                                            <BiSolidTrashAlt className='text-2xl text-center' />
+                                        </button>
+                                        </div>
+                                        :
+                                        ""
+                                    }
+                                    <p className='text-sm text-gray-500'>{moment(data?.uploadDate).startOf('day').fromNow()}</p>
+                                </div>
+                            </li>
                         })
                     }
 
