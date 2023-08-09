@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { addUserData } from '../../Store/reducers/dataSlice';
 
 function UserInfoEditPopup({setOpenPopup}) {
-    const data = useSelector(state => state.userSlice.user)
+    const data = useSelector(state => state.dataSlice.user)
     const userId = getCryptLocalSrtorage("userid")
     const dispatch = useDispatch()
 

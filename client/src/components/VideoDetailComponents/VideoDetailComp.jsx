@@ -1,34 +1,38 @@
+
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player'
 import moment from 'moment';
 import numeral from 'numeral';
-import { BiLike, BiSolidLike, BiUserCircle, BiSolidTrashAlt, BiSend, BiSolidEditAlt } from 'react-icons/bi';
-import { MdEditOff } from 'react-icons/md';
-
+import { BiLike, BiSolidLike, BiUserCircle } from 'react-icons/bi';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { toast } from 'react-toastify';
 import { addVideoData } from '../../Store/reducers/dataSlice';
+import VideoComment from './VideoComment';
+import VideoEditPopup from './VideoEditPopup';
+import { useNavigate } from 'react-router';
+
+
 function VideoDetailComp() {
     const data = useSelector(state => state.dataSlice.video)
     const [playedSeconds, setPlayedSeconds] = useState(0);
-    const [commentInput, setCommentInput] = useState("")
-    const [editActive, setEditActive] = useState("")
     const userid = getCryptLocalSrtorage("userid")
-
-    console.log(data);
+    const [descriptionisOpen, setDescriptionisOpen] = useState(false)
+    const [editPopup, setEditPopup] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     // const handleSeek = newSeekTime => {
     //     setPlayedSeconds(newSeekTime);
     //     console.log(newSeekTime);
     // };
 
-    const handleVideoClick = e => {
-        const clickedTime = Math.floor((e.nativeEvent.offsetX / e.target.offsetWidth) * e.target.duration);
-        setPlayedSeconds(clickedTime);
-        console.log(clickedTime);
-    };
+    // const handleVideoClick = e => {
+    //     const clickedTime = Math.floor((e.nativeEvent.offsetX / e.target.offsetWidth) * e.target.duration);
+    //     setPlayedSeconds(clickedTime);
+    //     console.log(clickedTime);
+    // };
 
     const likeToogle = async () => {
         try {
@@ -55,63 +59,40 @@ function VideoDetailComp() {
             toast.error('An error occurred.');
         }
     };
-    const deleteComment = async (id) => {
-        try {
-            console.log(data?._id);
-            await axios.delete(`http://localhost:8080/comment/${id}`);
-            const updatedVideo = { ...data, comments: data?.comments?.filter(x => x._id !== id) };
-            dispatch(addVideoData(updatedVideo));
-            toast.success('Comment Delete !');
-        } catch (error) {
-            console.error(error);
-            toast.error('An error occurred.');
-        }
-    }
-    const sendComment = async () => {
-        try {
-            console.log(data?._id);
-            console.log(commentInput);
-            await axios.post(`http://localhost:8080/comment/${data?._id}/user/${userid}`, { text: commentInput });
-            const commentData = {
-                text: commentInput,
-                author: data?.userid,
-                createdAt: new Date()
+    const deleteVideo = async () => {
+        if (confirm("Are You sure ?")) {
+            try {
+                await axios.delete(`http://localhost:8080/video/${data?._id}`);
+                toast.success('Video DELETE !');
+                navigate("/profile/myvideo")
+            } catch (error) {
+                console.error(error);
+                toast.error('An error occurred.');
             }
-            const updatedVideo = { ...data, comments: [...data.comments, commentData] };
-            dispatch(addVideoData(updatedVideo));
-            toast.success('Comment add !');
-            setCommentInput("")
-        } catch (error) {
-            console.error(error);
-            toast.error('An error occurred.');
+        } else {
+            toast.success('Video UnDELETE !');
         }
-    }
-    const editComment = async (id, text) => {
 
+    }
+    const editVideo = async () => {
         try {
-            await axios.put(`http://localhost:8080/comment/${id}`, { text: commentInput });
-    
-            const updatedComments = data.comments.map(comment => {
-                if (comment._id === id) {
-                    return { ...comment, text: commentInput };
-                }
-                return comment;
-            });
-    
-            const updatedVideo = { ...data, comments: updatedComments };
+            console.log(data?._id);
+            await axios.put(`http://localhost:8080/video/${data._id}`);
+            const updatedVideo = { ...data, title, description };
             dispatch(addVideoData(updatedVideo));
-    
-            setEditActive("");
-            setCommentInput("");
-            toast.success('Comment updated!');
+            toast.success('Video Unliked !');
         } catch (error) {
             console.error(error);
             toast.error('An error occurred.');
         }
+
+
     }
+
+
 
     return (
-        <div className="w-full">
+        <div className="w-full ">
             <div className="video__content border h-[300px] md:h-[500px]">
                 {
                     data?.videoawsid ?
@@ -125,7 +106,20 @@ function VideoDetailComp() {
                         : <h1>Loading...</h1>
                 }
             </div>
-            <p className='text-2xl text-white py-2'>{data?.title}</p>
+            <div className="video__title__part flex justify-between items-center">
+                <p className='text-2xl text-white py-2'>{data?.title}</p>
+                {data?.userid?._id == userid ?
+                    <div>
+                        <button className='px-3 py-2 bg-red-400 rounded-md text-white' onClick={() => deleteVideo()}> Delete Video</button>
+                        <button className='px-3 py-2 bg-blue-300 rounded-md text-white ml-2' onClick={() => setEditPopup(!editPopup)}>
+                            {
+                                editPopup ? "Reject Edit" : "Edit Video"
+                            }
+                        </button>
+                    </div>
+                    : ""}
+            </div>
+
             <div className="video__author__data flex justify-between text-white py-3">
                 <div className='flex items-center '>
                     <BiUserCircle className='text-5xl font-thin' />
@@ -147,76 +141,29 @@ function VideoDetailComp() {
 
                 </div>
             </div>
-            <div className="video__info py-5">
-                <p className='text-lg text-white'>{data?.description}</p>
-            </div>
-            <div className="video__comment">
-                <h1 className='text-xl text-white py-3'>Comments</h1>
-                <div className="add__comment bg-white w-[100%] md:w-[60%] flex rounded-lg">
-                    <input type="text" className='bg-transparent w-full p-2 rounded-l-lg outline-none' onChange={(e) => setCommentInput(e.target.value.trim())} />
-                    <button className='py-2 px-5 bg-blue-400 text-xl text-white rounded-r-lg' disabled={!commentInput} onClick={() => sendComment()}>
-                        <BiSend />
-                    </button>
 
-                </div>
-
-
-
-                <ul className='py-3'>
+            <div className='video__info p-5 pb-10 rounded-md relative'>
+                <motion.div layout className={`text-lg text-white     overflow-hidden  ${data?.description?.length > 500 ? descriptionisOpen ? "min-h-max" : "h-[100px]" : "min-h-max"}`}>
+                    {data?.description}
                     {
-                        data?.comments?.map(item => {
-                            return <li className={`text-white  my-2 px-3 py-2 rounded-md flex items-center justify-between ${editActive == item._id ? "bg-yellow-400" : "bg-blue-300"}`}>
-                                <div>
-                                    <span className='text-sm'>{item?.author?.username}</span>
-                                    {editActive == item._id ?
-                                        <div className='flex'>
-                                            <input type="text" value={commentInput} className='bg-white w-full p-2 rounded-l-lg outline-none text-black' onChange={(e) => setCommentInput(e.target.value.trim())} />
-                                            <button className='py-2 px-5 bg-blue-400 text-xl text-white rounded-r-lg' disabled={!commentInput} onClick={() => editComment(item?._id, item?.text)}>
-                                                <BiSend />
-                                            </button>
-                                        </div> :
-                                        <p className='text-lg'>{item.text}</p>
-
-
-                                    }
-
-                                </div>
-                                <div>
-                                    {item?.author?._id == userid ?
-                                        <div>
-                                            <button onClick={() => deleteComment(item._id)}>
-                                                <BiSolidTrashAlt className='text-2xl text-center' />
-                                            </button>
-
-                                            {editActive !== item._id ?
-                                                <button onClick={() => {
-                                                    setCommentInput(item.text);
-                                                    setEditActive(item._id)
-                                                }} className='ml-3'>
-                                                    <BiSolidEditAlt className='text-2xl text-center ' />
-                                                </button> :
-                                                <button onClick={() => {
-                                                    setCommentInput("");
-                                                    setEditActive("")
-                                                }} className='ml-3'>
-                                                    <MdEditOff className='text-2xl text-center ' />
-                                                </button>
-                                            }
-
-                                        </div>
-                                        :
-                                        ""
-                                    }
-                                    <p className='text-sm text-gray-500'>{moment(data?.uploadDate).startOf('day').fromNow()}</p>
-                                </div>
-                            </li>
-                        })
+                        data?.description?.length > 500 && <button className='absolute bottom-1 right-2' onClick={() => setDescriptionisOpen(!descriptionisOpen)}>
+                            {descriptionisOpen ?
+                                "Show Less" : 'Show More'
+                            }
+                        </button>
                     }
 
-                </ul>
+                </motion.div>
             </div>
 
-
+            <div className="video__comment">
+                <VideoComment />
+            </div>
+            <div className="edit__popup">
+                {
+                    editPopup && <VideoEditPopup setOpen={setEditPopup} />
+                }
+            </div>
         </div>
     )
 }

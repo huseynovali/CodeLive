@@ -26,16 +26,16 @@ function SocailIconService() {
                 break;
         }
     }
-    const deleteLinks = async (name) => {
+    const deleteLinks = async (link) => {
         console.log(name);
         try {
-            await axios.delete(`http://localhost:8080/user/social/${userId}/${name}`);
+            await axios.delete(`http://localhost:8080/user/social/${userId}/${link}`);
             toast.success('Link Delete !');
-            const social = data?.social.filter(item => item.name !== name)
-            console.log({ ...data, social });
+            const social = data?.social.filter(item => item.link !== link)
+       
             dispatch(addUserData({ ...data, social }))
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response.data?.message);
         }
     }
 
@@ -68,7 +68,7 @@ function SocailIconService() {
                                         <span className='ml-2'>{item.link?.slice(0, 25)}...</span>
                                     </a>
                                 </>
-                                <AiFillDelete className='text-xl ml-3 cursor-pointer' onClick={() => deleteLinks(item.name)} />
+                                <AiFillDelete className='text-xl ml-3 cursor-pointer' onClick={() => deleteLinks(item.link)} />
                             </li>
                         )
                     })

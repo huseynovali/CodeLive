@@ -11,12 +11,13 @@ function MyVideo() {
   const goToVideo = (id) => {
     navigate(`/video/${id}`, { state: { from: location.pathname } });
   }
-
+const sortedVideos = [...data?.videos].sort((a, b) => moment(b.uploadDate) - moment(a.uploadDate));
   return (
     <div className='flex gap-5 gap-y-9 flex-wrap cursor-pointer '>
 
       {
-        data?.videos?.map(item => {
+        
+        sortedVideos?.map(item => {
           return <div className="user__videos hover:scale-[1.05] transition-all" onClick={() => goToVideo(item._id)}>
             <div className="video__cover__img">
               <img src={item?.coverImageid ? `http://localhost:8080/accountimg/images/${item?.coverImageid}` : coverImg} alt="video cover image" className='bg-slate-400 h-[200px] w-[300px] object-cover rounded-md' />

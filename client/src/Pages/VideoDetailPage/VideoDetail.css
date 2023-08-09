@@ -1,5 +1,11 @@
 .video__detail__page{
-    background-color: #121F7A;
-    min-height: 100vh;
+    background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+        min-height: 100vh;
 
+}
+.video__info{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.comment__list{
+    background-color: rgba(255, 255, 255, 0.3);
 }

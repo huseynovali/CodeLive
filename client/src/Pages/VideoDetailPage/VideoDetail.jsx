@@ -17,7 +17,7 @@ function VideoDetail(props) {
 
     const dispatch = useDispatch()
 
-    const { data } = useQuery('videoData', () =>
+    const { isLoading, data } = useQuery('videoData', () =>
         axios.get(`http://localhost:8080/video/${id}`), { refetchOnWindowFocus: false, }
     )
 
@@ -31,24 +31,30 @@ function VideoDetail(props) {
         navigate(location.state.from)
     };
     return (
-        <div className='video__detail__page p-3'>
-            <ToastContainer
-                position="top-right"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
-            <button className='p-2 bg-blue-400 rounded-full text-white text-xl' onClick={() => goBack()}><BiArrowBack /></button>
-            <div className="video__section w-[90%] m-auto py-5 ">
-             <VideoDetailComp/>
-            </div>
-        </div>
+        <>
+            {
+                isLoading ? <h1>Loading...</h1> :
+                    <div className='video__detail__page p-3'>
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={2000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                        />
+                        <button className='p-2 bg-blue-400 rounded-full text-white text-xl' onClick={() => goBack()}><BiArrowBack /></button>
+                        <div className="video__section w-[90%] m-auto py-5 ">
+                            <VideoDetailComp />
+                        </div>
+                    </div>
+            }
+        </>
+
     )
 }
 

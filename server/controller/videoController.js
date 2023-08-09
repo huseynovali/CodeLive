@@ -133,7 +133,8 @@ const VideoController = {
   videoEdit: async (req, res) => {
     const videoId = req.params.videoId;
     const { title, description } = req.body;
-
+     console.log(title);
+     console.log(videoId);
     try {
       const video = await Video.findById(videoId);
       if (!video) {

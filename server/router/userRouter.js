@@ -27,7 +27,7 @@ userRouter.post("/api/token", tokenController)
 
 
 userRouter.post("/social/:userid", userSocial.addSocial)
-userRouter.delete("/social/:userid/:name", userSocial.deleteSocial)
+userRouter.delete("/social/:userid/:link", userSocial.deleteSocial)
 // userRouter.put("/social/:userid",userSocial.editSocial)
 
 

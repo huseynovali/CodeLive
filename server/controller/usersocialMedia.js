@@ -19,12 +19,14 @@ const userSocial = {
     },
     deleteSocial: async (req, res) => {
         const userid = req.params.userid;
-        const  name  = req.params.name;
-        console.log("asd",name);
+        const  link  = req.params.link;
+        console.log("lonk",link);
         try {
             const user = await User.findById(userid);
             if (user) {
-                user.social = user.social.filter(item => Object.values(item)[0] !== name);
+              
+                user.social = user.social.filter(item => Object.values(item)[1] !== link);
+                  console.log(user.social);
                 await user.save();
                 res.status(200).json("social Link Deleted !");
             } else {
