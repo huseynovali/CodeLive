@@ -62,8 +62,8 @@ const commentController = {
     },
 
     editComment: async (req, res) => {
-        const commentId = req.params.commentId;
-        const { content } = req.body;
+        const commentId = req.params.id;
+        const { text } = req.body;
 
         try {
             const comment = await Comment.findById(commentId);
@@ -71,9 +71,9 @@ const commentController = {
                 return res.status(404).json({ message: "Comment not found!" });
             }
 
-            // Comment içeriğini güncelle
-            comment.content = content || comment.content;
-
+           
+            comment.text = text || comment.text;
+            comment.createdAt = new Date()
             await comment.save();
 
             res.status(200).json({ message: "Comment updated successfully!", comment });

@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player'
 import moment from 'moment';
 import numeral from 'numeral';
-import { BiLike, BiSolidLike, BiUserCircle, BiSolidTrashAlt, BiSend } from 'react-icons/bi';
+import { BiLike, BiSolidLike, BiUserCircle, BiSolidTrashAlt, BiSend, BiSolidEditAlt } from 'react-icons/bi';
+import { MdEditOff } from 'react-icons/md';
+
 import axios from 'axios';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { toast } from 'react-toastify';
@@ -12,6 +14,7 @@ function VideoDetailComp() {
     const data = useSelector(state => state.dataSlice.video)
     const [playedSeconds, setPlayedSeconds] = useState(0);
     const [commentInput, setCommentInput] = useState("")
+    const [editActive, setEditActive] = useState("")
     const userid = getCryptLocalSrtorage("userid")
 
     console.log(data);
@@ -77,12 +80,35 @@ function VideoDetailComp() {
             const updatedVideo = { ...data, comments: [...data.comments, commentData] };
             dispatch(addVideoData(updatedVideo));
             toast.success('Comment add !');
+            setCommentInput("")
         } catch (error) {
             console.error(error);
             toast.error('An error occurred.');
         }
     }
+    const editComment = async (id, text) => {
 
+        try {
+            await axios.put(`http://localhost:8080/comment/${id}`, { text: commentInput });
+    
+            const updatedComments = data.comments.map(comment => {
+                if (comment._id === id) {
+                    return { ...comment, text: commentInput };
+                }
+                return comment;
+            });
+    
+            const updatedVideo = { ...data, comments: updatedComments };
+            dispatch(addVideoData(updatedVideo));
+    
+            setEditActive("");
+            setCommentInput("");
+            toast.success('Comment updated!');
+        } catch (error) {
+            console.error(error);
+            toast.error('An error occurred.');
+        }
+    }
 
     return (
         <div className="w-full">
@@ -139,17 +165,44 @@ function VideoDetailComp() {
                 <ul className='py-3'>
                     {
                         data?.comments?.map(item => {
-                            return <li className=' text-white bg-blue-300 my-2 px-3 py-2 rounded-md flex items-center justify-between'>
+                            return <li className={`text-white  my-2 px-3 py-2 rounded-md flex items-center justify-between ${editActive == item._id ? "bg-yellow-400" : "bg-blue-300"}`}>
                                 <div>
                                     <span className='text-sm'>{item?.author?.username}</span>
-                                    <p className='text-lg'>{item.text}</p>
+                                    {editActive == item._id ?
+                                        <div className='flex'>
+                                            <input type="text" value={commentInput} className='bg-white w-full p-2 rounded-l-lg outline-none text-black' onChange={(e) => setCommentInput(e.target.value.trim())} />
+                                            <button className='py-2 px-5 bg-blue-400 text-xl text-white rounded-r-lg' disabled={!commentInput} onClick={() => editComment(item?._id, item?.text)}>
+                                                <BiSend />
+                                            </button>
+                                        </div> :
+                                        <p className='text-lg'>{item.text}</p>
+
+
+                                    }
+
                                 </div>
                                 <div>
                                     {item?.author?._id == userid ?
-                                    <div>
-                                        <button onClick={() => deleteComment(item._id)}>
-                                            <BiSolidTrashAlt className='text-2xl text-center' />
-                                        </button>
+                                        <div>
+                                            <button onClick={() => deleteComment(item._id)}>
+                                                <BiSolidTrashAlt className='text-2xl text-center' />
+                                            </button>
+
+                                            {editActive !== item._id ?
+                                                <button onClick={() => {
+                                                    setCommentInput(item.text);
+                                                    setEditActive(item._id)
+                                                }} className='ml-3'>
+                                                    <BiSolidEditAlt className='text-2xl text-center ' />
+                                                </button> :
+                                                <button onClick={() => {
+                                                    setCommentInput("");
+                                                    setEditActive("")
+                                                }} className='ml-3'>
+                                                    <MdEditOff className='text-2xl text-center ' />
+                                                </button>
+                                            }
+
                                         </div>
                                         :
                                         ""
