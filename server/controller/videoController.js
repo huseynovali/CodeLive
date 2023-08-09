@@ -2,7 +2,7 @@ const Video = require("../model/videoSchema");
 const multer = require("multer");
 const User = require("../model/userSchema");
 const Comment = require("../model/comentSchema");
-const moment = require('moment-timezone');
+const moment = require('moment');
 
 const { uploadFile, deleteFile, getFile } = require("../services/s3");
 const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
@@ -33,6 +33,7 @@ const VideoController = {
   },
   getVideoContentById: async (req, res) => {
     const id = req.params.id
+ 
     try {
       const videos = await Video.findById(id)
         .populate("categoryId")
@@ -55,6 +56,7 @@ const VideoController = {
 
   addVideo: async (req, res) => {
     try {
+      console.log(moment().format());
       videoAndCoverImageUpload(req, res, async (err) => {
         if (err) {
           return res.status(400).json({ message: "Video and cover image upload failed." });
@@ -77,7 +79,7 @@ const VideoController = {
           categoryId,
           languageId,
           videoawsid: videoPath,
-          uploadDate: moment().tz("Asia/Baku").format()
+          uploadDate: moment().format()
         });
 
         const coverImageFile = req.files["coverImage"][0];

@@ -136,7 +136,7 @@ function VideoDetailComp() {
                         <span className='ml-2'>{numeral(data?.likeBy?.length).format('0,0a')}</span>
                     </div>
 
-                    <p className='mt-2'>{moment(data?.uploadDate).startOf('day').fromNow()}</p>
+                    <p className='mt-2'>{moment(data?.uploadDate).startOf('minute').fromNow()}</p>
 
 
                 </div>

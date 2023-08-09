@@ -34,8 +34,7 @@ const videoSchema = mongoose.Schema({
         type: String
     },
     uploadDate: {
-        type: Date,
-   
+        type: String,
     },
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
