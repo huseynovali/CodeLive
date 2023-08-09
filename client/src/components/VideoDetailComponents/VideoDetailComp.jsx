@@ -74,20 +74,7 @@ function VideoDetailComp() {
         }
 
     }
-    const editVideo = async () => {
-        try {
-            console.log(data?._id);
-            await axios.put(`http://localhost:8080/video/${data._id}`);
-            const updatedVideo = { ...data, title, description };
-            dispatch(addVideoData(updatedVideo));
-            toast.success('Video Unliked !');
-        } catch (error) {
-            console.error(error);
-            toast.error('An error occurred.');
-        }
 
-
-    }
 
 
 

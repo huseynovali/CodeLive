@@ -11,7 +11,7 @@ function MyVideo() {
   const goToVideo = (id) => {
     navigate(`/video/${id}`, { state: { from: location.pathname } });
   }
-   
+
 
   return (
     <div className='flex gap-5 gap-y-9 flex-wrap cursor-pointer '>

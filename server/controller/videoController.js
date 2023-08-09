@@ -56,12 +56,13 @@ const VideoController = {
 
   addVideo: async (req, res) => {
     try {
-      console.log(moment().format());
+      console.log("asd");
       videoAndCoverImageUpload(req, res, async (err) => {
         if (err) {
           return res.status(400).json({ message: "Video and cover image upload failed." });
         }
-        const { title, description, userid, categoryId, languageId } = req.body;
+        const { title, description, categoryId } = req.body;
+        const userid = req.params.userid
         const user = await User.findById(userid);
         if (!user) {
           return res.status(404).json({ message: "User not found!" });
@@ -77,7 +78,6 @@ const VideoController = {
           description,
           userid,
           categoryId,
-          languageId,
           videoawsid: videoPath,
           uploadDate: moment().format()
         });

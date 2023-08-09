@@ -84,7 +84,7 @@ function Sidebar() {
                                             Favorite
                                         </li>
                                     </Link>
-                                    <Link>
+                                    <Link to={"addvideo"}>
                                         <li className={` sidebar__list__item  ${sellectLink == "addvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <RiVideoAddLine className='text-2xl' />

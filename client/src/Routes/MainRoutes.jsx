@@ -13,6 +13,7 @@ import ResetPassword from '../Pages/auth/ResetPassword';
 import Accound from '../components/profileComponents/ProfileComponents/Accound';
 import MyVideo from '../components/profileComponents/ProfileComponents/MyVideo';
 import VideoDetail from '../Pages/VideoDetailPage/VideoDetail';
+import AddVideo from '../components/profileComponents/ProfileComponents/AddVideo';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -41,6 +42,10 @@ export default function MainRoutes() {
                 {
                   path:"myvideo",
                   element:<MyVideo/>
+                }
+                ,    {
+                  path:"addvideo",
+                  element:<AddVideo/>
                 }
               ]
             },

@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     user: {},
-    video: {}
+    video: {},
+    category:[]
 
 }
 
@@ -15,10 +16,13 @@ export const dataSlice = createSlice({
         },
         addVideoData: (state, action) => {
             state.video = action.payload
+        },
+        addCategoryData: (state, action) => {
+            state.category = action.payload
         }
     },
 })
 
-export const { addUserData,addVideoData } = dataSlice.actions
+export const { addUserData,addVideoData,addCategoryData } = dataSlice.actions
 
 export default dataSlice.reducer
