@@ -33,11 +33,10 @@ const VideoController = {
   },
   getVideoContentById: async (req, res) => {
     const id = req.params.id
- 
+ console.log(id);
     try {
       const videos = await Video.findById(id)
         .populate("categoryId")
-        .populate("languageId")
         .populate({
           path: "comments",
           populate: {
@@ -49,7 +48,7 @@ const VideoController = {
 
       res.status(200).json(videos)
     } catch (error) {
-
+      res.json(error)
     }
 
   },
@@ -125,6 +124,11 @@ const VideoController = {
       }
       await Comment.deleteMany({ videoId });
 
+      const likedUserIds = video.likeBy.map(id => id.toString());
+      await User.updateMany(
+          { _id: { $in: likedUserIds } },
+          { $pull: { favoritevideo: videoId } }
+      );
       await User.findByIdAndUpdate(video.userid, { $pull: { videos: video._id } });
       res.status(200).json({ message: "Video deleted successfully!" });
     } catch (error) {

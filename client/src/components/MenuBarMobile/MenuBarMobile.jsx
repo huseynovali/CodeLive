@@ -11,7 +11,7 @@ function MenuBarMobile() {
 
   return (
 
-    <motion.div className={`bottom__menu__section fixed flex  p-1 text-2xl left-0 bottom-0 z-50 select-none w-full   md:hidden`}>
+    <motion.div className={`bottom__menu__section fixed flex  p-1 text-2xl left-0 bottom-0 z-20 select-none w-full   md:hidden`}>
       <motion.ul className={`flex  justify-around text-white w-full  `}
         initial={false}
         transition={{ type: "spring", stiffness: 300, damping: 14 }}

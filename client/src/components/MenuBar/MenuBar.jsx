@@ -32,7 +32,7 @@ console.log(location.pathname.split("/")[1] == "profile");
 
   return (
     <>
-      <motion.div drag dragConstraints={{ left: 10, right: 10, bottom: 300, top: -300 }} className={`sidemenu__section fixed  p-3 hidden md:block   text-2xl right-10 top-[40%] z-50 select-none ${!open ? 'rounded-ss-xl rounded-ee-xl' : "rounded-3xl"}`}>
+      <motion.div drag dragConstraints={{ left: 10, right: 10, bottom: 300, top: -300 }} className={`sidemenu__section fixed  p-3 hidden md:block   text-2xl right-10 top-[40%] z-20 select-none ${!open ? 'rounded-ss-xl rounded-ee-xl' : "rounded-3xl"}`}>
 
 
         <motion.ul className={`flex flex-col gap-y-5 text-white  ${!open ? 'h-[50px] overflow-hidden select-none' : ""} `}

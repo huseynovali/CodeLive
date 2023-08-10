@@ -19,10 +19,10 @@ function MyVideo() {
         data?.videos?.map(item => {
           return <div className="user__videos hover:scale-[1.05] transition-all" onClick={() => goToVideo(item._id)}>
             <div className="video__cover__img">
-              {console.log(item?.coverImageid)}
+      
               <img src={item?.coverImageid ? `http://localhost:8080/accountimg/images/${item?.coverImageid}` : coverImg} alt="video cover image" className='bg-slate-400 h-[200px] w-[300px] object-cover rounded-md' />
               <h1 className='text-white'>{item?.title}</h1>
-              {console.log(moment(item?.uploadDate).format())}
+
               <p className='text-white'> {moment(item?.uploadDate).startOf('minute').fromNow()}</p>
             </div>
           </div>

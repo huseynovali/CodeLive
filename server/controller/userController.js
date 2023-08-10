@@ -44,7 +44,17 @@ const userController = {
                         select: "username image"
                     }
                 )
-
+                .populate(
+                    {
+                        path: "favoritevideo",
+                        select: "coverImageid uploadDate title",
+                        populate:{
+                            path:"categoryId",
+                            select:"name"
+                        }
+                        
+                    },
+                )
             if (user) {
                 if (token == user.token) {
                     res.status(200).json(user);

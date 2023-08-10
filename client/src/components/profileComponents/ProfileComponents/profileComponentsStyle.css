@@ -2,3 +2,8 @@
     background-color: rgba(255, 255, 255, 0.2); 
 } 
 
+.video__upload__img{
+background-image: url("../../../img/a.png");
+background-size: contain;
+background-repeat: no-repeat;
+}

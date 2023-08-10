@@ -108,7 +108,7 @@ function Accound() {
         </div>
 
         <div className="user__profile__user__about mt-10 md:mt-0  w-[100%] h-full p-3  rounded-lg overflow-hidden relative">
-          <div className="user__profile__user__about__container overflow-y-auto h-[90%] pb-5 overflow-x-hidden ">
+          <div className="user__profile__user__about__container overflow-y-auto lg:h-[90%] pb-5 overflow-x-hidden ">
             <div className="row">
               <span className='text-white'>Username:</span>
               <h1 className='text-white text-2xl my-3'>{data?.username}</h1>

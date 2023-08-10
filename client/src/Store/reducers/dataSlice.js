@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     user: {},
     video: {},
-    category:[]
+    category: []
 
 }
 
@@ -23,6 +23,6 @@ export const dataSlice = createSlice({
     },
 })
 
-export const { addUserData,addVideoData,addCategoryData } = dataSlice.actions
+export const { addUserData, addVideoData, addCategoryData } = dataSlice.actions
 
 export default dataSlice.reducer

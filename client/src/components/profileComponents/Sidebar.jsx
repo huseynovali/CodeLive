@@ -28,7 +28,7 @@ function Sidebar() {
     }, [data])
 
     return (
-        <div className='z-30 absolute'>
+        <div className='z-20 absolute'>
             {console.log(isLoading)}
             {
                 isLoading ? <h1>Loading...</h1> : <motion.nav
@@ -76,7 +76,7 @@ function Sidebar() {
                                             Following
                                         </li>
                                     </Link>
-                                    <Link>
+                                    <Link to={"favoritevideos"}>
                                         <li className={` sidebar__list__item  ${sellectLink == "favorite" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <MdFavoriteBorder className='text-2xl' />

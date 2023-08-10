@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { toast } from 'react-toastify';
-import { addVideoData } from '../../Store/reducers/dataSlice';
+import { addUserData, addVideoData } from '../../Store/reducers/dataSlice';
 import VideoComment from './VideoComment';
 import VideoEditPopup from './VideoEditPopup';
 import { useNavigate } from 'react-router';
@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router';
 
 function VideoDetailComp() {
     const data = useSelector(state => state.dataSlice.video)
+    const {user} = useSelector(state => state.dataSlice)
+    console.log(user);
     const [playedSeconds, setPlayedSeconds] = useState(0);
     const userid = getCryptLocalSrtorage("userid")
     const [descriptionisOpen, setDescriptionisOpen] = useState(false)
@@ -64,7 +66,9 @@ function VideoDetailComp() {
             try {
                 await axios.delete(`http://localhost:8080/video/${data?._id}`);
                 toast.success('Video DELETE !');
+             
                 navigate("/profile/myvideo")
+                   window.location.reload()
             } catch (error) {
                 console.error(error);
                 toast.error('An error occurred.');

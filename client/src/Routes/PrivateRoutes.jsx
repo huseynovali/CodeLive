@@ -14,8 +14,11 @@ function PrivateRoutes() {
         axiosInstance.post("/user/api/token", { token })
             .then(res => {
                 if (res.data == true) {
-                    setIsTrue(true);
+                    setTimeout(()=>{
+                           setIsTrue(true);
                     setLoading(false)
+                    },500)
+                 
 
                 }
             })
@@ -27,7 +30,7 @@ function PrivateRoutes() {
     }, [])
 
     if (loading) {
-        return <h1>Loading ...</h1>
+        return <div className="absolute inset-0 w-full h-full bg-white">Loading ...</div>
     }
 
     if (isTrue) {

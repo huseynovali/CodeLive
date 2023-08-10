@@ -20,10 +20,9 @@ function VideoDetail(props) {
     const { isLoading, data } = useQuery('videoData', () =>
         axios.get(`http://localhost:8080/video/${id}`), { refetchOnWindowFocus: false, }
     )
-
+console.log(data);
     useEffect(() => {
         dispatch(addVideoData(data?.data))
-        console.log(data?.data);
     }, [data])
 
 
