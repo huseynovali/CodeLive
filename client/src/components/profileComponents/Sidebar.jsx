@@ -77,7 +77,7 @@ function Sidebar() {
                                         </li>
                                     </Link>
                                     <Link to={"favoritevideos"}>
-                                        <li className={` sidebar__list__item  ${sellectLink == "favorite" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                        <li className={` sidebar__list__item  ${sellectLink == "favoritevideos" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <MdFavoriteBorder className='text-2xl' />
                                             </div>
