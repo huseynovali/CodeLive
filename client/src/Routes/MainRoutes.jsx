@@ -15,6 +15,7 @@ import MyVideo from '../components/profileComponents/ProfileComponents/MyVideo';
 import VideoDetail from '../Pages/VideoDetailPage/VideoDetail';
 import AddVideo from '../components/profileComponents/ProfileComponents/AddVideo';
 import FavoriteVideos from '../components/profileComponents/ProfileComponents/FavoriteVideos';
+import Followers from '../components/profileComponents/ProfileComponents/Followers';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -51,6 +52,10 @@ export default function MainRoutes() {
                 {
                   path: "favoritevideos",
                   element: <FavoriteVideos />
+                },
+                {
+                  path: "followers",
+                  element: <Followers />
                 }
               ]
             },

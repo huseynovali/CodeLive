@@ -61,15 +61,15 @@ function Sidebar() {
                                         </li>
                                     </Link>
                                     <Link>
-                                        <li className={` sidebar__list__item  ${sellectLink == "followers" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                        <li className={` sidebar__list__item  ${sellectLink == "following" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <SlUserFollow className='text-2xl' />
                                             </div>
                                             Followers
                                         </li>
                                     </Link>
-                                    <Link>
-                                        <li className={` sidebar__list__item  ${sellectLink == "following" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <Link to={"followers"}>
+                                        <li className={` sidebar__list__item  ${sellectLink == "followers" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <SlUserFollowing className='text-2xl' />
                                             </div>

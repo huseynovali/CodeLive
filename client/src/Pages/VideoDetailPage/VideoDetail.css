@@ -19,3 +19,15 @@
     -ms-border-radius:5px ;
     -o-border-radius:5px ;
 }
+.followers__list{
+    background-image: linear-gradient(to left, #00c6fb 5%, #005bea 90%);
+    border: 1px solid rgba(255, 255, 255, 0.8) ;
+    box-shadow: 0px 5px 10px 2px rgba(229, 234, 238, 0.2);
+}
+.followers__list:hover{
+    transform: scale3d(1.01, 1, 1.4);
+    -webkit-transform: scale3d(1.01, 1, 1.4);
+    -moz-transform: scale3d(1.01, 1, 1.4);
+    -ms-transform: scale3d(1.01, 1, 1.4);
+    -o-transform: scale3d(1.01, 1, 1.4);
+}
