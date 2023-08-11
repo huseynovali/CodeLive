@@ -20,6 +20,7 @@ function AllUserList({ handleShowMore, limit }) {
 
     const searchUserFunc = (params) => {
         setSearchUser(allUsers?.filter(x => x.username.toLocaleLowerCase().includes(params)))
+        setSearchInput(params)
     }
 
     const followUser = async (paramsValue) => {
@@ -77,8 +78,8 @@ function AllUserList({ handleShowMore, limit }) {
                     })
                 }
                 {
-                    limit > allUsers?.length + 1 ? null :
-                        <div className='w-full flex justify-end'>
+                   searchInput || limit > allUsers?.length + 1 ? null :
+                        <div className='w-full flex justify-end mb-16 md:mb-0'>
                             <button className="show-more-button px-2 py-1 my-3 bg-blue-400 text-white rounded-md " onClick={handleShowMore}>
                                 Show More ...
                             </button>
