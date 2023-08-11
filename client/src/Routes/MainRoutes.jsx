@@ -17,6 +17,7 @@ import AddVideo from '../components/profileComponents/ProfileComponents/AddVideo
 import FavoriteVideos from '../components/profileComponents/ProfileComponents/FavoriteVideos';
 import Followers from '../components/profileComponents/ProfileComponents/Followers';
 import Following from '../components/profileComponents/ProfileComponents/Following';
+import AllUsers from '../Pages/AllUsers/AllUsers';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -29,7 +30,11 @@ export default function MainRoutes() {
           element: <Home />
 
         },
+        {
+          path: "/allusers",
+          element: <AllUsers />
 
+        },
 
         {
           element: <PrivateRoutes />,

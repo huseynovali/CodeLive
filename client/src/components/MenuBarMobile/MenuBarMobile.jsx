@@ -28,8 +28,8 @@ function MenuBarMobile() {
             <AiOutlineYoutube />
           </motion.li>
         </Link>
-        <Link>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/users" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+        <Link to={"/allusers"}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/allusers" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/users" ? ' block' : "hidden"}`}></div>
             <LiaUsersSolid />
           </motion.li>
@@ -48,7 +48,7 @@ function MenuBarMobile() {
         </Link>
         <Link to={"/profile"}>
           <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
-            <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname.split("/")[1] == "profile"  ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
+            <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname.split("/")[1] == "profile" ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
         </Link>
 
       </motion.ul>

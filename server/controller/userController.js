@@ -29,7 +29,11 @@ const userController = {
                 .populate(
                     {
                         path: "videos",
-                        select: "coverImageid uploadDate videoawsid title"
+                        select: "coverImageid uploadDate videoawsid title",
+                        populate:{
+                            path:"categoryId",
+                            select:"name"
+                        }
                     },
                 )
                 .populate(

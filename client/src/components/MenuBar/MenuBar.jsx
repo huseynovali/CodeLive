@@ -66,8 +66,8 @@ console.log(location.pathname.split("/")[1] == "profile");
               <AiOutlineYoutube />
             </motion.li>
           </Link>
-          <Link>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/users" ? ' bg-blue-700' : ""} `}>
+          <Link to={"/allusers"}>
+            <motion.li className={` p-3 rounded-full ${location.pathname == "/allusers" ? ' bg-blue-700' : ""} `}>
               <LiaUsersSolid />
             </motion.li>
           </Link>

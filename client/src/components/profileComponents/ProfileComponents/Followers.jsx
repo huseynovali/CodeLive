@@ -16,8 +16,8 @@ function Followers() {
             await axios.post(`http://localhost:8080/user/follow/${user?._id}/followUserId/${paramsId}`);
             const updateUser = { ...user, follow: [...user?.follow, paramsValue] };
             console.log(updateUser);
-           dispatch(addUserData(updateUser));
-           toast.success('User Follow  !');
+            dispatch(addUserData(updateUser));
+            toast.success('User Follow  !');
         } catch (error) {
             console.error(error);
             toast.error('An error occurred.');
@@ -29,7 +29,7 @@ function Followers() {
 
 
     return (
-        <div className='px-5'>
+        <div className='md:px-5'>
             <ToastContainer
                 position="top-right"
                 autoClose={2000}
@@ -49,11 +49,11 @@ function Followers() {
                         <Link className='flex items-center'>
 
                             <img src={item?.image ? `http://localhost:8080/accountimg/images/${item?.image}` : profileImage} alt="video cover image" className='bg-slate-400 h-[50px] w-[50px] object-cover rounded-full' />
-                            <h1 className='ml-5 text-xl text-white'>{item?.username}</h1>
+                            <h1 className='ml-2 md:ml-5 text-md md:text-xl text-white'>{item?.username}</h1>
 
                         </Link>
                         {
-                            user?.follow.find(x => x?._id == item._id) ? <span>Following</span> : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() =>  followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
+                            user?.follow.find(x => x?._id == item._id) ? <span>Following</span> : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
                         }
 
 

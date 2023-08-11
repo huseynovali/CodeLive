@@ -46,7 +46,7 @@ function Following() {
 
     // }
     return (
-        <div className='px-5'>
+        <div className='md:px-5'>
             <ToastContainer
                 position="top-right"
                 autoClose={2000}
@@ -66,10 +66,10 @@ function Following() {
                         <Link className='flex items-center'>
 
                             <img src={item?.image ? `http://localhost:8080/accountimg/images/${item?.image}` : profileImage} alt="video cover image" className='bg-slate-400 h-[50px] w-[50px] object-cover rounded-full' />
-                            <h1 className='ml-5 text-xl text-white'>{item?.username}</h1>
+                            <h1 className='ml-2 md:ml-5 text-md md:text-xl text-white'>{item?.username}</h1>
 
                         </Link>
-                        <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => { unfollow(item?._id); }}>Unfollow</button>
+                        <button className='p-2 bg-blue-400 rounded-lg text-white text-xs md:text-sm' onClick={() => { unfollow(item?._id); }}>Unfollow</button>
 
                     </div>
                 })
