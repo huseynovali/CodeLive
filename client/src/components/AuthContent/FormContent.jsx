@@ -38,7 +38,7 @@ function FormContent() {
       setCryptLocalSrtorage('token',data.token)
       setCryptLocalSrtorage('username',data.user.username)
       setCryptLocalSrtorage('userid',data.user._id)
-      navigate('/profile');
+      navigate('/profile/accound');
     },
     onError: (error) => {
       const errorMessage = error.response.data.message

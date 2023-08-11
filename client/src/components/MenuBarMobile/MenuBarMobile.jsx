@@ -11,7 +11,7 @@ function MenuBarMobile() {
 
   return (
 
-    <motion.div className={`bottom__menu__section fixed flex  p-1 text-2xl left-0 bottom-0 z-20 select-none w-full   md:hidden`}>
+    <motion.div className={`bottom__menu__section fixed flex  p-1 text-2xl left-0 bottom-0 z-30 select-none w-full   md:hidden`}>
       <motion.ul className={`flex  justify-around text-white w-full  `}
         initial={false}
         transition={{ type: "spring", stiffness: 300, damping: 14 }}
@@ -46,7 +46,7 @@ function MenuBarMobile() {
             <CiStreamOn />
           </motion.li>
         </Link>
-        <Link to={"/profile"}>
+        <Link to={"/profile/accound"}>
           <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname.split("/")[1] == "profile" ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
         </Link>

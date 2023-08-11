@@ -34,7 +34,12 @@ function getFile(filekey) {
         Bucket: bucketName,
         Key: filekey
     }
-    return s3.getObject(downloadParams).createReadStream()
+    if(s3.getObject(downloadParams).createReadStream()){
+       return s3.getObject(downloadParams).createReadStream()
+    }else{
+      return false
+    }
+   
 }
 
 

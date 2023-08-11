@@ -81,7 +81,7 @@ console.log(location.pathname.split("/")[1] == "profile");
               <CiStreamOn />
             </motion.li>
           </Link>
-          <Link to={"/profile"}>
+          <Link to={"/profile/accound"}>
             <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' bg-blue-700' : ""} `}>
               <AiOutlineUser />
             </motion.li>

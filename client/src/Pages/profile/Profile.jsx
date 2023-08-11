@@ -11,20 +11,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addUserData } from '../../Store/reducers/dataSlice'
 import { useFetcher } from 'react-router-dom'
 function Profile() {
-  const userid = getCryptLocalSrtorage("userid")
-  const token = getCryptLocalSrtorage("token")
-  const dispatch = useDispatch()
-
-
-  const { data } = useQuery('userData', () =>
-    axiosInstance.get(`/user/${userid}/${token}`), { refetchOnWindowFocus: false, }
-  )
-  console.log(data);
-  useEffect(() => {
-    dispatch(addUserData(data?.data))
-
-  }, [data])
-
 
 
   return (

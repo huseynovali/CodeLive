@@ -46,7 +46,7 @@ function Accound() {
 
   }
 
-
+console.log(data);
   return (
     <div className='h-full'>{
             openPopup && <UserInfoEditPopup setOpenPopup={setOpenPopup}/>

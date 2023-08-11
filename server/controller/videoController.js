@@ -12,8 +12,10 @@ const videoAndCoverImageUpload = multer({ dest: "upload/videos/" }).fields([
 
 const VideoController = {
   getAllVideoContent: async (req, res) => {
+    const limit = req.params.limit || 10;
     try {
       const videos = await Video.find()
+        .limit(limit)
         .populate("categoryId")
         .populate({
           path: "comments",
@@ -33,7 +35,7 @@ const VideoController = {
   },
   getVideoContentById: async (req, res) => {
     const id = req.params.id
- console.log(id);
+    console.log(id);
     try {
       const videos = await Video.findById(id)
         .populate("categoryId")
@@ -102,7 +104,12 @@ const VideoController = {
   getVideo: async (req, res) => {
     const Key = req.params.key;
     const result = getFile(Key)
-    result.pipe(res)
+    if(result){
+       result.pipe(res)
+    }else{
+        res.status(404).json("Video or Img Id not Found !")
+    }
+   
   },
   deleteVideo: async (req, res) => {
     const videoId = req.params.videoId;
@@ -126,8 +133,8 @@ const VideoController = {
 
       const likedUserIds = video.likeBy.map(id => id.toString());
       await User.updateMany(
-          { _id: { $in: likedUserIds } },
-          { $pull: { favoritevideo: videoId } }
+        { _id: { $in: likedUserIds } },
+        { $pull: { favoritevideo: videoId } }
       );
       await User.findByIdAndUpdate(video.userid, { $pull: { videos: video._id } });
       res.status(200).json({ message: "Video deleted successfully!" });
@@ -139,8 +146,8 @@ const VideoController = {
   videoEdit: async (req, res) => {
     const videoId = req.params.videoId;
     const { title, description } = req.body;
-     console.log(title);
-     console.log(videoId);
+    console.log(title);
+    console.log(videoId);
     try {
       const video = await Video.findById(videoId);
       if (!video) {
@@ -161,7 +168,7 @@ const VideoController = {
   likeVideo: async (req, res) => {
     const videoId = req.params.videoId;
     const userId = req.params.userId;
-console.log(userId);
+    console.log(userId);
     try {
       const video = await Video.findById(videoId);
       if (!video) {

@@ -10,15 +10,21 @@
 }
 
 .login__content__img{
-    background-image: url("../../img/programma_dlya_stavok_glav.png");
+    background-image: url("../../img/Login-bro.svg");
     background-size: contain;
     background-repeat: no-repeat;
     object-fit: cover;
     background-position: 10% 50%;
 }
-
+.register__content__img{
+  background-image: url("../../img/login-amico.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: 10% 50%;
+}
 .forget__content__img{
-  background-image: url("../../img/login.png");
+  background-image: url("../../img/password-rafiki.svg");
   background-size: contain;
   background-repeat: no-repeat;
   object-fit: cover;

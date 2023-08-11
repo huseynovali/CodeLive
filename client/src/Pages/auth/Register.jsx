@@ -23,7 +23,7 @@ function Register() {
         <Link className='text-2xl p-2 bg-blue-500 w-[41px] h-[41px] text-white rounded-full absolute inset-5 border hover:border-blue-700' to={"/"}>
           <AiOutlineLeft />
         </Link>
-        <div className="login__content__img w-[50%] h-full hidden md:block"></div>
+        <div className="register__content__img w-[50%] h-full hidden md:block"></div>
         <div className="form__content py-16 w-full md:w-[50%]">
           <RegisterFormContent />
         </div>

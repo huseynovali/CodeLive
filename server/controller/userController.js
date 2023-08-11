@@ -3,10 +3,12 @@ const User = require("../model/userSchema")
 const userController = {
 
     getAllUser: async (req, res) => {
+        const limit = req.params.limit || 10;
         const id = req.params.userid
         try {
             const data = await User.find()
-                .select('username videos followers follow about image')
+                .limit(limit)
+                .select('username  followers follow  image')
             if (data.length > 0) {
                 const userdata = data.filter(user => user.id !== id)
                 res.status(200).json(userdata)
@@ -30,9 +32,9 @@ const userController = {
                     {
                         path: "videos",
                         select: "coverImageid uploadDate videoawsid title",
-                        populate:{
-                            path:"categoryId",
-                            select:"name"
+                        populate: {
+                            path: "categoryId",
+                            select: "name"
                         }
                     },
                 )
@@ -52,11 +54,11 @@ const userController = {
                     {
                         path: "favoritevideo",
                         select: "coverImageid uploadDate title",
-                        populate:{
-                            path:"categoryId",
-                            select:"name"
+                        populate: {
+                            path: "categoryId",
+                            select: "name"
                         }
-                        
+
                     },
                 )
             if (user) {
@@ -99,7 +101,7 @@ const userController = {
             if (user) {
                 user.username = username;
                 user.about = about;
-    
+
                 // E-posta adresinin değişip değişmediğini kontrol ediyoruz
                 if (user.email !== email) {
                     const emailCheck = await User.findOne({ email });
@@ -108,7 +110,7 @@ const userController = {
                     }
                     user.email = email;
                 }
-    
+
                 user.save();
                 return res.status(200).json({ message: "User information updated successfully!" });
             } else {
@@ -118,7 +120,7 @@ const userController = {
             return res.status(500).json(error);
         }
     },
-    
+
     toggleFollowUser: async (req, res) => {
         const userId = req.params.userId;
         const followUserId = req.params.followUserId;

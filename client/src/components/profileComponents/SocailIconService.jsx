@@ -46,6 +46,10 @@ function SocailIconService() {
             toast.success('Link Add !');
             const social = [...data?.social, linkData];
             dispatch(addUserData({ ...data, social }))
+            setLinkInput({
+                name: "",
+                link: ""
+            })
         } catch (error) {
             toast.error(error.response.data.message);
         }
@@ -96,7 +100,7 @@ function SocailIconService() {
                                     Other
                                 </option>
                             </select>
-                            <input type="link" className='outline-none  h-full rounded-r-md border-l-2 w-full' onChange={(e) => setLinkInput({ ...linkData, link: e.target.value.trim() })} />
+                            <input type="link" value={linkData.link} className='outline-none  h-full rounded-r-md border-l-2 w-full' onChange={(e) => setLinkInput({ ...linkData, link: e.target.value.trim() })} />
                         </div>
                         <div className="buttons mt-3 flex gap-5">
                             {
