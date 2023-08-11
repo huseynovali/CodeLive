@@ -9,45 +9,22 @@ import axios from 'axios';
 function Followers() {
     const { user } = useSelector(state => state?.dataSlice)
     const dispatch = useDispatch()
-    const [unfollowUser, setUnfollowUser] = useState([])
 
-    // const followUser = async (paramsValue) => {
-    //     const {_id:paramsId} = paramsValue
-        
-    //     try {
-
-    //        await axios.post(`http://localhost:8080/user/follow/${paramsId}/followUserId/${user?._id}`);
-    //         const updateUser = { ...user, followers: [...user?.followers,paramsValue] };
-           
-    //         setTimeout(() => {
-    //             dispatch(addUserData(updateUser));
-    //         }, 10000)
-
-    //        toast.success('User Unfollow  !');
-    //     } catch (error) {
-    //         console.error(error);
-    //         toast.error('An error occurred.');
-    //     }
-
-
-    // }
-
-    const unfollow = async (paramsId) => {
+    const followUser = async (paramsValue) => {
+        const { _id: paramsId } = paramsValue
         try {
-
-            await axios.post(`http://localhost:8080/user/follow/${paramsId}/followUserId/${user?._id}`);
-            const updateUser = { ...user, followers: [...user?.followers.filter(x => x._id !== paramsId)] };
-        
-                dispatch(addUserData(updateUser));
-           
-
-            toast.success('User Unfollow  !');
+            await axios.post(`http://localhost:8080/user/follow/${user?._id}/followUserId/${paramsId}`);
+            const updateUser = { ...user, follow: [...user?.follow, paramsValue] };
+            console.log(updateUser);
+           dispatch(addUserData(updateUser));
+           toast.success('User Follow  !');
         } catch (error) {
             console.error(error);
             toast.error('An error occurred.');
         }
-    }
 
+
+    }
 
 
 
@@ -75,8 +52,10 @@ function Followers() {
                             <h1 className='ml-5 text-xl text-white'>{item?.username}</h1>
 
                         </Link>
-                        <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => { unfollow(item?._id); setUnfollowUser([...unfollowUser, item?._id]) }}>Unfollow</button>
-                        {/* <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => { followUser({_id:item?._id,username:item?.username,image:item?.image}); setUnfollowUser([...unfollowUser, item?._id]) }}>Unfollow</button> */}
+                        {
+                            user?.follow.find(x => x?._id == item._id) ? <span>Following</span> : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() =>  followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
+                        }
+
 
                     </div>
                 })

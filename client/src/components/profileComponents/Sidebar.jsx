@@ -60,7 +60,7 @@ function Sidebar() {
                                             My Videos
                                         </li>
                                     </Link>
-                                    <Link>
+                                    <Link to={"following"}>
                                         <li className={` sidebar__list__item  ${sellectLink == "following" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <SlUserFollow className='text-2xl' />
