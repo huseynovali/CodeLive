@@ -22,8 +22,8 @@ function MenuBarMobile() {
             <AiOutlineHome />
           </motion.li>
         </Link>
-        <Link>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/video" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+        <Link to={"/allvideos"}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/allvideos" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/video" ? ' block' : "hidden"}`}></div>
             <AiOutlineYoutube />
           </motion.li>

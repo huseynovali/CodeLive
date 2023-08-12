@@ -24,7 +24,6 @@ const VideoController = {
             select: "username",
           },
         })
-        .populate("languageId")
         .populate("userid", "username")
 
       res.status(200).json(videos)

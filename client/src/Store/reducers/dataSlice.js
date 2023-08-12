@@ -4,7 +4,8 @@ const initialState = {
     user: {},
     video: {},
     category: [],
-    allUsers:[]
+    allUsers:[],
+    allVideo:[]
 
 }
 
@@ -23,10 +24,13 @@ export const dataSlice = createSlice({
         },
         addAllUser: (state, action) => {
             state.allUsers = action.payload
+        },
+        addAllVideo: (state, action) => {
+            state.allVideo = action.payload
         }
     },
 })
 
-export const { addUserData, addVideoData, addCategoryData,addAllUser } = dataSlice.actions
+export const { addUserData, addVideoData, addCategoryData,addAllUser,addAllVideo } = dataSlice.actions
 
 export default dataSlice.reducer
