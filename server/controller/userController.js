@@ -10,8 +10,13 @@ const userController = {
                 .limit(limit)
                 .select('username  followers follow  image')
             if (data.length > 0) {
-                const userdata = data.filter(user => user.id !== id)
-                res.status(200).json(userdata)
+                if (id) {
+                    const userdata = data.filter(user => user.id !== id)
+                    res.status(200).json(userdata)
+                } else {
+                    res.status(200).json(data)
+                }
+
             } else {
                 res.status(404).json({ message: "users not found !" })
             }
@@ -82,7 +87,19 @@ const userController = {
         console.log(id);
         try {
             const user = await User.findById(id)
-                .select('username videos followers follow about image')
+            .select('username videos followers follow about image social')
+            .populate(
+                {
+                    path: "videos",
+                    select: "coverImageid uploadDate videoawsid title",
+                    populate: {
+                        path: "categoryId",
+                        select: "name"
+                    }
+                }
+            )
+      
+
             if (user) {
                 console.log(user);
                 res.status(200).json(user);

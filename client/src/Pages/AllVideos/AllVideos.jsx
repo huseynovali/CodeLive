@@ -6,13 +6,14 @@ import { addAllVideo } from '../../Store/reducers/dataSlice'
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import AllVideoDetail from '../../components/AllVideoDetail/AllVideoDetail'
 import './AllVideo.css'
+import Loading from '../Loading/Loading'
 function AllVideos() {
     const userid = getCryptLocalSrtorage("userid")
     const [limit, setItemLimit] = useState(7)
     const dispatch = useDispatch()
 
 
-    const { data, refetch } = useQuery('allvideoData', () =>
+    const { isLoading, data, refetch } = useQuery('allvideoData', () =>
         axios.get(`http://localhost:8080/video/${limit}`), { refetchOnWindowFocus: false, }
     )
 
@@ -23,7 +24,7 @@ function AllVideos() {
 
 
     useEffect(() => {
-  refetch()
+        refetch()
     }, [limit])
 
     console.log(data?.data?.length);
@@ -34,10 +35,13 @@ function AllVideos() {
 
 
     return (
-        <div className='All_video'>
+        <div className='All_video relative'>
+
+            {
+                isLoading ? <Loading /> : <AllVideoDetail />
+            }
 
 
-        <AllVideoDetail/>
         </div>
     )
 }

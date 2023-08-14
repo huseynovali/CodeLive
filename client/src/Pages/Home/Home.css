@@ -1,6 +1,4 @@
-.header {
-    width: 100%;
-    height: 100vh;
+.home__page {
     background: linear-gradient(180deg, #2a218a 5%, #4034ab 22%, #2333B4 74%);
 }
 

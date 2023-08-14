@@ -19,6 +19,7 @@ import Followers from '../components/profileComponents/ProfileComponents/Followe
 import Following from '../components/profileComponents/ProfileComponents/Following';
 import AllUsers from '../Pages/AllUsers/AllUsers';
 import AllVideos from '../Pages/AllVideos/AllVideos';
+import UserDetail from '../Pages/UserDetail/UserDetail';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -71,10 +72,15 @@ export default function MainRoutes() {
                 {
                   path: "following",
                   element: <Following />
-                }
+                },
               ]
-            },
 
+            },
+            {
+              path: "video/:id",
+              element: <VideoDetail />
+            },
+          
           ]
         },
 
@@ -101,10 +107,10 @@ export default function MainRoutes() {
         }
       ]
     },
-    {
-      path: "video/:id",
-      element: <VideoDetail />
-    },
+  {
+              path: "user/:id",
+              element: <UserDetail />
+            },
   ]);
 
   return Routes;

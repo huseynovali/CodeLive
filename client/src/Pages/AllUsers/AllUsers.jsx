@@ -8,6 +8,7 @@ import { addAllUser } from '../../Store/reducers/dataSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import AllUserList from '../../components/AllUserList/AllUserList';
 import { ToastContainer } from 'react-toastify';
+import Loading from '../Loading/Loading';
 function AllUsers() {
 
   const userid = getCryptLocalSrtorage("userid")
@@ -15,7 +16,7 @@ function AllUsers() {
   const dispatch = useDispatch()
 
 
-  const { data, refetch } = useQuery('AlluserData', () =>
+  const {isLoading, data, refetch } = useQuery('AlluserData', () =>
     axios.get(`http://localhost:8080/user/getalluser/${userid}/${limit}`), { refetchOnWindowFocus: false, }
   )
 
@@ -49,7 +50,7 @@ function AllUsers() {
         pauseOnHover
         theme="light"
       />
-      <AllUserList handleShowMore={handleShowMore} limit={limit} />
+        {isLoading ? <Loading/>:<AllUserList handleShowMore={handleShowMore} limit={limit} />  } 
     </div>
   )
 }

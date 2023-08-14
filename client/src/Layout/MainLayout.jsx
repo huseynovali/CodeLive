@@ -32,7 +32,8 @@ function MainLayout() {
     )
 
     useEffect(() => {
-        dispatch(addCategoryData(category))
+        dispatch(addCategoryData(category?.data))
+   
     }, [category])
 
     return (

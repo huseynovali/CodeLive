@@ -5,6 +5,7 @@ import profileImage from "../../img/User-Profile-PNG-Free-Download.png"
 import { toast } from 'react-toastify';
 import { addAllUser, addUserData } from '../../Store/reducers/dataSlice';
 import axios from 'axios';
+import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 
 function AllUserList({ handleShowMore, limit }) {
     const { allUsers } = useSelector(state => state.dataSlice)
@@ -12,16 +13,17 @@ function AllUserList({ handleShowMore, limit }) {
     const [searchUser, setSearchUser] = useState([])
     const [searchInput, setSearchInput] = useState("")
     const dispatch = useDispatch()
+    const userId = getCryptLocalSrtorage("userid")
 
     useEffect(() => {
         setSearchUser(allUsers)
-      
     }, [allUsers])
 
     const searchUserFunc = (params) => {
         setSearchUser(allUsers?.filter(x => x.username.toLocaleLowerCase().includes(params)))
         setSearchInput(params)
     }
+
 
     const followUser = async (paramsValue) => {
         const { _id: paramsId } = paramsValue
@@ -62,7 +64,7 @@ function AllUserList({ handleShowMore, limit }) {
                 {
                     searchUser?.map(item => {
                         return <div className='followers__list  px-3 py-2 rounded-lg my-3  flex items-center justify-between'>
-                            <Link className='flex items-center'>
+                            <Link to={`/user/${item?._id}`} className='flex items-center'>
 
                                 <img src={item?.image ? `http://localhost:8080/accountimg/images/${item?.image}` : profileImage} alt="video cover image" className='bg-slate-400 h-[50px] w-[50px] object-cover rounded-full' />
                                 <h1 className='ml-2 md:ml-5 text-md md:text-xl text-white'>{item?.username}</h1>
@@ -70,10 +72,12 @@ function AllUserList({ handleShowMore, limit }) {
                             </Link>
 
                             {
-
+                                   
+                              userId ?
                                 user?.follow?.find(x => x?._id == item?._id) ? <button className='p-2 bg-blue-400 rounded-lg text-white text-xs md:text-sm' onClick={() => { unfollow(item?._id); }}>Unfollow</button>
                                     : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
-                            }
+                                  :null
+                                }
                         </div>
                     })
                 }

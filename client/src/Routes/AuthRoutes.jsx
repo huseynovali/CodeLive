@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet, json } from "react-router";
 import { axiosInstance } from "../services/axiosServices";
 import { getCryptLocalSrtorage } from "../services/localStorageCrypt";
+import Loading from "../Pages/Loading/Loading";
 
 function AuthRoutes() {
     const [loading, setLoading] = useState(true);
@@ -29,7 +30,7 @@ function AuthRoutes() {
 
     if (loading) {
 
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
 
 

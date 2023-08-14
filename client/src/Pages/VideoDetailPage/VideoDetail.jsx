@@ -10,6 +10,7 @@ import { BiArrowBack } from "react-icons/bi"
 import "./VideoDetail.css"
 import { ToastContainer } from 'react-toastify';
 import VideoDetailComp from '../../components/VideoDetailComponents/VideoDetailComp';
+import Loading from '../Loading/Loading';
 function VideoDetail(props) {
     const location = useLocation();
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function VideoDetail(props) {
     const dispatch = useDispatch()
 
     const { isLoading, data } = useQuery('videoData', () =>
-        axios.get(`http://localhost:8080/video/${id}`), { refetchOnWindowFocus: false, }
+        axios.get(`http://localhost:8080/video/getvideo/${id}`), { refetchOnWindowFocus: false, }
     )
 console.log(data);
     useEffect(() => {
@@ -32,7 +33,7 @@ console.log(data);
     return (
         <>
             {
-                isLoading ? <h1>Loading...</h1> :
+                isLoading ? <Loading/>:
                     <div className='video__detail__page p-3'>
                         <ToastContainer
                             position="top-right"

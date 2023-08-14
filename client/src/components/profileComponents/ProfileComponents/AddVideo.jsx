@@ -8,6 +8,7 @@ import "./profileComponentsStyle.css"
 import { getCryptLocalSrtorage } from '../../../services/localStorageCrypt';
 import { addUserData } from '../../../Store/reducers/dataSlice';
 import { useNavigate } from 'react-router';
+import Loading from '../../../Pages/Loading/Loading';
 
 function AddVideo() {
     const { category } = useSelector(state => state?.dataSlice)
@@ -17,6 +18,8 @@ function AddVideo() {
 
     const userid = getCryptLocalSrtorage("userid")
     const [uploadLoading, setLoading] = useState(false)
+     const [error,setError] = useState(false)
+
     const [file, setFile] = useState({
         videoFile: null,
         coverImageFile: null
@@ -58,6 +61,7 @@ function AddVideo() {
         } catch (error) {
             console.error(error);
             toast.error(error.response?.data?.message || 'An error occurred');
+            setError(error.response?.data?.message || 'An error occurred')
         }
     };
 
@@ -65,9 +69,8 @@ function AddVideo() {
         <div>
             {
                 uploadLoading ?
-                    <div className="uploadLoading absolute inset-0 w-[125%] h-full bg-white z-50">
-                        Loading...
-                    </div>
+                  error ? <h1>{error}</h1>:
+                  <Loading/>
                     :
                     <div className='flex'>
 
@@ -113,7 +116,7 @@ function AddVideo() {
                                             <label className='text-white'>Category</label>
                                             <Field as="select" name="categoryId" className='p-2 rounded-md lg:w-[50%] outline-none mt-2'>
                                                 <option value="">Select a category</option>
-                                                {category?.data?.map(category => (
+                                                {category?.map(category => (
                                                     <option key={category._id} value={category._id}>
                                                         {category.name}
                                                     </option>

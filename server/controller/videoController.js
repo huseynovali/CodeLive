@@ -34,8 +34,7 @@ const VideoController = {
   },
   getVideoContentById: async (req, res) => {
     const id = req.params.id
-    console.log(id);
-    try {
+    try { 
       const videos = await Video.findById(id)
         .populate("categoryId")
         .populate({
@@ -46,12 +45,10 @@ const VideoController = {
           },
         })
         .populate("userid", "username")
-
       res.status(200).json(videos)
     } catch (error) {
-      res.json(error)
+      res.json("error")
     }
-
   },
 
   addVideo: async (req, res) => {
@@ -95,7 +92,7 @@ const VideoController = {
 
         res.status(201).json({ message: "Video and Cover Image added successfully!", newVideo });
       });
-    } catch (err) {
+    } catch (err) { 
       res.status(400).json({ mes: err.message });
     }
   },
@@ -103,12 +100,9 @@ const VideoController = {
   getVideo: async (req, res) => {
     const Key = req.params.key;
     const result = getFile(Key)
-    if(result){
+
        result.pipe(res)
-    }else{
-        res.status(404).json("Video or Img Id not Found !")
-    }
-   
+
   },
   deleteVideo: async (req, res) => {
     const videoId = req.params.videoId;

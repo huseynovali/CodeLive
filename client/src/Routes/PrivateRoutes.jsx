@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router";
 import { axiosInstance } from "../services/axiosServices";
 import { getCryptLocalSrtorage } from "../services/localStorageCrypt";
+import Loading from "../Pages/Loading/Loading";
 
 function PrivateRoutes() {
     const [loading, setLoading] = useState(true);
@@ -14,11 +15,11 @@ function PrivateRoutes() {
         axiosInstance.post("/user/api/token", { token })
             .then(res => {
                 if (res.data == true) {
-                    setTimeout(()=>{
-                           setIsTrue(true);
-                    setLoading(false)
-                    },500)
-                 
+                    setTimeout(() => {
+                        setIsTrue(true);
+                        setLoading(false)
+                    }, 500)
+
 
                 }
             })
@@ -30,7 +31,7 @@ function PrivateRoutes() {
     }, [])
 
     if (loading) {
-        return <div className="absolute inset-0 w-full h-full bg-white">Loading ...</div>
+        return <Loading />
     }
 
     if (isTrue) {

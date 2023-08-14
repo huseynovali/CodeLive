@@ -14,7 +14,7 @@ function Accound() {
   const userId = getCryptLocalSrtorage("userid")
   const [sellectImg, setSellectImg] = useState("")
   const [add, setAdd] = useState("")
-  const [openPopup,setOpenPopup] = useState(false)
+  const [openPopup, setOpenPopup] = useState(false)
   const dispatch = useDispatch()
 
 
@@ -46,11 +46,11 @@ function Accound() {
 
   }
 
-console.log(data);
+  console.log(data);
   return (
     <div className='h-full'>{
-            openPopup && <UserInfoEditPopup setOpenPopup={setOpenPopup}/>
-          }
+      openPopup && <UserInfoEditPopup setOpenPopup={setOpenPopup} />
+    }
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -69,7 +69,17 @@ console.log(data);
             data?.image ?
               <img src={`http://localhost:8080/accountimg/images/${data?.image}`} className={` h-[230px] w-full md:w-[230px] object-fill rounded-lg  bg-slate-500 ${data?.image ? "p-0" : "p-1"} `} />
               :
-              <input type="file" onChange={(e) => setSellectImg(e.target.files[0])} />
+              (
+                sellectImg ? <h1 className='text-white'>Sellect - {sellectImg.name}</h1> :
+                  <div className="change__photo__input relative w-[125px] h-[50px]">
+                    <input type="file" onChange={(e) => setSellectImg(e.target.files[0])} className="opacity-0 w-full z-10 cursor-pointer  absolute inset-0 h-full" />
+                    <div className="sellect__button absolute inset-0">
+                      <button className='px-3 py-2 bg-blue-300 rounded-md mt-2 text-white'>Sellect Photo</button>
+                    </div>
+                  </div>
+              )
+
+
           }
           <div className="user__accound__img__buttons">
             {
@@ -99,7 +109,10 @@ console.log(data);
                   </div>
                 </div>
                 :
-                <button className='px-3 py-2 bg-blue-300 rounded-md mt-2 text-white' onClick={addPhoto}>{add ? "Adding ... " : "Add"}</button>
+
+                sellectImg && <button className='px-3 py-2 bg-blue-300 rounded-md mt-2 text-white' onClick={addPhoto}>{add ? "Adding ... " : "Add"}</button>
+
+
             }
           </div>
           <div className="user__social__links mt-5">
@@ -113,22 +126,22 @@ console.log(data);
               <span className='text-white'>Username:</span>
               <h1 className='text-white text-2xl my-3'>{data?.username}</h1>
             </div>
-            <hr className='py-3'/>
+            <hr className='py-3' />
             <div className="row">
               <span className='text-white'>Email:</span>
               <h1 className='text-white text-2xl my-3'>{data?.email}</h1>
             </div>
-            <hr className='py-3'/>
+            <hr className='py-3' />
             <div className="row">
               <span className='text-white'>About:</span>
               <p className='text-white text-2xl'>{data?.about}</p>
             </div>
           </div>
 
-          
-  
 
-          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={()=>setOpenPopup(!openPopup)}>{openPopup ? "Close Popup": "Edit User Info"}</button>
+
+
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={() => setOpenPopup(!openPopup)}>{openPopup ? "Close Popup" : "Edit User Info"}</button>
 
         </div>
       </div>

@@ -11,11 +11,11 @@ import Spline from '@splinetool/react-spline';
 function Home() {
 
   return (
-    <div>
+    <div className='home__page'>
       <div className="header_navbar">
 
       </div>
-      <div className="header">
+      <div className="header w-full h-screen pb-5">
 
         <div className="nav__brand">
           <h1 className='text-2xl p-5  text-white md:text-4xl md:px-[50px] md:py-[30px]'>
@@ -53,7 +53,7 @@ function Home() {
                 itaque animi placeat? Ex earum, laborum iste laboriosam
                 nulla neque soluta, repellat voluptates id ab blanditiis.
               </p>
-              <Link to="/video">
+              <Link to="/allvideos">
                 <button className='my-3 py-3 px-6 rounded-md'>
                   Get Start
                 </button>
@@ -77,7 +77,12 @@ function Home() {
       </div>
 
 
-
+      <div className="section_1">
+        <div className=' overflow-hidden w-[600px]'>
+          <Spline scene="https://prod.spline.design/EEx1xUVR1xlW4Iua/scene.splinecode" className='w-full h-full ' />
+        </div>
+      </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </div>
   )
 }

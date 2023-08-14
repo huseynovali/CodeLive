@@ -88,7 +88,7 @@ function VideoDetailComp() {
                 {
                     data?.videoawsid ?
                         <ReactPlayer
-                            url={data?.videoawsid ? "http://localhost:8080/video/getvideo/" + data?.videoawsid : ""}
+                            url={data?.videoawsid ? "http://localhost:8080/video/getvideoaws/" + data?.videoawsid : ""}
                             controls={true}
                             width={"100%"}
                             height={"100%"}
