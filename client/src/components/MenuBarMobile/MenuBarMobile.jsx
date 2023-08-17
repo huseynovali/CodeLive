@@ -17,37 +17,37 @@ function MenuBarMobile() {
         transition={{ type: "spring", stiffness: 300, damping: 14 }}
       >
         <Link to={"/"}>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' relative bg-blue-700' : ""} `} transition={{ duration: 1 }} animate={{ bottom: '30px' }}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' relative bg-blue-600' : ""} `} transition={{ duration: 1 }} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/" ? ' block' : "hidden"}`}></div>
             <AiOutlineHome />
           </motion.li>
         </Link>
         <Link to={"/allvideos"}>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/allvideos" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/allvideos" ? ' relative bg-blue-600' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/video" ? ' block' : "hidden"}`}></div>
             <AiOutlineYoutube />
           </motion.li>
         </Link>
         <Link to={"/allusers"}>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/allusers" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/allusers" ? ' relative bg-blue-600' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/users" ? ' block' : "hidden"}`}></div>
             <LiaUsersSolid />
           </motion.li>
         </Link>
         <Link>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/questions" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/questions" ? ' relative bg-blue-600' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/question" ? ' block' : "hidden"}`}></div>
             <BiCodeAlt />
           </motion.li>
         </Link>
-        <Link>
-          <motion.li className={` p-3 rounded-full ${location.pathname == "/livestream" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+        {/* <Link>
+          <motion.li className={` p-3 rounded-full ${location.pathname == "/livestream" ? ' relative bg-blue-600' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/livestream" ? ' block' : "hidden"}`}></div>
             <CiStreamOn />
           </motion.li>
-        </Link>
+        </Link> */}
         <Link to={"/profile/accound"}>
-          <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' relative bg-blue-700' : ""} `} animate={{ bottom: '30px' }}>
+          <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' relative bg-blue-600' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname.split("/")[1] == "profile" ? ' block' : "hidden"}`}></div><AiOutlineUser /></motion.li>
         </Link>
 

@@ -1,26 +1,52 @@
 .home__page {
-    background: linear-gradient(180deg, #2a218a 5%, #4034ab 22%, #2333B4 74%);
+    background: #0F2557
 }
 
 
 
 .header__section__img {
-    width: 60%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
     height: 100%;
     background-repeat: no-repeat;
-    background-image: url("../../img/ultimate-membership-pro-members-management.png");
-    background-size: contain;
-    background-position: 80% 50%;
+    background-image: url("../../img/6084414.jpg");
+    background-size: cover;
+    background-position: 20% 30%;
+    background-attachment: fixed;
 }
 
-
+.header__section__img__cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 .header__section__text p {
     padding: 20px 0;
     font-size: 21px;
 }
 
-.header__section__text button{
+.header__section__text button {
     background: #6663FD;
 }
 
+.section_1 {
+    background-image: url("../../img/maxresdefault.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.connection__section__text{
+    background-color: rgba(0,0,200);
+}
+
+.section__2{
+    background-color: #10162F;
+}
+
+.section__2 button {
+    background: #6663FD;
+}

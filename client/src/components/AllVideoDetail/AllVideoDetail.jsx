@@ -45,6 +45,7 @@ function AllVideoDetail() {
         }
 
         setSearchVideo(filteredVideos);
+
     };
     const goToVideo = (id) => {
         navigate(`/video/${id}`, { state: { from: location.pathname } });
@@ -53,11 +54,11 @@ function AllVideoDetail() {
     return (
         <div className='p-5'>
             <div className="filter__videos flex w-full">
-                <div className="search__content flex w-[50%] m-auto">
+                <div className="search__content flex md:w-[50%] m-auto">
                     <input type="text" className='w-full p-2 rounded-md outline-none' onChange={(e) => setSearchInput(e.target.value.toLocaleLowerCase().trim())} />
                     <button className='px-3 py-2 text-white bg-blue-500 rounded-md ml-3' onClick={() => searchVideoFunc()}>Search</button>
                 </div>
-                <button className='p-2 rounded-md flex gap-2 items-center bg-blue-400 text-white' onClick={() => setOpenModal(!openModal)}>
+                <button className='p-2 rounded-md flex gap-2 items-center bg-blue-400 text-white ml-3' onClick={() => setOpenModal(!openModal)}>
                     Filter <BsFilterCircle />
                 </button>
 
@@ -69,7 +70,7 @@ function AllVideoDetail() {
                     searchVideo?.map(item => {
                         return <div onClick={() => goToVideo(item._id)} className="user__videos hover:scale-[1.05] transition-all h-[320px] relative shadow-lg rounded-md" >
                             <div className="video__cover__img shadow-lg">
-                                <img src={item?.coverImageid ? `http://localhost:8080/accountimg/images/${item?.coverImageid}` : coverImg} alt="video cover image" className='bg-slate-400 h-[200px] w-[300px] object-cover rounded-md' />
+                                <img src={item?.coverImageid ? `http://localhost:8080/accountimg/images/${item?.coverImageid}` : coverImg} alt="video cover image" className='bg-slate-400 h-[200px] w-[350px] md:w-[300px] object-cover rounded-md' />
                             </div>
                             <div className="video__info__content  p-3">
                                 <h1 className='text-white w-[250px]'>{item?.title.length > 50 ? item?.title.slice(0, 50) + " ..." : item?.title}</h1>
@@ -146,11 +147,7 @@ function AllVideoDetail() {
                                 >
                                     This Year
                                 </li>
-                                {/* <li className='hover:opacity-80 hover:scale-105 cursor-pointer'>the last hour</li>
-                                <li className='hover:opacity-80 hover:scale-105 cursor-pointer'></li>
-                                <li className='hover:opacity-80 hover:scale-105 cursor-pointer'>this week</li>
-                                <li className='hover:opacity-80 hover:scale-105 cursor-pointer'>this month</li>
-                                <li className='hover:opacity-80 hover:scale-105 cursor-pointer'>this year</li> */}
+
                             </ul>
                         </div>
                         <div className="filter__category p-5">
@@ -159,7 +156,7 @@ function AllVideoDetail() {
 
                             <ul className='flex  flex-col gap-3'>
 
-                                {category?.data?.map(category => (
+                                {category?.map(category => (
                                     <li
                                         key={category._id}
                                         className={`hover:opacity-80 hover:scale-105 cursor-pointer ${selectedCategoryFilter === category.name ? "text-blue-500 font-semibold" : ""

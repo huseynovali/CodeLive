@@ -7,6 +7,7 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { addVideoData } from '../../Store/reducers/dataSlice';
+import { useNavigate } from 'react-router';
 
 
 function VideoComment() {
@@ -15,7 +16,7 @@ function VideoComment() {
     const data = useSelector(state => state.dataSlice.video)
     const userid = getCryptLocalSrtorage("userid")
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     const deleteComment = async (id) => {
         try {
             console.log(data?._id);
@@ -71,6 +72,9 @@ function VideoComment() {
         }
     }
 
+    const goToUser = (id) => {
+        navigate(`/user/${id}`, { state: { from: location.pathname } });
+    }
 
 
 
@@ -94,7 +98,7 @@ function VideoComment() {
                     data?.comments?.map(item => {
                         return <li className={`comment__list text-white  my-2 px-3 py-2 rounded-md flex items-center justify-between ${editActive == item._id ? "bg-yellow-400" : ""}`}>
                             <div>
-                                <span className='text-sm'>{item?.author?.username}</span>
+                                <span onClick={()=>goToUser(item?.author?._id)} className='text-sm block cursor-pointer'>{item?.author?.username}</span>
                                 {editActive == item._id ?
                                     <div className='flex'>
                                         <input type="text" value={commentInput} className='bg-white w-full p-2 rounded-l-lg outline-none text-black' onChange={(e) => setCommentInput(e.target.value.trim())} />

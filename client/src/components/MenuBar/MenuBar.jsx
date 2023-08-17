@@ -45,44 +45,44 @@ console.log(location.pathname.split("/")[1] == "profile");
         >
           {
             open ?
-              <motion.li className='close hover:bg-blue-700 p-3 rounded-full relative' onClick={toggleMenu} >
+              <motion.li className='close hover:bg-blue-600 p-3 rounded-full relative' onClick={toggleMenu} >
                 <div className="close__button__cover absolute w-full h-full inset-0"></div>
                 <AiOutlineClose />
               </motion.li>
               :
-              <motion.li className='open hover:bg-blue-700 p-3 rounded-full relative' onClick={toggleMenu} >
+              <motion.li className='open hover:bg-blue-600 p-3 rounded-full relative' onClick={toggleMenu} >
                 <div className="open__button__cover absolute w-full h-full inset-0"></div>
                 <AiOutlineMenu />
               </motion.li>
           }
 
           <Link to={"/"}>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' bg-blue-700' : ""} `}>
+            <motion.li className={` p-3 rounded-full ${location.pathname == "/" ? ' bg-blue-600' : ""} `}>
               <AiOutlineHome />
             </motion.li>
           </Link>
           <Link to={"/allvideos"}>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/allvideos" ? ' bg-blue-700' : ""} `}>
+            <motion.li className={` p-3 rounded-full ${location.pathname == "/allvideos" ? ' bg-blue-600' : ""} `}>
               <AiOutlineYoutube />
             </motion.li>
           </Link>
           <Link to={"/allusers"}>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/allusers" ? ' bg-blue-700' : ""} `}>
+            <motion.li className={` p-3 rounded-full ${location.pathname == "/allusers" ? ' bg-blue-600' : ""} `}>
               <LiaUsersSolid />
             </motion.li>
           </Link>
           <Link>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/questions" ? ' bg-blue-700' : ""} `}>
+            <motion.li className={` p-3 rounded-full ${location.pathname == "/questions" ? ' bg-blue-600' : ""} `}>
               <BiCodeAlt />
             </motion.li>
           </Link>
-          <Link>
-            <motion.li className={` p-3 rounded-full ${location.pathname == "/livestream" ? ' bg-blue-700' : ""} `}>
+          {/* <Link>
+            <motion.li className={` p-3 rounded-full ${location.pathname == "/livestream" ? ' bg-blue-600' : ""} `}>
               <CiStreamOn />
             </motion.li>
-          </Link>
+          </Link> */}
           <Link to={"/profile/accound"}>
-            <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' bg-blue-700' : ""} `}>
+            <motion.li className={` p-3 rounded-full ${location.pathname.split("/")[1] == "profile" ? ' bg-blue-600' : ""} `}>
               <AiOutlineUser />
             </motion.li>
           </Link>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import profileImage from "../../img/User-Profile-PNG-Free-Download.png"
 import { toast } from 'react-toastify';
 import { addAllUser, addUserData } from '../../Store/reducers/dataSlice';
@@ -14,6 +14,7 @@ function AllUserList({ handleShowMore, limit }) {
     const [searchInput, setSearchInput] = useState("")
     const dispatch = useDispatch()
     const userId = getCryptLocalSrtorage("userid")
+    const navigate = useNavigate();
 
     useEffect(() => {
         setSearchUser(allUsers)
@@ -40,6 +41,12 @@ function AllUserList({ handleShowMore, limit }) {
 
     }
 
+    const goToUser = (id) => {
+        navigate(`/user/${id}`, { state: { from: location.pathname } });
+    }
+
+
+
     const unfollow = async (paramsId) => {
         try {
 
@@ -63,26 +70,26 @@ function AllUserList({ handleShowMore, limit }) {
             <div className="users__list mt-16">
                 {
                     searchUser?.map(item => {
-                        return <div className='followers__list  px-3 py-2 rounded-lg my-3  flex items-center justify-between'>
-                            <Link to={`/user/${item?._id}`} className='flex items-center'>
+                        return <div  className='followers__list  px-3 py-2 rounded-lg my-3  flex items-center justify-between'>
+                            <div onClick={() => goToUser(item?._id)} className='flex items-center cursor-pointer '>
 
                                 <img src={item?.image ? `http://localhost:8080/accountimg/images/${item?.image}` : profileImage} alt="video cover image" className='bg-slate-400 h-[50px] w-[50px] object-cover rounded-full' />
                                 <h1 className='ml-2 md:ml-5 text-md md:text-xl text-white'>{item?.username}</h1>
 
-                            </Link>
+                            </div>
 
                             {
-                                   
-                              userId ?
-                                user?.follow?.find(x => x?._id == item?._id) ? <button className='p-2 bg-blue-400 rounded-lg text-white text-xs md:text-sm' onClick={() => { unfollow(item?._id); }}>Unfollow</button>
-                                    : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
-                                  :null
-                                }
+
+                                userId ?
+                                    user?.follow?.find(x => x?._id == item?._id) ? <button className='p-2 bg-blue-400 rounded-lg text-white text-xs md:text-sm' onClick={() => { unfollow(item?._id); }}>Unfollow</button>
+                                        : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
+                                    : null
+                            }
                         </div>
                     })
                 }
                 {
-                   searchInput || limit > allUsers?.length + 1 ? null :
+                    searchInput || limit > allUsers?.length + 1 ? null :
                         <div className='w-full flex justify-end mb-16 md:mb-0'>
                             <button className="show-more-button px-2 py-1 my-3 bg-blue-400 text-white rounded-md " onClick={handleShowMore}>
                                 Show More ...

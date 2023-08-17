@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router';
 function VideoDetailComp() {
     const data = useSelector(state => state.dataSlice.video)
     const {user} = useSelector(state => state.dataSlice)
-    console.log(user);
     const [playedSeconds, setPlayedSeconds] = useState(0);
     const userid = getCryptLocalSrtorage("userid")
     const [descriptionisOpen, setDescriptionisOpen] = useState(false)
@@ -78,6 +77,9 @@ function VideoDetailComp() {
         }
 
     }
+    const goToUser = (id) => {
+        navigate(`/user/${id}`, { state: { from: location.pathname } });
+    }
 
 
 
@@ -114,7 +116,7 @@ function VideoDetailComp() {
             <div className="video__author__data flex justify-between text-white py-3">
                 <div className='flex items-center '>
                     <BiUserCircle className='text-5xl font-thin' />
-                    <h1 className='ml-3 text-2xl'>{data?.userid?.username}</h1>
+                    <h1 onClick={()=>goToUser(data?.userid?._id)} className='ml-3 text-2xl'>{data?.userid?.username}</h1>
                 </div>
                 <div className='flex flex-col'>
                     <div className="video__like flex items-center text-xl">

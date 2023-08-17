@@ -140,8 +140,9 @@ function Accound() {
 
 
 
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={() =>{localStorage.clear(),window.location.reload()}}>Log Out</button>
 
-          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={() => setOpenPopup(!openPopup)}>{openPopup ? "Close Popup" : "Edit User Info"}</button>
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-24' onClick={() => setOpenPopup(!openPopup)}>{openPopup ? "Close Popup" : "Edit User Info"}</button>
 
         </div>
       </div>

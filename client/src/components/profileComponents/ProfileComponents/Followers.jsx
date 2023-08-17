@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import profileImage from "../../../img/User-Profile-PNG-Free-Download.png"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addUserData } from '../../../Store/reducers/dataSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import axios from 'axios';
 function Followers() {
     const { user } = useSelector(state => state?.dataSlice)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const followUser = async (paramsValue) => {
         const { _id: paramsId } = paramsValue
@@ -26,6 +27,9 @@ function Followers() {
 
     }
 
+    const goToUser = (id) => {
+        navigate(`/user/${id}`, { state: { from: location.pathname } });
+    }
 
 
     return (
@@ -46,12 +50,12 @@ function Followers() {
             {
                 user?.followers?.map(item => {
                     return <div className='followers__list  px-3 py-2 rounded-lg my-3  flex items-center justify-between'>
-                        <Link className='flex items-center'>
+                        <div onClick={()=>goToUser(item?._id)} className='flex items-center'>
 
                             <img src={item?.image ? `http://localhost:8080/accountimg/images/${item?.image}` : profileImage} alt="video cover image" className='bg-slate-400 h-[50px] w-[50px] object-cover rounded-full' />
                             <h1 className='ml-2 md:ml-5 text-md md:text-xl text-white'>{item?.username}</h1>
 
-                        </Link>
+                        </div>
                         {
                             user?.follow.find(x => x?._id == item._id) ? <span>Following</span> : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
                         }

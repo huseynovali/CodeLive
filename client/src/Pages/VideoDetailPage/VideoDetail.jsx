@@ -15,7 +15,7 @@ function VideoDetail(props) {
     const location = useLocation();
     const navigate = useNavigate();
     const { id } = useParams()
-
+     console.log(location);
     const dispatch = useDispatch()
 
     const { isLoading, data } = useQuery('videoData', () =>
@@ -30,6 +30,7 @@ console.log(data);
     const goBack = () => {
         navigate(location.state.from)
     };
+
     return (
         <>
             {
