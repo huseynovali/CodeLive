@@ -6,6 +6,7 @@ import { useParams } from 'react-router'
 import QuestionDetailComp from '../../components/QuestionDetail/QuestionDetailComp'
 import axios from 'axios'
 import Loading from '../Loading/Loading'
+import { ToastContainer } from 'react-toastify'
 
 function QuestionDetail() {
   const dispatch = useDispatch()
@@ -24,6 +25,18 @@ function QuestionDetail() {
       {
         isLoading ? <Loading /> :
           <div className='question__detail__page'>
+            <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
             <QuestionDetailComp />
           </div>
       }
