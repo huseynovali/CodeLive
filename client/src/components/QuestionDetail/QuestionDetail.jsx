@@ -1,21 +1,23 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 function QuestionDetail() {
     const { allQuestion } = useSelector(state => state.dataSlice)
     console.log(allQuestion);
     return (
-        <div>
+        <div className='my-16'>
             {
                 allQuestion?.map(item => {
-                    return (<div>
-                        <h2>{item?.text}</h2>
-                        <div className="question__bottom">
-                            <span>{item?.author?.username}</span>
-                            <span>{moment(item?.createdAt).startOf('minute').fromNow()}</span>
+                    return (
+                    <Link to={""} className='block question__list w-[90%] m-auto  p-5  my-5 rounded-md'>
+                        <h2 className='text-2xl text-white'>{item?.text}</h2>
+                        <div className="question__bottom flex justify-center my-2 text-white items-end flex-col">
+                            <span className='text-lg'>{item?.author?.username}</span>
+                            <span className='mx-2 text-sm'>{moment(item?.createdAt).startOf('minute').fromNow()}</span>
                         </div>
-                    </div>
+                    </Link>
 
                     )
                 })
