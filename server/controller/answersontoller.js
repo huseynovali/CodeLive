@@ -79,17 +79,18 @@ const answerController = {
     try {
       const updatedAnswer = await Answer.findByIdAndUpdate(
         answerId,
-        { $addToSet: { correct: userId } }, // $addToSet ile aynı kullanıcının birden fazla kez eklenmesini önler
+        { 
+          $addToSet: { correct: userId }, // Kullanıcıyı correct dizisine ekle
+          $pull: { incorrect: userId }   // Kullanıcıyı incorrect dizisinden çıkar
+        },
         { new: true }
       );
       res.status(200).json({ message: "Answer marked as correct.", updatedAnswer });
-
     } catch (error) {
       res.status(500).json({ message: "An error occurred while marking the answer as correct.", error: error.message });
     }
   },
 
-  // Yanlış işaretlemeyi eklemek için
   addIncorrectAnswer: async (req, res) => {
     const answerId = req.params.answerId;
     const userId = req.params.userId;
@@ -97,15 +98,18 @@ const answerController = {
     try {
       const updatedAnswer = await Answer.findByIdAndUpdate(
         answerId,
-        { $addToSet: { incorrect: userId } },
+        { 
+          $addToSet: { incorrect: userId }, // Kullanıcıyı incorrect dizisine ekle
+          $pull: { correct: userId }       // Kullanıcıyı correct dizisinden çıkar
+        },
         { new: true }
       );
       res.status(200).json({ message: "Answer marked as incorrect.", updatedAnswer });
-
     } catch (error) {
       res.status(500).json({ message: "An error occurred while marking the answer as incorrect.", error: error.message });
     }
-  }
+  },
+
 
 };
 

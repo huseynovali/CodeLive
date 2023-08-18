@@ -21,6 +21,7 @@ import AllUsers from '../Pages/AllUsers/AllUsers';
 import AllVideos from '../Pages/AllVideos/AllVideos';
 import UserDetail from '../Pages/UserDetail/UserDetail';
 import Questions from '../Pages/Stackowerflow/Questions';
+import QuestionDetail from '../Pages/Stackowerflow/QuestionDetail';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -88,6 +89,10 @@ export default function MainRoutes() {
             {
               path: "questions",
               element: <Questions />
+            },
+            {
+              path: "questions/:id",
+              element: <QuestionDetail />
             },
           ]
         },

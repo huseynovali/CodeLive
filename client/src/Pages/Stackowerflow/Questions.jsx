@@ -6,12 +6,13 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import { addAllQuestion } from '../../Store/reducers/dataSlice'
 import { useQuery } from 'react-query';
-import QuestionDetail from '../../components/QuestionDetail/QuestionDetail';
+import AllQuestionDetail from '../../components/QuestionDetail/AllQuestionDetail';
+
 function Questions() {
 
     const dispatch = useDispatch()
 
-    const { isLoading, data } = useQuery('question', () =>
+    const { isLoading, data } = useQuery('allquestion', () =>
         axios.get(`http://localhost:8080/question`), { refetchOnWindowFocus: false, }
     )
 
@@ -27,7 +28,7 @@ function Questions() {
                 <span className='text-white text-2xl'>Codelive</span>
             </Link>
 
-            <QuestionDetail/>
+            <AllQuestionDetail/>
         </div>
     )
 }
