@@ -9,8 +9,7 @@ const commentSchema = mongoose.Schema({
         required: true,
     },
     createdAt: {
-        type: Date,
-        default: Date.now
+        type: String
     },
     videoId: {
         type: mongoose.Schema.Types.ObjectId,

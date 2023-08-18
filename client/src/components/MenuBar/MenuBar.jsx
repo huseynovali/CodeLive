@@ -71,7 +71,7 @@ console.log(location.pathname.split("/")[1] == "profile");
               <LiaUsersSolid />
             </motion.li>
           </Link>
-          <Link>
+          <Link to={"/questions"}>
             <motion.li className={` p-3 rounded-full ${location.pathname == "/questions" ? ' bg-blue-600' : ""} `}>
               <BiCodeAlt />
             </motion.li>

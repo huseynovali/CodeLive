@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     user: {},
     video: {},
-    customUser:{},
+    customUser: {},
     category: [],
-    allUsers:[],
-    allVideo:[]
-
+    allUsers: [],
+    allVideo: [],
+    allQuestion: []
 }
 
 export const dataSlice = createSlice({
@@ -31,10 +31,13 @@ export const dataSlice = createSlice({
         },
         addCutomUserData: (state, action) => {
             state.customUser = action.payload
+        },
+        addAllQuestion: (state, action) => {
+            state.allQuestion = action.payload
         }
     },
 })
 
-export const { addUserData, addVideoData, addCategoryData,addAllUser,addAllVideo,addCutomUserData } = dataSlice.actions
+export const { addUserData, addVideoData, addCategoryData, addAllUser, addAllVideo, addCutomUserData,addAllQuestion } = dataSlice.actions
 
 export default dataSlice.reducer

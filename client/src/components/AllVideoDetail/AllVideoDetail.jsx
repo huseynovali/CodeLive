@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import moment from 'moment';
 import { BsFilterCircle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
+import { BiReset } from 'react-icons/bi';
 
 function AllVideoDetail() {
     const { category } = useSelector(state => state?.dataSlice);
@@ -47,6 +48,13 @@ function AllVideoDetail() {
         setSearchVideo(filteredVideos);
 
     };
+    const resetFilters = () => {
+        setSelectedTimeFilter("");
+        setSelectedCategoryFilter("");
+        setSearchVideo(allVideo);
+    };
+    
+
     const goToVideo = (id) => {
         navigate(`/video/${id}`, { state: { from: location.pathname } });
     }
@@ -89,7 +97,10 @@ function AllVideoDetail() {
             {
                 openModal &&
                 <div className="filter__modal  max-w-max max-h-max bg-white m-auto absolute inset-0 p-5">
+                    <div className='flex justify-between'>
                     <h1 className='font-medium ml-5 text-xl'>Search filters</h1>
+                    <button onClick={()=>{resetFilters(),setOpenModal(false)}}><BiReset className='text-2xl hover:-rotate-180 transition-transform'/></button>
+                    </div>
                     <div className="  flex ">
 
                         <div className="filter__time p-5">

@@ -48,6 +48,8 @@ function UserDetailComp() {
             await axios.post(`http://localhost:8080/user/follow/${user?._id}/followUserId/${paramsId}`);
             const updateUser = { ...user, follow: [...user?.follow, paramsValue] };
             let updateUserid = { ...customUser, followers: [...customUser?.followers, paramsId] };
+
+           
             dispatch(addUserData(updateUser));
             dispatch(addCutomUserData(updateUserid))
             toast.success('User Follow  !');
@@ -93,6 +95,7 @@ function UserDetailComp() {
                         <ul className="social__links flex gap-5">
                             {customUser?.social?.map((item, index) => (
                                 <li key={index} className='h-[30px] w-[30px] md:h-[25px] md:w-[25px]  block relative hover:-top-1'>
+
                                     <a href={item.link} target="_blank" rel="noopener noreferrer ">
                                         <img src={getSocialIcon(item.name)} alt={item.name} className="social__icon w-full h-full" />
                                     </a>
@@ -106,14 +109,17 @@ function UserDetailComp() {
                             <p className='flex flex-col justify-center items-center w-full px-10 py-2 bg-blue-400 text-md text-white border border-l-0 rounded-r-md'  ><span className='font-bold'>{numeral(customUser?.followers?.length).format('0,0a')}</span>followers</p>
                         </div>
 
-                        {userid &&
-                            customUser?.followers?.find(item => item == userid) ?
+                        {customUser?._id !== userid ? userid &&
+
+                            typeof (customUser?.followers?.find(item => item == userid)) == "string" ?
                             <button className='my-3 w-full bg-blue-500 px-16 py-2 text-xl text-white hover:bg-blue-600 rounded-md border ' onClick={() => { unfollow(customUser._id); }}>Unfollow</button>
                             :
                             <button className='my-3 w-full bg-blue-500 px-16 py-2 text-xl text-white hover:bg-blue-600 rounded-md border ' onClick={() => followUser({ _id: customUser?._id, username: customUser?.username, image: customUser?.image })}>Follow +</button>
+                            : <div className='my-3 w-full bg-blue-500 px-16 py-5 text-xl text-white hover:bg-blue-600 rounded-md border ' ></div>
+
                         }
 
-                        {/* <button>unFollow</button> */}
+
                     </div>
                     <div className='user__about  pb-10 rounded-md relative my-5'>
                         <motion.div layout className={`text-lg text-white     overflow-hidden  ${customUser?.about?.length > 500 ? descriptionisOpen ? "min-h-max" : "h-[100px]" : "min-h-max"}`}>
@@ -131,11 +137,14 @@ function UserDetailComp() {
                     <div className="user__followers__following md:flex hidden">
                         <p className='flex flex-col justify-center items-center px-10 py-2 rounded-l-md bg-blue-400 text-md text-white border'><span className='font-bold'>{numeral(customUser?.follow?.length).format('0,0a')}</span>following</p>
                         <p className='flex flex-col justify-center items-center px-10 py-2 bg-blue-400 text-md text-white border border-l-0' ><span className='font-bold'>{numeral(customUser?.followers?.length).format('0,0a')}</span>followers</p>
-                        {userid &&
-                            customUser?.followers?.find(item => item == userid) ?
+                        {console.log()}
+                        {customUser?._id !== userid ? userid && userid &&
+                           typeof (customUser?.followers?.find(item => item == userid)) == "string" ?
                             <button className='bg-blue-500 px-16 py-2 text-xl text-white hover:bg-blue-600 rounded-r-md border border-l-0' onClick={() => { unfollow(customUser._id); }}>Unfollow</button>
                             :
                             <button className='bg-blue-500 px-16 py-2 text-xl text-white hover:bg-blue-600 rounded-r-md border border-l-0' onClick={() => followUser({ _id: customUser?._id, username: customUser?.username, image: customUser?.image })}>Follow +</button>
+                            : <div className=' w-full bg-blue-500 px-16 py-5 text-xl text-white  rounded-r-md border ' ></div>
+
                         }
 
                         {/* <button>unFollow</button> */}

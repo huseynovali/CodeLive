@@ -40,7 +40,7 @@
 }
 
 .connection__section__text{
-    background-color: rgba(0,0,200);
+    background-color: #0F2557
 }
 
 .section__2{
@@ -49,4 +49,27 @@
 
 .section__2 button {
     background: #6663FD;
+}
+
+
+.home__page button{
+    border: 3px solid transparent
+}
+.home__page button:hover{
+    border: 3px solid rgba(255, 255, 255, 0.8) ;
+    box-shadow: 0px 5px 10px 2px rgba(229, 234, 238, 0.2);
+}
+  
+ .section__3 .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background-color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.8) ;
+    box-shadow: 0px 5px 18px 2px rgba(229, 234, 238, 0.2);
+  }
+  
+footer{
+    background-color: #10162F;
 }

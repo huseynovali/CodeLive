@@ -20,6 +20,7 @@ import Following from '../components/profileComponents/ProfileComponents/Followi
 import AllUsers from '../Pages/AllUsers/AllUsers';
 import AllVideos from '../Pages/AllVideos/AllVideos';
 import UserDetail from '../Pages/UserDetail/UserDetail';
+import Questions from '../Pages/Stackowerflow/Questions';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -80,7 +81,14 @@ export default function MainRoutes() {
               path: "video/:id",
               element: <VideoDetail />
             },
-          
+            {
+              path: "user/:id",
+              element: <UserDetail />
+            },
+            {
+              path: "questions",
+              element: <Questions />
+            },
           ]
         },
 
@@ -107,10 +115,7 @@ export default function MainRoutes() {
         }
       ]
     },
-  {
-              path: "user/:id",
-              element: <UserDetail />
-            },
+
   ]);
 
   return Routes;

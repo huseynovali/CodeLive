@@ -15,6 +15,18 @@ function Profile() {
   const data = useSelector(state => state.dataSlice.user)
 
   const [loading, setLoading] = useState(true)
+  const userid = getCryptLocalSrtorage("userid")
+  const token = getCryptLocalSrtorage("token")
+  const dispatch = useDispatch()
+
+  const { data: user } = useQuery('userData', () =>
+    axiosInstance.get(`/user/${userid}/${token}`), { refetchOnWindowFocus: false, }
+  )
+
+  useEffect(() => {
+    dispatch(addUserData(user?.data))
+
+  }, [user])
 
   useEffect(() => {
     setLoading(false)

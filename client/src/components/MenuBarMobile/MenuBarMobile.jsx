@@ -34,7 +34,7 @@ function MenuBarMobile() {
             <LiaUsersSolid />
           </motion.li>
         </Link>
-        <Link>
+        <Link to={"/questions"}>
           <motion.li className={` p-3 rounded-full ${location.pathname == "/questions" ? ' relative bg-blue-600' : ""} `} animate={{ bottom: '30px' }}>
             <div className={`li__cover w-[50px] h-[50px] absolute top-[-0.5px] left-[-1px] rounded-full -z-10 bg-white ${location.pathname == "/question" ? ' block' : "hidden"}`}></div>
             <BiCodeAlt />

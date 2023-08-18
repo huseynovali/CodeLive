@@ -14,7 +14,9 @@ function VideoComment() {
     const [commentInput, setCommentInput] = useState("")
     const [editActive, setEditActive] = useState("")
     const data = useSelector(state => state.dataSlice.video)
+    console.log(data);
     const userid = getCryptLocalSrtorage("userid")
+    const username = getCryptLocalSrtorage("username")
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const deleteComment = async (id) => {
@@ -36,9 +38,10 @@ function VideoComment() {
             await axios.post(`http://localhost:8080/comment/${data?._id}/user/${userid}`, { text: commentInput });
             const commentData = {
                 text: commentInput,
-                author: data?.userid,
-                createdAt: new Date()
+                author: { _id: userid, username },
+
             }
+            console.log(commentData);
             const updatedVideo = { ...data, comments: [...data.comments, commentData] };
             dispatch(addVideoData(updatedVideo));
             toast.success('Comment add !');
@@ -98,7 +101,7 @@ function VideoComment() {
                     data?.comments?.map(item => {
                         return <li className={`comment__list text-white  my-2 px-3 py-2 rounded-md flex items-center justify-between ${editActive == item._id ? "bg-yellow-400" : ""}`}>
                             <div>
-                                <span onClick={()=>goToUser(item?.author?._id)} className='text-sm block cursor-pointer'>{item?.author?.username}</span>
+                                <span onClick={() => goToUser(item?.author?._id)} className='text-sm block cursor-pointer'>{item?.author?.username}</span>
                                 {editActive == item._id ?
                                     <div className='flex'>
                                         <input type="text" value={commentInput} className='bg-white w-full p-2 rounded-l-lg outline-none text-black' onChange={(e) => setCommentInput(e.target.value.trim())} />
@@ -113,6 +116,7 @@ function VideoComment() {
 
                             </div>
                             <div>
+                                {console.log(item?.author?._id == userid)}
                                 {item?.author?._id == userid ?
                                     <div>
                                         <button onClick={() => deleteComment(item._id)}>
@@ -138,7 +142,8 @@ function VideoComment() {
                                     :
                                     ""
                                 }
-                                <p className='text-sm text-white'>{moment(data?.uploadDate).startOf('day').fromNow()}</p>
+                                {console.log(item?.createdAt)}
+                                <p className='text-sm text-white'>{moment(item?.createdAt).startOf('minute').fromNow()}</p>
                             </div>
                         </li>
                     })

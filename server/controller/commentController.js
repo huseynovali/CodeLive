@@ -1,11 +1,13 @@
 const Comment = require("../model/comentSchema");
 const Video = require("../model/videoSchema");
+const moment = require('moment');
 
 const commentController = {
     getCommentsByVideo: async (req, res) => {
         const videoId = req.params.videoId;
         try {
-            const comments = await Comment.find({ videoId });
+            const comments = await Comment.find({ videoId })
+
             res.status(200).json(comments);
         } catch (error) {
             res.status(500).json({ message: "An error occurred while fetching the comments.", error: error.message });
@@ -26,6 +28,7 @@ const commentController = {
                 videoId,
                 author: userId,
                 text,
+                createdAt:moment().format() 
             });
 
             await newComment.save();
