@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCryptLocalSrtorage } from '../../services/localStorageCrypt';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,7 @@ function QuestionDetailComp() {
   const dispatch = useDispatch()
   const { customQuestion } = useSelector(state => state?.dataSlice);
   const { user } = useSelector(state => state?.dataSlice);
-
+  const [textInput, setTextInput] = useState("")
   const answerCorrect = async (paramsId) => {
     try {
       await axios.post(`http://localhost:8080/answer/correct/${userid}/${paramsId}`);
@@ -72,8 +72,33 @@ function QuestionDetailComp() {
       toast.error('An error occurred.');
     }
   };
+  const addAnswer = async () => {
+    try {
+      if (textInput) {
+        const response = await axios.post(`http://localhost:8080/answer/${userid}/${customQuestion?._id}`, {
+          content: textInput
+        });
 
+        const newAnswer = response.data.newAnswer;
 
+        const updatedAnswers = [...customQuestion.answers, newAnswer];
+
+        const updatedQuestion = {
+          ...customQuestion,
+          answers: updatedAnswers
+        };
+
+        dispatch(addCutomQuestionData(updatedQuestion));
+        setTextInput(""); // Metin girdisini sıfırla
+        toast.success('Answer added successfully!');
+      } else {
+        toast.warning('Please enter an answer.');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred while adding the answer.');
+    }
+  }
 
   console.log(customQuestion);
   return (
@@ -117,7 +142,10 @@ function QuestionDetailComp() {
         }
       </div>
 
-
+      <div className="add__answer__content">
+        <textarea name="" id="" cols="30" rows="10" onChange={(e) => setTextInput(e.target.value.trim())}></textarea>
+        <button onClick={() => addAnswer()}>Add Answer</button>
+      </div>
 
 
 
