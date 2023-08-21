@@ -12,7 +12,7 @@ function AllVideoDetail() {
     const [searchInput, setSearchInput] = useState("");
     const [selectedTimeFilter, setSelectedTimeFilter] = useState("");
     const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("");
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {

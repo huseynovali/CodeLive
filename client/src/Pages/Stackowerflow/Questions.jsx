@@ -21,7 +21,7 @@ function Questions() {
     }, [data])
 
     return (
-        <div className='question__page h-screen p-5'>
+        <div className='question__page min-h-screen p-5'>
         
 
             <AllQuestionDetail/>
