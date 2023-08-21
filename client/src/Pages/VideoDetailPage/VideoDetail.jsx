@@ -48,7 +48,7 @@ console.log(data);
                             pauseOnHover
                             theme="light"
                         />
-                        <button className='p-2 bg-blue-400 rounded-full text-white text-xl' onClick={() => goBack()}><BiArrowBack /></button>
+                        <button className='p-2 go__back__button rounded-full text-white text-xl' onClick={() => goBack()}><BiArrowBack /></button>
                         <div className="video__section w-[90%] m-auto py-5 ">
                             <VideoDetailComp />
                         </div>

@@ -1,19 +1,22 @@
 .video__detail__page {
-    background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+    background-color: #10162F;
     min-height: 100vh;
 
 }
 
 .video__info {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #1c2548;
 }
 
 .comment__list {
-    background-color: rgba(255, 255, 255, 0.3);
+     background-color: #1c2548;
+}
+.go__back__button{
+    background-color: #1c2548;
 }
 
 .video__info__content {
-    background-image: linear-gradient(to bottom, #4B4FEB 0%, #2575fc 100%);
+    background-color: #1c2548;
     margin-top: -5px;
     height: 130px;
     border-radius: 5px;
@@ -24,7 +27,7 @@
 }
 
 .followers__list {
-    background-image: linear-gradient(to left, #00c6fb 5%, #005bea 90%);
+    background-color: #10162F;
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0px 5px 10px 2px rgba(229, 234, 238, 0.2);
 }

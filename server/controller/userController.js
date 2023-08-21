@@ -66,6 +66,12 @@ const userController = {
 
                     },
                 )
+                .populate(
+                    {
+                        path: "questions",
+                        select: "text createdAt "
+                    }
+                )
             if (user) {
                 if (token == user.token) {
                     res.status(200).json(user);

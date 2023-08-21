@@ -19,7 +19,7 @@ function AllVideos() {
 
     useEffect(() => {
         dispatch(addAllVideo(data?.data))
-        console.log("data", data);
+       
     }, [data])
 
 

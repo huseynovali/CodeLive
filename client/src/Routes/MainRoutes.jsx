@@ -22,6 +22,7 @@ import AllVideos from '../Pages/AllVideos/AllVideos';
 import UserDetail from '../Pages/UserDetail/UserDetail';
 import Questions from '../Pages/Stackowerflow/Questions';
 import QuestionDetail from '../Pages/Stackowerflow/QuestionDetail';
+import MyQuestions from '../components/profileComponents/ProfileComponents/MyQuestions';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -74,6 +75,10 @@ export default function MainRoutes() {
                 {
                   path: "following",
                   element: <Following />
+                },
+                {
+                  path: "questions",
+                  element: <MyQuestions />
                 },
               ]
 

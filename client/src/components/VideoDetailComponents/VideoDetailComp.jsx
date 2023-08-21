@@ -100,11 +100,11 @@ function VideoDetailComp() {
                 }
             </div>
             <div className="video__title__part flex justify-between items-center">
-                <p className='text-2xl text-white py-2'>{data?.title}</p>
+                <p className=' md:text-2xl text-white py-3 w-50%'>{data?.title}</p>
                 {data?.userid?._id == userid ?
-                    <div>
-                        <button className='px-3 py-2 bg-red-400 rounded-md text-white' onClick={() => deleteVideo()}> Delete Video</button>
-                        <button className='px-3 py-2 bg-blue-300 rounded-md text-white ml-2' onClick={() => setEditPopup(!editPopup)}>
+                    <div className='flex'>
+                        <button className='px-1 md:px-3 py-2 bg-red-400 rounded-md text-white text-sm' onClick={() => deleteVideo()}> Delete Video</button>
+                        <button className='px-1 md:px-3 py-2 bg-blue-300 rounded-md text-white ml-2 text-sm' onClick={() => setEditPopup(!editPopup)}>
                             {
                                 editPopup ? "Reject Edit" : "Edit Video"
                             }
@@ -116,7 +116,7 @@ function VideoDetailComp() {
             <div className="video__author__data flex justify-between text-white py-3">
                 <div className='flex items-center '>
                     <BiUserCircle className='text-5xl font-thin' />
-                    <h1 onClick={()=>goToUser(data?.userid?._id)} className='ml-3 text-2xl'>{data?.userid?.username}</h1>
+                    <h1 onClick={()=>goToUser(data?.userid?._id)} className='ml-3 text-2xl cursor-pointer'>{data?.userid?.username}</h1>
                 </div>
                 <div className='flex flex-col'>
                     <div className="video__like flex items-center text-xl">

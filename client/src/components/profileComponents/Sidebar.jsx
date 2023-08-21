@@ -20,11 +20,11 @@ function Sidebar() {
     const location = useLocation()
     const sellectLink = location.pathname.split("/").pop()
     const [isLoading, setisLoading] = useState(true)
- 
+
 
     useEffect(() => {
         setisLoading(false)
-        
+
     }, [data])
 
     return (
@@ -92,8 +92,8 @@ function Sidebar() {
                                             Add Video
                                         </li>
                                     </Link>
-                                    <Link>
-                                        <li className={` sidebar__list__item  ${sellectLink == "addquestion" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <Link to={"questions"}>
+                                        <li className={` sidebar__list__item  ${sellectLink == "questions" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
                                                 <RiQuestionnaireLine className='text-2xl' />
                                             </div>
@@ -111,14 +111,14 @@ function Sidebar() {
                                 </ul>
                             </div>
                             <Link className=' overflow-hidden w-[250px] px-3' to={"accound"}>
-                                <div className={` sidebar__list__item  ${sellectLink == "accound" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                <div className={` sidebar__list__item  ${sellectLink == "accound" ? "text-white" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                     <div className={`list__icon  flex justify-center items-center border  ${sellectLink == "accound" ? "border-white" : "border-transparent"} hover:border-white rounded-full`}>
                                         {
-                                            data?.image  ?
-                                            <img src={ `http://localhost:8080/accountimg/images/${data?.image} `} className={`rounded-full h-[40px] w-[40px] bg-slate-500 ${data?.image !== "" ? "p-0" : "p-1"} `} />:
-                                            <img src={profileImage} alt="" className={`rounded-full h-[40px] w-[40px] bg-slate-500 ${data?.image !== "" ? "p-0" : "p-1"} `}/>
+                                            data?.image ?
+                                                <img src={`http://localhost:8080/accountimg/images/${data?.image} `} className={`rounded-full h-[40px] w-[40px] bg-slate-500 ${data?.image !== "" ? "p-0" : "p-1"} `} /> :
+                                                <img src={profileImage} alt="" className={`rounded-full h-[40px] w-[40px] bg-slate-500 ${data?.image !== "" ? "p-0" : "p-1"} `} />
                                         }
-                                     
+
                                     </div>
                                     <span className='mx-2'>{data?.username}</span>
                                 </div>

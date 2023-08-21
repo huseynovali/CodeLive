@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router';
 
 function VideoComment() {
     const [commentInput, setCommentInput] = useState("")
+    const [editCommentInput, seteditCommentInput] = useState(commentInput)
     const [editActive, setEditActive] = useState("")
     const data = useSelector(state => state.dataSlice.video)
     console.log(data);
@@ -35,13 +36,14 @@ function VideoComment() {
         try {
             console.log(data?._id);
             console.log(commentInput);
-            await axios.post(`http://localhost:8080/comment/${data?._id}/user/${userid}`, { text: commentInput });
+            const response = await axios.post(`http://localhost:8080/comment/${data?._id}/user/${userid}`, { text: commentInput });
+
             const commentData = {
-                text: commentInput,
+                ...response.data.newComment,
                 author: { _id: userid, username },
 
             }
-            console.log(commentData);
+
             const updatedVideo = { ...data, comments: [...data.comments, commentData] };
             dispatch(addVideoData(updatedVideo));
             toast.success('Comment add !');
@@ -54,11 +56,11 @@ function VideoComment() {
     const editComment = async (id, text) => {
 
         try {
-            await axios.put(`http://localhost:8080/comment/${id}`, { text: commentInput });
+            await axios.put(`http://localhost:8080/comment/${id}`, { text: editCommentInput });
 
             const updatedComments = data.comments.map(comment => {
                 if (comment._id === id) {
-                    return { ...comment, text: commentInput };
+                    return { ...comment, text: editCommentInput };
                 }
                 return comment;
             });
@@ -87,8 +89,8 @@ function VideoComment() {
 
             <h1 className='text-xl text-white py-3'>Comments</h1>
             <div className="add__comment bg-white w-[100%] md:w-[60%] flex rounded-lg ">
-                <input type="text" className='bg-transparent w-full p-2 rounded-l-lg outline-none' onChange={(e) => { setCommentInput(e.target.value.trim()) }} />
-                <button className='py-2 px-5 bg-blue-500 text-xl text-white rounded-r-lg ' disabled={!commentInput} onClick={() => sendComment()}>
+                <input type="text" value={commentInput} className='bg-transparent w-full p-2 rounded-l-lg outline-none' onChange={(e) => { setCommentInput(e.target.value.trim()) }} />
+                <button className='py-2 px-5 bg-blue-500 text-xl text-white rounded-r-lg ' disabled={!commentInput} onClick={() =>{ sendComment()}}>
                     <BiSend />
                 </button>
 
@@ -104,8 +106,8 @@ function VideoComment() {
                                 <span onClick={() => goToUser(item?.author?._id)} className='text-sm block cursor-pointer'>{item?.author?.username}</span>
                                 {editActive == item._id ?
                                     <div className='flex'>
-                                        <input type="text" value={commentInput} className='bg-white w-full p-2 rounded-l-lg outline-none text-black' onChange={(e) => setCommentInput(e.target.value.trim())} />
-                                        <button className='py-2 px-5 bg-blue-500 text-xl text-white rounded-r-lg' disabled={!commentInput} onClick={() => editComment(item?._id, item?.text)}>
+                                        <input type="text" value={editCommentInput} className='bg-white w-full p-2 rounded-l-lg outline-none text-black' onChange={(e) => seteditCommentInput(e.target.value)} />
+                                        <button className='py-2 px-5 bg-blue-500 text-xl text-white rounded-r-lg' disabled={!editCommentInput} onClick={() => { editComment(item?._id, item?.text), seteditCommentInput('') }}>
                                             <BiSend />
                                         </button>
                                     </div> :
@@ -116,22 +118,22 @@ function VideoComment() {
 
                             </div>
                             <div>
-                                {console.log(item?.author?._id == userid)}
+                           
                                 {item?.author?._id == userid ?
-                                    <div>
+                                    <div className='flex justify-end'>
                                         <button onClick={() => deleteComment(item._id)}>
                                             <BiSolidTrashAlt className='text-2xl text-center' />
                                         </button>
 
                                         {editActive !== item._id ?
                                             <button onClick={() => {
-                                                setCommentInput(item.text);
+                                                seteditCommentInput(item.text);
                                                 setEditActive(item._id)
                                             }} className='ml-3'>
                                                 <BiSolidEditAlt className='text-2xl text-center ' />
                                             </button> :
                                             <button onClick={() => {
-                                                setCommentInput("");
+                                                seteditCommentInput("");
                                                 setEditActive("")
                                             }} className='ml-3'>
                                                 <MdEditOff className='text-2xl text-center ' />

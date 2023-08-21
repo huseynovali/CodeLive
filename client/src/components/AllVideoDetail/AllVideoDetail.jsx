@@ -12,11 +12,12 @@ function AllVideoDetail() {
     const [searchInput, setSearchInput] = useState("");
     const [selectedTimeFilter, setSelectedTimeFilter] = useState("");
     const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("");
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         setSearchVideo(allVideo);
+      
     }, [allVideo]);
 
     const searchVideoFunc = () => {
@@ -45,7 +46,7 @@ function AllVideoDetail() {
             filteredVideos = filteredVideos.filter(item => item.categoryId?.name === selectedCategoryFilter);
         }
 
-        setSearchVideo(filteredVideos);
+        setSearchVideo([...filteredVideos]);
 
     };
     const resetFilters = () => {
@@ -96,7 +97,7 @@ function AllVideoDetail() {
 
             {
                 openModal &&
-                <div className="filter__modal  max-w-max max-h-max bg-white m-auto absolute inset-0 p-5">
+                <div className="filter__modal   max-w-max max-h-max bg-white top-[8%] left-[5%]  md:top-[20%] md:left-[40%] absolute inset-0 p-5 ">
                     <div className='flex justify-between'>
                     <h1 className='font-medium ml-5 text-xl'>Search filters</h1>
                     <button onClick={()=>{resetFilters(),setOpenModal(false)}}><BiReset className='text-2xl hover:-rotate-180 transition-transform'/></button>
