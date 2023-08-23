@@ -65,9 +65,8 @@ function QuestionDetailComp() {
         <div className='w-full flex justify-between text-white'>
 
           {editActive ?
-            <div className=''>
-
-              <input value={commentInput} type='text' className='bg-white w-full p-2 rounded-lg outline-none text-black resize-none h-[100px]' onChange={(e) => setCommentInput(e.target.value)} />
+            <div className='w-full'>
+<textarea value={commentInput}  className='bg-white w-full p-2 rounded-lg outline-none text-black resize-none h-[100px]' onChange={(e) => setCommentInput(e.target.value)} > </textarea>
               <button className='py-2 px-5 bg-blue-500 text-xl text-white rounded-lg' disabled={!commentInput} onClick={() => { editQuestion(customQuestion?._id), setEditActive("") }} >
                 save
               </button>
@@ -77,7 +76,7 @@ function QuestionDetailComp() {
 
           }
           {customQuestion?.author?._id == userid ?
-            <div>
+            <div className='flex'>
               <button onClick={() => deleteQuestion(customQuestion?._id)}>
                 <BiSolidTrashAlt className='text-2xl text-center' />
               </button>

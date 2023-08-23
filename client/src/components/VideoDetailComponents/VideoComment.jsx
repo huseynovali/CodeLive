@@ -89,7 +89,7 @@ function VideoComment() {
 
             <h1 className='text-xl text-white py-3'>Comments</h1>
             <div className="add__comment bg-white w-[100%] md:w-[60%] flex rounded-lg ">
-                <input type="text" value={commentInput} className='bg-transparent w-full p-2 rounded-l-lg outline-none' onChange={(e) => { setCommentInput(e.target.value.trim()) }} />
+                <input type="text" value={commentInput} className='bg-transparent w-full p-2 rounded-l-lg outline-none' onChange={(e) => { setCommentInput(e.target.value) }} />
                 <button className='py-2 px-5 bg-blue-500 text-xl text-white rounded-r-lg ' disabled={!commentInput} onClick={() =>{ sendComment()}}>
                     <BiSend />
                 </button>

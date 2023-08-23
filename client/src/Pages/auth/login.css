@@ -1,29 +1,28 @@
-.login__page{
-  background-color: #10162F;
+.login__page {
+  background-color: #10162f;
 }
 
-.login__container{
-  background-color: #Fff;
-  border: 1px solid rgba(255, 255, 255, 0.2) ;
+.login__container {
+  background-color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0px 5px 10px 2px rgba(229, 234, 238, 0.2);
-   
 }
 
-.login__content__img{
-    background-image: url("../../img/Login-bro.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    background-position: 10% 50%;
+.login__content__img {
+  background-image: url("../../img/Login-bro.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: 10% 50%;
 }
-.register__content__img{
+.register__content__img {
   background-image: url("../../img/login-amico.svg");
   background-size: contain;
   background-repeat: no-repeat;
   object-fit: cover;
   background-position: 10% 50%;
 }
-.forget__content__img{
+.forget__content__img {
   background-image: url("../../img/password-rafiki.svg");
   background-size: contain;
   background-repeat: no-repeat;

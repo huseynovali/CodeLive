@@ -8,6 +8,7 @@ import { addUserData } from '../../../Store/reducers/dataSlice'
 import "./profileComponentsStyle.css"
 import SocailIconService from '../SocailIconService'
 import UserInfoEditPopup from '../userInfoEditPopup'
+
 function Accound() {
   const data = useSelector(state => state.dataSlice.user)
 
@@ -74,6 +75,7 @@ function Accound() {
                   <div className="change__photo__input relative w-[125px] h-[50px]">
                     <input type="file" onChange={(e) => setSellectImg(e.target.files[0])} className="opacity-0 w-full z-10 cursor-pointer  absolute inset-0 h-full" />
                     <div className="sellect__button absolute inset-0">
+       
                       <button className='px-3 py-2 bg-blue-300 rounded-md mt-2 text-white'>Sellect Photo</button>
                     </div>
                   </div>
