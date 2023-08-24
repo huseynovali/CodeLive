@@ -57,7 +57,7 @@ function Followers() {
 
                         </div>
                         {
-                            user?.follow.find(x => x?._id == item._id) ? <span>Following</span> : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
+                            user?.follow.find(x => x?._id == item._id) ? <span className='text-white'>Following</span> : <button className='p-2 bg-blue-400 rounded-lg text-white text-sm' onClick={() => followUser({ _id: item?._id, username: item?.username, image: item?.image })}>Follow</button>
                         }
 
 

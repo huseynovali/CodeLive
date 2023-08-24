@@ -93,7 +93,7 @@ function Home() {
       </div>
 
 
-      <div className="section_1 min-h-screen flex justify-between flex-col items-center ">
+      <div className="section_1 min-h-screen  flex justify-between flex-col items-center ">
         <div className=' overflow-hidden lg:w-[600px]'>
           <Spline scene="https://prod.spline.design/EEx1xUVR1xlW4Iua/scene.splinecode" className='w-full h-full relative -left-3' />
         </div>

@@ -111,7 +111,7 @@ function UserDetailComp() {
             <h1 className="text-4xl text-white my-5 md:my-0">
               {customUser?.username}
             </h1>
-            <ul className="social__links flex gap-5">
+            <ul className="social__links flex gap-5 bg-slate-700 p-3 rounded-md">
               {customUser?.social?.map((item, index) => (
                 <li
                   key={index}

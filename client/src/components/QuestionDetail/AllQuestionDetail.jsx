@@ -8,7 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { addAllQuestion } from "../../Store/reducers/dataSlice";
 
-import MyRichTextEditor from "./Editor";
 
 function AllQuestionDetail() {
   const [inputText, setInputText] = useState("");
