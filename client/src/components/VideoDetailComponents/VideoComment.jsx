@@ -144,8 +144,8 @@ function VideoComment() {
                                     :
                                     ""
                                 }
-                                {console.log(item?.createdAt)}
-                                <p className='text-sm text-white'>{moment(item?.createdAt).startOf('minute').fromNow()}</p>
+                                
+                                <p className='text-sm text-white min-w-max'>{moment(item?.createdAt).startOf('minute').fromNow()}</p>
                             </div>
                         </li>
                     })

@@ -9,8 +9,12 @@ import axios from "axios";
 import { addCutomQuestionData } from "../../Store/reducers/dataSlice";
 import moment from "moment";
 import { toast } from "react-toastify";
+import RichTextEditor from "react-rte";
 
 function AnswerDetail() {
+  const [editorValue, setEditorValue] = useState(
+    RichTextEditor.createEmptyValue()
+  );
   const { user } = useSelector((state) => state?.dataSlice);
   const [textInput, setTextInput] = useState("");
   const [commentInput, setCommentInput] = useState("");
@@ -19,6 +23,12 @@ function AnswerDetail() {
   const { customQuestion } = useSelector((state) => state?.dataSlice);
   const [editActive, setEditActive] = useState("");
   const dispatch = useDispatch();
+
+  const handleEditorChange = (value) => {
+    setEditorValue(value);
+    setTextInput(value.toString("html"));
+  };
+
 
   const answerCorrect = async (paramsId) => {
     try {
@@ -223,7 +233,11 @@ function AnswerDetail() {
                     </button>
                   </div>
                 ) : (
-                  <p className="text-lg">{item.content}</p>
+                  <div
+                  className="html-content text-2xl text-white"
+                  dangerouslySetInnerHTML={{ __html: item.content }}
+                />
+                
                 )}
               </div>
               <div className="question__bottom flex justify-between  text-white items-end flex-col w-full h-full">
@@ -272,7 +286,7 @@ function AnswerDetail() {
       </div>
 
       <div className="add__answer__content md:w-[80%] m-auto mt-16 ">
-        <textarea
+        {/* <textarea
           name=""
           id=""
           cols="30"
@@ -283,7 +297,9 @@ function AnswerDetail() {
           onChange={(e) => {
             setTextInput(e.target.value);
           }}
-        ></textarea>
+        ></textarea> */}
+      <RichTextEditor value={editorValue} onChange={handleEditorChange}  className="h-[300px]"/>
+
         <div className="w-full flex justify-end">
           <button
             onClick={() => {

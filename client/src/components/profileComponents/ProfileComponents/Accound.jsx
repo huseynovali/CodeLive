@@ -122,7 +122,7 @@ function Accound() {
           </div>
         </div>
 
-        <div className="user__profile__user__about mt-10 md:mt-0  w-[100%] h-full p-3  rounded-lg overflow-hidden relative">
+        <div className="user__profile__user__about mt-10 md:mt-0  w-[100%] h-full p-3  rounded-lg overflow-scroll lg:overflow-auto relative">
           <div className="user__profile__user__about__container overflow-y-auto lg:h-[90%] pb-5 overflow-x-hidden ">
             <div className="row">
               <span className='text-white'>Username:</span>
@@ -142,9 +142,9 @@ function Accound() {
 
 
 
-          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-2' onClick={() =>{localStorage.clear(),window.location.reload()}}>Log Out</button>
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md fixed bottom-[10%] right-14' onClick={() =>{localStorage.clear(),window.location.reload()}}>Log Out</button>
 
-          <button className='px-3 py-2 bg-blue-400 text-white rounded-md absolute bottom-2 right-24' onClick={() => setOpenPopup(!openPopup)}>{openPopup ? "Close Popup" : "Edit User Info"}</button>
+          <button className='px-3 py-2 bg-blue-400 text-white rounded-md fixed bottom-[10%] right-36' onClick={() => setOpenPopup(!openPopup)}>{openPopup ? "Close Popup" : "Edit User Info"}</button>
 
         </div>
       </div>

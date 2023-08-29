@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -7,9 +7,12 @@ import { getCryptLocalSrtorage } from "../../services/localStorageCrypt";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { addAllQuestion } from "../../Store/reducers/dataSlice";
-
+import RichTextEditor from "react-rte";
 
 function AllQuestionDetail() {
+  const [editorValue, setEditorValue] = useState(
+    RichTextEditor.createEmptyValue()
+  );
   const [inputText, setInputText] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const { allQuestion } = useSelector((state) => state.dataSlice);
@@ -21,6 +24,10 @@ function AllQuestionDetail() {
   const navigate = useNavigate();
   const goToQuestion = (id) => {
     navigate(`/questions/${id}`, { state: { from: location.pathname } });
+  };
+  const handleEditorChange = (value) => {
+    setEditorValue(value);
+    setInputText(value.toString("html"));
   };
 
   const addQuestion = async () => {
@@ -61,7 +68,7 @@ function AllQuestionDetail() {
       </div>
       {openModal && (
         <div className="create__question__modal h-[80%] md:w-[50%] md:h-[60%] p-5 m-auto absolute inset-0 rounded-md">
-          <textarea
+          {/* <textarea
             name=""
             id=""
             cols="30"
@@ -69,6 +76,8 @@ function AllQuestionDetail() {
             className="w-full resize-none rounded-md p-3 text-lg"
             onChange={(e) => setInputText(e.target.value)}
           ></textarea>
+   */}
+          <RichTextEditor value={editorValue} onChange={handleEditorChange}  className="min-h-[300px]"/>
 
           <button
             className="px-3 py-2 bg-purple-600 text-white rounded-md mt-3"
@@ -86,7 +95,11 @@ function AllQuestionDetail() {
               onClick={() => goToQuestion(item?._id)}
               className="block question__list w-[90%] m-auto  p-5  my-5 rounded-md"
             >
-              <h2 className="text-2xl text-white">{item?.text}</h2>
+           
+              <div
+                className="html-content text-2xl text-white"
+                dangerouslySetInnerHTML={{ __html: item?.text }}
+              />
               <div className="question__bottom flex justify-center my-2 text-white items-end flex-col">
                 <span className="text-lg">{item?.author?.username}</span>
                 <span className="mx-2 text-sm">
