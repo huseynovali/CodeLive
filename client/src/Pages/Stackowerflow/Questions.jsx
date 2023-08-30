@@ -6,7 +6,7 @@ import axios from 'axios'
 import { addAllQuestion } from '../../Store/reducers/dataSlice'
 import { useQuery } from 'react-query';
 import AllQuestionDetail from '../../components/QuestionDetail/AllQuestionDetail';
-
+import Loading from "../Loading/Loading"
 function Questions() {
 
     const dispatch = useDispatch()
@@ -23,8 +23,10 @@ function Questions() {
     return (
         <div className='question__page min-h-screen p-5'>
         
-
-            <AllQuestionDetail/>
+              {
+                isLoading ?<Loading/>: <AllQuestionDetail/>
+              }
+           
         </div>
     )
 }

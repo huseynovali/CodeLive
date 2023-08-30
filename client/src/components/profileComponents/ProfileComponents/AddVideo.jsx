@@ -13,7 +13,7 @@ import Loading from '../../../Pages/Loading/Loading';
 function AddVideo() {
     const { category } = useSelector(state => state?.dataSlice)
     const { user } = useSelector(state => state?.dataSlice)
-    const dispatch = useDispatch(); // useDispatch ekledim
+    const dispatch = useDispatch(); 
     const navigate = useNavigate();
 
     const userid = getCryptLocalSrtorage("userid")

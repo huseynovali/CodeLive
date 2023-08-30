@@ -4,7 +4,7 @@ import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs'
 import { BiSolidUserDetail, BiSolidVideos, BiPurchaseTagAlt } from 'react-icons/bi'
 import { SlUserFollow, SlUserFollowing } from 'react-icons/sl'
 import { MdFavoriteBorder } from 'react-icons/md'
-import { RiVideoAddLine, RiQuestionnaireLine } from 'react-icons/RI'
+import { RiVideoAddLine, RiQuestionnaireLine, RiTodoLine } from 'react-icons/RI'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import "./ProfileComponets.css"
 import profileImage from "../../img/User-Profile-PNG-Free-Download.png"
@@ -100,12 +100,12 @@ function Sidebar() {
                                             Add Question
                                         </li>
                                     </Link>
-                                    <Link>
-                                        <li className={` sidebar__list__item  ${sellectLink == "purchesvideo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
+                                    <Link to={"todo"}>
+                                        <li className={` sidebar__list__item  ${sellectLink == "todo" ? "text-blue-500" : "text-white"} hover:text-blue-500 flex items-center text-lg  py-2`}>
                                             <div className="list__icon w-[60px] flex justify-center items-center py-2 ">
-                                                <BiPurchaseTagAlt className='text-2xl' />
+                                                <RiTodoLine className='text-2xl' />
                                             </div>
-                                            Purchased Videos
+                                           Todo
                                         </li>
                                     </Link>
                                 </ul>

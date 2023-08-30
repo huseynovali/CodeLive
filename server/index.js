@@ -11,6 +11,7 @@ const languageRouter = require("./router/languageRouter");
 const commentRouter = require("./router/commentRouter");
 const questionRouter = require("./router/questionRouter");
 const answerRouter = require("./router/answerRouter");
+const todoRouter = require("./router/todoRouter");
 
 const app = express();
 
@@ -33,4 +34,5 @@ app.use("/language",languageRouter)
 app.use("/comment",commentRouter)
 app.use("/question",questionRouter)
 app.use('/answer', answerRouter);
+app.use('/todo', todoRouter);
 app.listen(PORT, () => console.log(`${PORT} listen !!`))

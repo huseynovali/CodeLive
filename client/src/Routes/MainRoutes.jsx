@@ -23,6 +23,7 @@ import UserDetail from '../Pages/UserDetail/UserDetail';
 import Questions from '../Pages/Stackowerflow/Questions';
 import QuestionDetail from '../Pages/Stackowerflow/QuestionDetail';
 import MyQuestions from '../components/profileComponents/ProfileComponents/MyQuestions';
+import Todo from '../components/profileComponents/ProfileComponents/Todo';
 
 export default function MainRoutes() {
   const Routes = useRoutes([
@@ -80,6 +81,10 @@ export default function MainRoutes() {
                   path: "questions",
                   element: <MyQuestions />
                 },
+                {
+                  path:"todo",
+                  element:<Todo/>
+                }
               ]
 
             },
