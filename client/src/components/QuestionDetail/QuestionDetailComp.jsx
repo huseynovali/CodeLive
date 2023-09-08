@@ -63,7 +63,16 @@ function QuestionDetailComp() {
   const goBack = () => {
     navigate(location.state.from);
   };
+  function formatUploadDate(uploadDate) {
+    const now = moment();
+    const date = moment(uploadDate);
 
+    if (now.diff(date, "days") <= 7) {
+      return moment(date).startOf("minute").fromNow();
+    }
+
+    return date.format("DD.MM.YYYY");
+  }
   return (
     <div className="min-h-screen p-5">
       <div
@@ -138,7 +147,7 @@ function QuestionDetailComp() {
           <div className="flex justify-center my-2 text-white items-end flex-col">
             <span className="text-lg">{customQuestion?.author?.username}</span>
             <span className="mx-2 text-sm">
-              {moment(customQuestion?.createdAt).startOf("minute").fromNow()}
+              {formatUploadDate(customQuestion?.createdAt)}
             </span>
           </div>
         </div>

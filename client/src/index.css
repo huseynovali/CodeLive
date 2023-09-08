@@ -10,4 +10,20 @@
     --blue: #181D55;
     --white: #ffffff;
   }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+  }
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #1c2548;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #415bc3;
+    border-radius: 20px;
+    border: 2px solid #1c2548;
   
+  }

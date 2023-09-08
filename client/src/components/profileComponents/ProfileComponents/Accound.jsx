@@ -68,7 +68,7 @@ function Accound() {
         <div className="user__profiler__image h-full ">
           {
             data?.image ?
-              <img src={`http://localhost:8080/accountimg/images/${data?.image}`} className={` h-[230px] w-full md:w-[230px] object-fill rounded-lg  bg-slate-500 ${data?.image ? "p-0" : "p-1"} `} />
+              <img src={`http://localhost:8080/accountimg/images/${data?.image}`} className={`z h-[230px] w-full md:w-[230px] object-fill rounded-lg  bg-slate-500 ${data?.image ? "p-0" : "p-1"} `} />
               :
               (
                 sellectImg ? <h1 className='text-white'>Sellect - {sellectImg.name}</h1> :

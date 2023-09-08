@@ -9,7 +9,7 @@ import './AllVideo.css'
 import Loading from '../Loading/Loading'
 function AllVideos() {
     const userid = getCryptLocalSrtorage("userid")
-    const [limit, setItemLimit] = useState(7)
+    const [limit, setItemLimit] = useState(15)
     const dispatch = useDispatch()
 
 
@@ -27,7 +27,7 @@ function AllVideos() {
         refetch()
     }, [limit])
 
-    console.log(data?.data?.length);
+ 
     const handleShowMore = () => {
         setItemLimit(prevLimit => prevLimit + 10);
     };

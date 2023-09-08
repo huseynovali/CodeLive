@@ -171,6 +171,16 @@ function AnswerDetail() {
       toast.error("An error occurred while updating the answer.");
     }
   };
+  function formatUploadDate(uploadDate) {
+    const now = moment();
+    const date = moment(uploadDate);
+
+    if (now.diff(date, "days") <= 7) {
+      return moment(date).startOf("minute").fromNow();
+    }
+
+    return date.format("DD.MM.YYYY");
+  }
   return (
     <div className="pb-16">
       <div className="answer__content mt-24">
@@ -276,7 +286,7 @@ function AnswerDetail() {
                 <div className="answer__info flex   text-white items-center flex-col">
                   <span className="text-lg">{item?.author?.username}</span>
                   <span className="mx-2 text-sm">
-                    {moment(item?.createdAt).startOf("minute").fromNow()}
+                    {formatUploadDate(item?.createdAt)}
                   </span>
                 </div>
               </div>
@@ -298,12 +308,12 @@ function AnswerDetail() {
             setTextInput(e.target.value);
           }}
         ></textarea> */}
-      <RichTextEditor value={editorValue} onChange={handleEditorChange}  className="h-[300px]"/>
+      <RichTextEditor value={editorValue} onChange={handleEditorChange}  className="min-h-[300px]"/>
 
         <div className="w-full flex justify-end">
           <button
             onClick={() => {
-              addAnswer(), setTextInput("");
+              addAnswer(), setTextInput(""),setEditorValue(RichTextEditor.createEmptyValue());
             }}
             className="px-3 py-2 bg-purple-700 text-white rounded-md my-3"
           >

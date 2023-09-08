@@ -50,6 +50,16 @@ function AllQuestionDetail() {
       toast.error("An error occurred while updating the answer.");
     }
   };
+  function formatUploadDate(uploadDate) {
+    const now = moment();
+    const date = moment(uploadDate);
+
+    if (now.diff(date, "days") <= 7) {
+      return moment(date).startOf("minute").fromNow();
+    }
+
+    return date.format("DD.MM.YYYY");
+  }
   return (
     <div>
       <div className="allquestion__header flex justify-between items-center">
@@ -103,7 +113,7 @@ function AllQuestionDetail() {
               <div className="question__bottom flex justify-center my-2 text-white items-end flex-col">
                 <span className="text-lg">{item?.author?.username}</span>
                 <span className="mx-2 text-sm">
-                  {moment(item?.createdAt).startOf("minute").fromNow()}
+                  {formatUploadDate(item?.createdAt)}
                 </span>
               </div>
             </div>

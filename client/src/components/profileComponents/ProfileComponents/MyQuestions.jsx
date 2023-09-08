@@ -10,7 +10,16 @@ function MyQuestions() {
   const goToQuestion = (id) => {
     navigate(`/questions/${id}`, { state: { from: location.pathname } });
   };
+  function formatUploadDate(uploadDate) {
+    const now = moment();
+    const date = moment(uploadDate);
 
+    if (now.diff(date, "days") <= 7) {
+      return moment(date).startOf("minute").fromNow();
+    }
+
+    return date.format("DD.MM.YYYY");
+  }
   return (
     <div>
       <div className="flex  gap-y-9 flex-wrap cursor-pointer ">
@@ -27,7 +36,7 @@ function MyQuestions() {
               />
               <span>
                 {" "}
-                {moment(item?.createdAt).startOf("minute").fromNow()}
+                {formatUploadDate(item?.createdAt)}
               </span>
             </div>
           );
