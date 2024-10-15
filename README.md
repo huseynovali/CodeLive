@@ -30,7 +30,7 @@ Open http://localhost:5174 to view it in your browser.
 
 
 ## Installation:
-Clone the repository: git clone [https://github.com/huseynovali/Events_App.git](https://github.com/huseynovali/CodeLive.git)
+Clone the repository: git clone [https://github.com/huseynovali/CodeLive.git](https://github.com/huseynovali/CodeLive.git)
 
 
 ## Install the dependencies for the server:
